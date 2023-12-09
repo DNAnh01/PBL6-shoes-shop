@@ -7,7 +7,7 @@
 }
 .customerReviews-wrapper {
     display: grid;
-    grid-template-rows: 4% 62%;
+    grid-template-rows: 10% 62%;
     margin: 20px 20px;
     background-color: #f8f8f8;
     border-radius: 5px;
@@ -16,7 +16,7 @@
 
 .customerReviews-wrapper .total {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 30% 70%;
 }
 
 .customerReviews-wrapper .total .total-Rating .rating-header {
@@ -51,7 +51,7 @@
 
 .customerReviews-wrapper .total .total-Rating .rating-main .rating-items {
     display: grid;
-    grid-template-columns: 93px 74% 3%;
+    grid-template-columns: 1fr 1fr;
     gap: 0 8px;
     place-items: center;
     margin-top: 8px;

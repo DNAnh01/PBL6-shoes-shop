@@ -10,14 +10,12 @@ import { toast } from 'react-toastify';
 import apiReviewDetail from '../API/apiReviewDetail';
 import { Keyboard, Mousewheel, Navigation } from 'swiper/modules';
 
-export default function CommentedShow({ onAmountRatingChange }) {
+export default function CommentedShow() {
     const image =
         'https://png.pngtree.com/element_our/20200611/ourlarge/pngtree-doggie-cute-cheap-expression-pack-avatar-image_2251655.jpg';
 
     const [product, setProduct] = useState();
     const [reviews, setReviews] = useState([]);
-    const targetRating = 5;
-    const filteredReviews = reviews.filter((item) => item.rating === targetRating);
 
     // console.log(`Số lượng đánh giá có rating ${targetRating}: ${amountRating}`);
     const [isLoading, setIsLoading] = useState(true); // Thêm isLoading vào đây
@@ -33,7 +31,6 @@ export default function CommentedShow({ onAmountRatingChange }) {
         };
         fetchproductDetail();
     }, []);
-
     useEffect(() => {
         const fetchReviewDetail = async () => {
             try {
@@ -41,10 +38,6 @@ export default function CommentedShow({ onAmountRatingChange }) {
                 const response2 = await apiReviewDetail.getReviewDetail(id);
                 setReviews(response2?.data);
                 console.log(response2.data);
-                if (onAmountRatingChange) {
-                    const newAmountRating = filteredReviews.length;
-                    onAmountRatingChange(newAmountRating);
-                }
             } catch (error) {
                 // console.error("Error fetching product detail:", error);
                 // toast.error("Error fetching product detail");
@@ -54,7 +47,7 @@ export default function CommentedShow({ onAmountRatingChange }) {
         };
 
         fetchReviewDetail();
-    }, [id, onAmountRatingChange, filteredReviews.length]);
+    }, [id]);
 
     return (
         <div>

@@ -86,11 +86,6 @@ export default function AboutPage({ quantity = 1 }) {
         setQuantityDefault(quantityDefault + 1);
     };
 
-    const [parentAmountRating, setParentAmountRating] = useState(null);
-    // Hàm callback để nhận giá trị amountRating từ component con
-    const handleAmountRatingChange = (amountRating) => {
-        setParentAmountRating(amountRating);
-    };
     return (
         <>
             <Header cartItems={cartItems} />
@@ -191,8 +186,8 @@ export default function AboutPage({ quantity = 1 }) {
                     </div>
                 )}
             </div>
-            <CommentCard productId={id} onAmountRatingChange={parentAmountRating} />
-            <CommentedShow onAmountRatingChange={handleAmountRatingChange} />
+            <CommentCard productId={id} />
+            <CommentedShow />
         </>
     );
 }
