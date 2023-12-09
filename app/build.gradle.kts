@@ -131,6 +131,7 @@ dependencies {
     implementation(Dependencies.Retrofit.retrofit2)
     implementation(Dependencies.Retrofit.retrofitConverter)
     implementation(Dependencies.Retrofit.okhttp3)
+    implementation(Dependencies.Retrofit.converterScalars)
 
     implementation(Dependencies.MultiDex.multiDex)
 

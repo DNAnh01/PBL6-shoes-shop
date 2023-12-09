@@ -10,7 +10,7 @@ import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.FragmentHomeBinding
 import com.shop.shoes.project.ui.main.MainActivity
-import com.shop.shoes.project.ui.main.base.BaseFragment
+import com.shop.shoes.project.ui.base.BaseFragment
 import com.shop.shoes.project.ui.main.detail.DetailProductActivity
 import com.shop.shoes.project.ui.main.home.adapter.BrandAdapter
 import com.shop.shoes.project.ui.main.home.adapter.ProductAdapter

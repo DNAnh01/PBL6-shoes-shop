@@ -1,4 +1,4 @@
-package com.shop.shoes.project.ui.main.base;
+package com.shop.shoes.project.ui.base;
 
 import android.content.Intent;
 

@@ -5,7 +5,8 @@ object Constants {
     const val MAIN_HOME: Int = 0
     const val MAIN_CART: Int = 1
     const val MAIN_ACCOUNT: Int = 2
-    const val SERVER: String = "https://pbl6-shoes-shop-production-2639.up.railway.app"
+  //  const val SERVER: String = "https://pbl6-shoes-shop-production-0dfd.up.railway.app"
+    const val SERVER = "https://pbl6-shoes-shop-production-06cc.up.railway.app"
     const val DATABASE_NAME = "saved.db"
     const val TIME_OUT = 60_000L
     const val SIGN_IN = "/auth/signin"
@@ -19,5 +20,6 @@ object Constants {
     const val UPDATE_CART = "/api/cart_items/"
     const val DELETE_CART = "/api/cart_items/"
     const val SIGN_UP = "/auth/signup"
+    const val CHANGE_PASS = "/api/users/change-password"
     const val EXTRA_PRODUCT = "productExtra"
 }

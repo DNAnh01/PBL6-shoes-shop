@@ -65,4 +65,9 @@
     <string name="delete_success">Delete success!</string>
     <string name="delete_fail">Delete fail! Try again!</string>
     <string name="show_password">Show password</string>
+    <string name="something_wrong">Something wrong. Try again!</string>
+    <string name="change">Change</string>
+    <string name="new_password">New password</string>
+    <string name="old_password">Old password</string>
+    <string name="please_enter_different_values">Please enter different values</string>
 </resources>

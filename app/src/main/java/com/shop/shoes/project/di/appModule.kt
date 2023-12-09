@@ -23,6 +23,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 val appModule = module {
@@ -32,6 +33,7 @@ val appModule = module {
     fun appApi(client: OkHttpClient, builder: GsonBuilder): ApiService {
         val retrofitBuilder = Retrofit.Builder()
             .baseUrl(SERVER)
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(builder.create()))
             .client(client)
         val retrofit = retrofitBuilder.build()

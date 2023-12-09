@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import com.shop.shoes.project.R
 import com.shop.shoes.project.ShopShoesApp
 import com.shop.shoes.project.databinding.ActivityMainBinding
-import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.ui.base.BaseActivity
 import com.shop.shoes.project.utils.Constants
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {

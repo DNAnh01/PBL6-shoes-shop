@@ -1,6 +1,8 @@
 package com.shop.shoes.project.ui.main.detail
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +12,11 @@ import com.shop.shoes.project.ShopShoesApp
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.Review
 import com.shop.shoes.project.databinding.ActivityDetailProductBinding
-import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.ui.auth.LoginActivity
+import com.shop.shoes.project.ui.base.BaseActivity
 import com.shop.shoes.project.utils.BottomSheetUtils
 import com.shop.shoes.project.utils.Constants
+import com.shop.shoes.project.utils.Pref
 import com.shop.shoes.project.utils.Utils
 
 class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
@@ -52,11 +56,20 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
     override fun initListener() = binding.run {
         imgBack.setOnClickListener { finish() }
         llAddCart.setOnClickListener {
-            Utils.showBottomAddCart(
-                context = this@DetailProductActivity,
-                product = entity!!,
-                viewModel = cartViewModel
-            )
+            if (Pref.accessToken == "") {
+                startActivityForResult(
+                    Intent(
+                        this@DetailProductActivity,
+                        LoginActivity::class.java
+                    ), Constants.REQUEST_CODE_LOGIN
+                )
+            } else {
+                Utils.showBottomAddCart(
+                    context = this@DetailProductActivity,
+                    product = entity!!,
+                    viewModel = cartViewModel
+                )
+            }
         }
     }
 
@@ -97,6 +110,18 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
             tvPrice.text = entity!!.discountedPrice.toString()
             val text = "-${entity!!.discountPersent}%"
             tvSale.text = text
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == Constants.REQUEST_CODE_LOGIN) {
+            Utils.showBottomAddCart(
+                context = this@DetailProductActivity,
+                product = entity!!,
+                viewModel = cartViewModel
+            )
         }
     }
 }

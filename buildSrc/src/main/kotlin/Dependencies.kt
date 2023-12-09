@@ -44,6 +44,7 @@ object Dependencies {
         const val retrofit2 = "com.squareup.retrofit2:retrofit:2.9.0"
         const val retrofitConverter = "com.squareup.retrofit2:converter-gson:2.9.0"
         const val okhttp3 = "com.squareup.okhttp3:logging-interceptor:4.10.0"
+        const val converterScalars = "com.squareup.retrofit2:converter-scalars:2.9.0"
     }
 
     object MultiDex {

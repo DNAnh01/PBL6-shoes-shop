@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.shop.shoes.project.ShopShoesApp
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.ActivitySearchBinding
-import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.ui.base.BaseActivity
 import com.shop.shoes.project.ui.main.detail.DetailProductActivity
 import com.shop.shoes.project.ui.main.home.adapter.ProductAdapter
 import com.shop.shoes.project.utils.Constants

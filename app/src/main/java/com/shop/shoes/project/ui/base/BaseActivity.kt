@@ -1,4 +1,4 @@
-package com.shop.shoes.project.ui.main.base
+package com.shop.shoes.project.ui.base
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.os.SystemClock
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.core.view.WindowCompat
@@ -26,6 +27,7 @@ abstract class BaseActivity<B : ViewBinding> : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(null)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         binding = viewBinding(LayoutInflater.from(this))
         setContentView(binding.root)
         initData()

@@ -12,7 +12,7 @@ import com.shop.shoes.project.R
 import com.shop.shoes.project.databinding.FragmentAccountBinding
 import com.shop.shoes.project.ui.auth.LoginActivity
 import com.shop.shoes.project.ui.main.MainActivity
-import com.shop.shoes.project.ui.main.base.BaseFragment
+import com.shop.shoes.project.ui.base.BaseFragment
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Pref
 
@@ -102,4 +102,11 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         }
     }
 
+    override fun onResume() = binding.run {
+        super.onResume()
+        if (Pref.accessToken != "") {
+            tvLogout.visibility = View.VISIBLE
+            view.visibility = View.VISIBLE
+        }
+    }
 }

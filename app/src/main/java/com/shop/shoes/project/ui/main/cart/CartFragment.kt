@@ -10,7 +10,7 @@ import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.FragmentCartBinding
 import com.shop.shoes.project.ui.main.MainActivity
-import com.shop.shoes.project.ui.main.base.BaseFragment
+import com.shop.shoes.project.ui.base.BaseFragment
 import com.shop.shoes.project.ui.main.detail.DetailProductActivity
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Pref
