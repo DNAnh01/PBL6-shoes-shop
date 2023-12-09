@@ -27,6 +27,7 @@
   }
   &-info .profile-img {
     width: 300px;
+    border-radius: 50%;
   }
   &-info .profile-accout {
     text-align: center;
@@ -149,12 +150,12 @@
   }
   &-detail .profile-show-changepassword .profile-password {
     display: flex;
-    gap: 0 34px;
+    gap: 0 58px;
     align-items: center;
   }
   &-detail .profile-show-changepassword .profile-passwordconfim {
     display: flex;
-    gap: 0 17px;
+    gap: 0 35px;
     align-items: center;
   }
   &-btn-update {

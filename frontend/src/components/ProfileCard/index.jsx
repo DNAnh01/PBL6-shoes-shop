@@ -9,16 +9,13 @@ import apiChangePass from '../API/apiChangePass';
 
 export default function ProfileCard() {
     const [profiles, setProfiles] = useState([]);
-    const [fullName, setfullName] = useState('');
     const [streetAddress, setstreetAddress] = useState('');
     const [defaultAddress, setDefaultAddress] = useState(null);
-    console.log(defaultAddress);
     useEffect(() => {
         const fetchProfile = async () => {
             try {
                 const response = await apiProfile.getProfile();
                 setProfiles(response.data);
-                setfullName(response.data.firstName + ' ' + response.data.lastName);
                 // Check if addresses is an array and not empty
                 if (Array.isArray(response.data.addresses) && response.data.addresses.length > 0) {
                     // Set the first address as the default address
@@ -33,11 +30,10 @@ export default function ProfileCard() {
     }, []);
 
     const image =
-        'https://png.pngtree.com/element_our/20200611/ourlarge/pngtree-doggie-cute-cheap-expression-pack-avatar-image_2251655.jpg';
+        'https://scontent.fsgn2-10.fna.fbcdn.net/v/t39.30808-6/328039816_914151769604724_1668073028896674479_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=maXa2WXfoYcAX-oaO4T&_nc_ht=scontent.fsgn2-10.fna&oh=00_AfD5fFLg63VB9q0uJccL8LAPi9EHJyJCiG9A9NOR0UJvhw&oe=6578758B';
 
     // personal
     const [isEditing, setIsEditing] = useState(false);
-    const [editedEmail, setEditedEmail] = useState('');
     const [editedfirstname, setEditFisrtname] = useState('');
     const [editedlastname, setEditLastname] = useState('');
     const [editedMobile, setEditedMobile] = useState('');
@@ -71,8 +67,9 @@ export default function ProfileCard() {
     };
 
     const handleEdit = () => {
-        setEditedEmail(profiles.email);
         setEditedMobile(profiles.mobile);
+        setEditFisrtname(profiles.firstName);
+        setEditLastname(profiles.lastName);
         setIsEditing(!isEditing);
     };
     const handleChangePassword = async () => {
@@ -127,7 +124,7 @@ export default function ProfileCard() {
                     <div className="profile-info">
                         <img src={image} alt="" className="profile-img"></img>
                         <div className="profile-accout">
-                            <span>{fullName}</span>
+                            <span>{`${profiles.lastName} ${profiles.firstName}`}</span>
                         </div>
                     </div>
                     <div className="profile-detail">
@@ -144,15 +141,23 @@ export default function ProfileCard() {
                         </div>
                         <div className={showPersonal ? 'profile-show-personal' : 'hidden'}>
                             <div className="profile-name">
-                                <label className="profile-show-label">Họ và tên</label>
+                                <label className="profile-show-label">First Name</label>
                                 <input
                                     type="text"
-                                    defaultValue={fullName}
+                                    value={isEditing ? editedfirstname : profiles.firstName}
                                     className="profile-show-input"
-                                    onChange={(event) => setfullName(event.target.value)}
+                                    onChange={(event) => setEditFisrtname(event.target.value)}
                                 ></input>
                             </div>
-                            {}
+                            <div className="profile-name">
+                                <label className="profile-show-label">Last Name</label>
+                                <input
+                                    type="text"
+                                    value={isEditing ? editedlastname : profiles.lastName}
+                                    className="profile-show-input"
+                                    onChange={(event) => setEditLastname(event.target.value)}
+                                ></input>
+                            </div>
                             <div className="profile-address">
                                 <label className="profile-show-label">Địa chỉ</label>
                                 {defaultAddress ? (
@@ -171,10 +176,10 @@ export default function ProfileCard() {
                                 {}
                                 <input
                                     type="email"
-                                    value={isEditing ? editedEmail : profiles.email}
-                                    onChange={(event) => setEditedEmail(event.target.value)}
+                                    value={profiles.email}
                                     className="profile-show-input"
                                     readOnly
+                                    style={{ background: '#d2d2d2' }}
                                 />
                             </div>
                             <div className="profile-phone">
@@ -188,7 +193,7 @@ export default function ProfileCard() {
                                     readOnly={!isEditing}
                                 />
                             </div>
-                            <div className="profile-sex">
+                            {/* <div className="profile-sex">
                                 <label className="profile-show-label">Giới tính</label>
                                 <input
                                     type="radio"
@@ -203,7 +208,7 @@ export default function ProfileCard() {
                                     checked={profiles.gender === 'female'}
                                 />
                                 <label>Nữ</label>
-                            </div>
+                            </div> */}
 
                             <div className="profile-btn-update">
                                 {isEditing ? (
