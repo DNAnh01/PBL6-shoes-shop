@@ -8,7 +8,6 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 import './style.scss';
 import apiProductGrid from '../API/apiProductGrid';
-import apiGuestProduct from '../API/apiGuestProduct';
 
 const breakpointsSwiper = {
     320: {
@@ -35,7 +34,7 @@ export default function BrandList() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await apiGuestProduct.getAllProduct();
+                const response = await apiProductGrid.getAllProduct();
                 const uniqueBrands = filterUniqueBrands(response.data);
 
                 setBrands(uniqueBrands);

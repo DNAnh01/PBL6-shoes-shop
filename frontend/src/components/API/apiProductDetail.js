@@ -1,10 +1,9 @@
 import axiosClient from './axiosClient';
-import axiosClientGuest from './axiosClientGuest';
 
 const apiProductDetail = {
     getProductDetail(id) {
-        const url = `/guest/products/id/${id}`;
-        return axiosClientGuest.get(url);
+        const url = `/products/id/${id}`;
+        return axiosClient.get(url);
     },
 };
 export default apiProductDetail;

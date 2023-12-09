@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
 import apiBrand from '../API/apiBrand';
 import apiFilterPrice from '../API/apiFilterPrice';
-import apiGuestProduct from '../API/apiGuestProduct';
 import apiProductGrid from '../API/apiProductGrid';
 
 export default function ProductGridList({ productSearch }) {

@@ -13,6 +13,7 @@ import Button from '../Button';
 export default function AboutPage({ quantity = 1 }) {
     const navigate = useNavigate();
     const [productDetail, setProductDetail] = useState([]);
+    console.log(productDetail);
     const { cartItems } = useCart();
     const { updateCartItems } = useCart();
     const [selectedSize, setSelectedSize] = useState('');

@@ -17,34 +17,41 @@ export default function OrdersTable() {
     // Hàm xử lý khi giá trị thay đổi sau một khoảng thời gian
     const handleStatusChangeDebounced = _debounce(async () => {
         try {
-            toast.success('Đang chờ thay đổi thông tin Order');
+            // toast.success('Đang chờ thay đổi thông tin Order');
         } catch (error) {
             console.error(error);
         }
-    }, 500);
+    });
 
     const handleStatusChange = (newStatus, orderId) => {
         setSelectedStatus(newStatus);
         handleOrderSelect(orderId, newStatus);
         handleStatusChangeDebounced();
-    };
-
-    const handleSaveClick = async () => {
         try {
-            // Gọi API putOrder cho từng đơn hàng được chọn
-            for (const orderId of selectedOrderIds) {
-                await apiOrder.putOrder(orderId, selectedStatus);
-            }
+            apiOrder.putOrder(orderId, newStatus);
 
-            // Gọi hàm xử lý ngay khi người dùng nhấn nút "Lưu"
             handleStatusChangeDebounced.flush();
-
-            // Làm mới dữ liệu
-            fetchData();
         } catch (error) {
-            console.error('Error saving orders:', error);
+            console.error('Error updating order status:', error);
         }
     };
+
+    // const handleSaveClick = async () => {
+    //     try {
+    //         // Gọi API putOrder cho từng đơn hàng được chọn
+    //         for (const orderId of selectedOrderIds) {
+    //             await apiOrder.putOrder(orderId, selectedStatus);
+    //         }
+
+    //         // Gọi hàm xử lý ngay khi người dùng nhấn nút "Lưu"
+    //         handleStatusChangeDebounced.flush();
+
+    //         // Làm mới dữ liệu
+    //         fetchData();
+    //     } catch (error) {
+    //         console.error('Error saving orders:', error);
+    //     }
+    // };
     // Hàm để chọn/deselect đơn hàng
     const handleOrderSelect = (orderId, newStatus) => {
         const isSelected = selectedOrderIds.includes(orderId);
@@ -93,6 +100,7 @@ export default function OrdersTable() {
                 <Table aria-label="demo table" className="custom-table">
                     <TableHead>
                         <TableRow className="custom-header">
+                            <TableCell className="custom-header-order">Image</TableCell>
                             <TableCell className="custom-header-order">Title</TableCell>
                             <TableCell className="custom-header-order">Email</TableCell>
                             <TableCell className="custom-header-order">Address</TableCell>
@@ -100,15 +108,26 @@ export default function OrdersTable() {
                             <TableCell className="custom-header-order">ToTal Price</TableCell>
                             <TableCell className="custom-header-order">Status</TableCell>
                             <TableCell className="custom-header-order">Update</TableCell>
-                            <TableCell className="custom-header-order">Delete</TableCell>
+                            {/* <TableCell className="custom-header-order">Delete</TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {orders.map((order) => (
                             <TableRow key={order.id} className="custom-cell">
                                 <TableCell align="left" scope="row" className="custom-cell-order">
+                                    <div className="custom-cell-order-title" style={{ display: 'grid' }}>
+                                        {order?.orderItems?.map((item) => (
+                                            <img src={item.product.imageUrl} alt="" style={{ width: '3rem' }} />
+                                        ))}
+                                    </div>
+                                </TableCell>
+                                <TableCell align="left" scope="row" className="custom-cell-order">
                                     <span className="custom-cell-order-title">
-                                        {order?.orderItems?.find((item) => item.product)?.product?.title}
+                                        {order?.orderItems?.map((item) => (
+                                            <div key={item.id}>
+                                                Product: {item.product.title}, Quantity: {item.quantity}
+                                            </div>
+                                        ))}
                                     </span>
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
@@ -124,7 +143,7 @@ export default function OrdersTable() {
                                     {order.totalDiscountedPrice} VND
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
-                                    <span className="custom-status">{order.orderStatus}</span>
+                                    <span className="custom-status">{order.orderStatus.toUpperCase()}</span>
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
                                     <select
@@ -136,26 +155,25 @@ export default function OrdersTable() {
                                         }}
                                     >
                                         <option value="">Update</option>
-                                        <option value="pending">Pending</option>
-                                        <option value="shipped">Shipped</option>
-                                        <option value="delivered">Delivered</option>
                                         <option value="confirmed">Confirmed</option>
+                                        <option value="delivered">Delivered</option>
+                                        <option value="shipped">Shipped</option>
                                         <option value="canceled">Canceled</option>
                                     </select>
                                 </TableCell>
-                                <TableCell align="left" className="custom-cell-order">
+                                {/* <TableCell align="left" className="custom-cell-order">
                                     <button className="custom-button">Delete</button>
-                                </TableCell>
+                                </TableCell> */}
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+            {/* <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
                 <button onClick={handleSaveClick} className="custom-btn-ok">
                     Lưu
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }
