@@ -1,0 +1,25 @@
+@mixin section-style {
+    border: 2px solid var(--main-divider);
+    border-radius: 6px;
+    box-shadow: 4px 4px 4px 1px #ccc;
+}
+
+.title {
+    font-size: 1.3rem;
+    padding: 0.8rem;
+    font-weight: 500;
+}
+
+.grid {
+    height: 100%;
+    display: grid;
+    grid-template-areas: 'section1 section2 section3 section4';
+    grid-gap: 0.1rem;
+
+    @for $i from 1 through 4 {
+        & .section#{$i} {
+            grid-area: section#{$i};
+            @include section-style();
+        }
+    }
+}

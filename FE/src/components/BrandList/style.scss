@@ -1,0 +1,13 @@
+.brandList {
+  &-title {
+    color: var(--eerie-black);
+    font-size: 20px;
+    font-weight: var(--weight-600);
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--cultured);
+    margin-bottom: 30px;
+    font-family: "Poppins", sans-serif;
+  }
+}

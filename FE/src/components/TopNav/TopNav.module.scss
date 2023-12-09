@@ -1,0 +1,22 @@
+.top-nav {
+    margin-left: 65px;
+    border-bottom: 3px solid var(--main-divider);
+    height: 65px;
+    .brand {
+        margin: 0;
+        background-image: var(--primary);
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        font-size: 1.4rem;
+    }
+
+    .user-avatar {
+        width: 5rem;
+        height: 5rem;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-left: 1.2rem;
+        cursor: pointer;
+    }
+}

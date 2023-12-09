@@ -1,0 +1,61 @@
+.custom-table-container {
+}
+
+.custom-table {
+    /* CSS for the Table */
+}
+
+.custom-header {
+    /* CSS for the header cells */
+    background: linear-gradient(90deg, #008eff, #fa5c5c);
+    border-collapse: collapse;
+}
+
+.custom-header-order {
+    font-size: 1.6rem !important;
+    font-weight: 500 !important;
+    font-family: Poppins, sans-serif !important;
+    color: var(--white) !important;
+}
+
+.custom-cell {
+}
+.custom-cell-order {
+    font-size: 1.2rem !important;
+
+    font-weight: 300 !important;
+    color: var(--main-text) !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    font-family: Poppins, sans-serif !important;
+}
+.custom-cell-order .custom-cell-order-title {
+    text-transform: capitalize;
+}
+
+.custom-status {
+    background: linear-gradient(90deg, #008eff, #fa5c5c);
+    color: aliceblue;
+    padding: 7px;
+    border-radius: 13px;
+    font-size: 1.2rem !important;
+
+    font-weight: 300 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.custom-button,
+.custom-sellect {
+    background: none;
+    border: 2px #008eff solid;
+    border-radius: 10px;
+    padding: 5px;
+}
+.custom-btn-ok {
+    background: linear-gradient(90deg, #008eff, #fa5c5c);
+    color: aliceblue;
+    padding: 10px 20px;
+    border-radius: 13px;
+    justify-content: center;
+}

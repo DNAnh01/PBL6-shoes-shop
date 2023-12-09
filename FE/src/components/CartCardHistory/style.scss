@@ -1,0 +1,21 @@
+.cartList-history{
+  display: grid;
+  grid-template-columns: 40% 15% 15% 15% 15%;
+  border-bottom: 1px solid #000000;
+  gap: 10px;
+  padding-left: 2%;
+}
+.cartHistory-Quantity{
+  color: black;
+  border: none;
+  padding-top: 21px;
+  text-align: center;
+}
+.cartHistory-input{
+  width: 40px;
+  text-align: center;
+  margin: 0 10px 30px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}

@@ -1,0 +1,195 @@
+.profile {
+  margin: 30px 85px;
+  font: inherit;
+  font-family: "Poppins", sans-serif;
+  background: url(../../images/background5.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.profile {
+  &-title {
+    font-size: 26px;
+    color: var(--eerie-black);
+    font-weight: var(--weight-600);
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--cultured);
+    margin-bottom: 30px;
+  }
+  &-content {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 0 30px;
+  }
+  &-info {
+    padding: 50px;
+  }
+  &-info .profile-img {
+    width: 300px;
+  }
+  &-info .profile-accout {
+    text-align: center;
+  }
+  &-detail {
+    padding: 20px auto;
+  }
+  &-detail .profile-btn {
+    margin-bottom: 30px;
+    display: flex;
+    gap: 0 50px;
+    margin-left: 30px;
+  }
+  &-detail .profile-btn .profile-btn-personal {
+    color: black;
+    border: none;
+    padding: 6px 0;
+    width: auto;
+    background-color: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  &-detail .profile-btn .profile-btn-changepassword {
+    color: black;
+    border: none;
+    padding: 6px 0;
+    width: auto;
+    background-color: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  &-detail .profile-btn .profile-btn-logout {
+    color: black;
+    border: none;
+    padding: 6px 0;
+    width: auto;
+    background-color: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  &-detail .profile-show-personal {
+    display: grid;
+    gap: 30px 0;
+    width: 70%;
+  }
+  &-detail .profile-show-personal .profile-name {
+    display: flex;
+    gap: 0 50px;
+    align-items: center;
+  }
+  &-detail .profile-show-personal .profile-age {
+    display: flex;
+    gap: 0 90px;
+    align-items: center;
+  }
+  &-detail .profile-show-personal .profile-address {
+    display: flex;
+    gap: 0 70px;
+    align-items: center;
+  }
+  &-detail .profile-show-personal .profile-email {
+    display: flex;
+    gap: 0 80px;
+    align-items: center;
+  }
+  &-detail .profile-show-personal .profile-phone {
+    display: flex;
+    gap: 0 29px;
+    align-items: center;
+  }
+  &-detail .profile-show-personal .profile-date {
+    display: flex;
+    gap: 0 47px;
+    align-items: center;
+  }
+  &-detail .profile-show-personal .profile-sex {
+    display: flex;
+    gap: 0 30px;
+    align-items: center;
+  }
+  &-detail .profile-show-input {
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 60%;
+    border: 2px solid rgba(19, 66, 101, 0.2470588235);
+    border-radius: 10px;
+  }
+  &-detail input[type="date"] {
+    padding: 10px 20px;
+    border: 2px solid rgba(19, 66, 101, 0.2470588235);
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  &-detail input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #db3434;
+    margin-right: 5px;
+    outline: none;
+    cursor: pointer;
+  }
+  &-detail .profile-sex input[type="radio"]:checked {
+    background-color: #db3434;
+    border-color: #db3434;
+  }
+  &-detail .profile-show-changepassword {
+    display: grid;
+    gap: 30px 0;
+    width: 70%;
+  }
+  &-detail .profile-show-changepassword .profile-username {
+    display: flex;
+    gap: 0 66px;
+    align-items: center;
+  }
+  &-detail .profile-show-changepassword .profile-password {
+    display: flex;
+    gap: 0 34px;
+    align-items: center;
+  }
+  &-detail .profile-show-changepassword .profile-passwordconfim {
+    display: flex;
+    gap: 0 17px;
+    align-items: center;
+  }
+  &-btn-update {
+    margin: 20px 65px;
+    padding: 10px 20px;
+    width: 150px;
+  }
+  &-btn-change {
+    display: flex;
+    gap: 0 30px;
+  }
+  &-btn-submit,
+  &-btn-cancel {
+    margin: 20px 30px;
+    padding: 10px 20px;
+    width: 200px;
+  }
+}
+.hidden {
+  display: none;
+}
+@media (max-width: 570px) {
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-detail .profile-show-input {
+    width: auto;
+  }
+  .profile-content {
+    margin-bottom: 80px;
+  }
+  .profile-btn-submit,
+  .profile-btn-cancel {
+    width: auto;
+    margin: 0 auto;
+  }
+}

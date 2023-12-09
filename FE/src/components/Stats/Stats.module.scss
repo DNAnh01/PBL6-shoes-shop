@@ -1,0 +1,25 @@
+.container {
+    padding: 0.8rem;
+    background: var(--main-background);
+    border-radius: 8px;
+
+    &:hover {
+        background: var(--orther-background);
+    }
+
+    .icon {
+        padding: 0.5rem;
+        border-radius: 8px;
+    }
+
+    .title {
+        font-size: 1.6rem;
+        padding: 0.5rem;
+    }
+
+    .stats {
+        font-size: 2rem;
+        padding: 0.5rem;
+        font-weight: 500;
+    }
+}

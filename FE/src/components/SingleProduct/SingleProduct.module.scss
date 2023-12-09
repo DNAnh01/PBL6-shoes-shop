@@ -1,0 +1,21 @@
+.img {
+    width: 46px;
+    height: auto;
+    object-fit: contain;
+}
+
+.downtrendColor {
+    color: var(--status-alert);
+}
+.title {
+    color: #626262;
+    user-select: none;
+}
+
+.text-success {
+    color: var(--status-success);
+}
+
+.text-danger {
+    color: var(--status-alert);
+}

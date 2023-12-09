@@ -1,0 +1,293 @@
+// reset css
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@import url('normalize.css');
+// fonts embedded
+@font-face {
+    font-family: Poppins;
+    src: url('/assets/fonts/Poppins-Thin.ttf');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url('/assets/fonts/Poppins-Light.ttf');
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url('/assets/fonts/Poppins-Regular.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url('/assets/fonts/Poppins-Medium.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url('/assets/fonts/Poppins-Bold.ttf');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url('/assets/fonts/Poppins-Black.ttf');
+    font-weight: 900;
+}
+
+// variables
+:root {
+    // color
+    --primary: linear-gradient(to right, #008eff, #fa5c5c);
+    --primary-hover: linear-gradient(90deg, #4caeff, #03f2ff);
+    --white: #fff;
+    --main-text: #6d6d6d;
+    --main-background: #f7f8fa;
+    --orther-background: #eeeeee;
+    --main-divider: #edeff2;
+    --status-success: #2dc157;
+    --status-alert: #c12d2d;
+
+    // font family
+    --font-family: 'Poppins', sans-serif;
+
+    // breakpoints
+    --device-large: 1199.98px;
+    --device-medium: 991.98px;
+    --device-small: 767.98px;
+    --device-extra-small: 575.98px;
+}
+
+// reset default style
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--main-text);
+    overflow-y: overlay;
+}
+
+scrollbar CSS html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 15px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: linear-gradient(to top, #c72092ac, #6c14d0b1);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+main {
+    margin-left: 65px;
+    height: calc(100vh - 65px - 41px);
+    padding: 0.5rem;
+    background-color: var(--main-background);
+}
+
+/* Large devices (desktops, 992px and up) */
+@media screen and (max-width: 1199.98px) {
+}
+/* Medium devices (tablets, 768px and up) */
+@media screen and (max-width: 991.98px) {
+}
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (max-width: 767.98px) {
+}
+/* Extra small devices (portrait phones, less than 576px) */
+@media screen and (max-width: 575.98px) {
+}
+
+// Custom tippy tooltip
+body {
+    .tippy-box {
+        border-radius: 8px;
+        font-weight: 400;
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        background: var(--primary);
+        margin-top: -10px;
+    }
+
+    .tippy-arrow {
+        color: #008eff;
+    }
+
+    .tippy-content {
+        padding: 8px 9px;
+    }
+
+    .tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
+        top: -7px;
+    }
+}
