@@ -1,0 +1,14 @@
+.panel {
+    &.icon {
+        width: 30px;
+        height: 30px;
+        // color: var(--main-text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+    & .icon:last-child {
+        margin-bottom: 0;
+    }
+}

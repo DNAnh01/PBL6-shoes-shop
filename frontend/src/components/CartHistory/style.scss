@@ -1,0 +1,19 @@
+.cartRow-history {
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 8px #6c14d0;
+    text-align: center;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 40% 15% 15% 15% 15%;
+    border-collapse: collapse;
+    max-width: 100%;
+    height: auto;
+    font-weight: 700;
+    background: linear-gradient(to right, #008eff, #fa5c5c);
+    font-size: 18px;
+    padding: 8px 0;
+    padding-left: 2%;
+    color: #000;
+}

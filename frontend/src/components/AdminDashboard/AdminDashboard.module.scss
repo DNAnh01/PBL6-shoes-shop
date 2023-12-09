@@ -1,0 +1,57 @@
+@mixin section-style {
+    border: 2px solid var(--main-divider);
+    border-radius: 6px;
+    box-shadow: 4px 4px 4px 1px #ccc;
+}
+
+.grid {
+    height: 100%;
+    display: grid;
+    grid-template-areas:
+        'section1 section1 section2 section2 section2 section2'
+        'section3 section3 section4 section4 section5 section6'
+        'section3 section3 section4 section4 section7 section8';
+    grid-gap: 0.4rem;
+
+    @for $i from 1 through 8 {
+        & .section#{$i} {
+            grid-area: section#{$i};
+            @include section-style();
+        }
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media screen and (max-width: 991.98px) {
+    .grid {
+        height: 100%;
+        grid-template-areas:
+            'section1 section1 section2 section2 section2 section2'
+            'section3 section3 section4 section4 section5 section6'
+            'section3 section3 section4 section4 section7 section8';
+
+        grid-gap: 0.2rem;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (max-width: 767.98px) {
+    .grid {
+        height: 100%;
+        grid-template-areas:
+            'section1 section1 section1 section1'
+            'section2 section2 section2 section2'
+            'section3 section3 section4 section4'
+            'section3 section3 section4 section4'
+            'section5 section5 section6 section6'
+            'section7 section7 section8 section8';
+
+        grid-gap: 0.2rem;
+
+        @for $i from 1 through 8 {
+            & .section#{$i} {
+                width: 100%;
+            }
+        }
+    }
+}

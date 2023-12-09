@@ -1,0 +1,201 @@
+.body-register {
+    max-width: 100%;
+    padding: 15px;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: url('../../assets/images/background5.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.wrapper-register {
+    overflow: hidden;
+    position: relative;
+    width: 400px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(81, 83, 167, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper-register .form-box {
+    width: 100%;
+    padding: 0 40px;
+}
+
+.wrapper-register .form-box h2 {
+    font-size: 43px;
+    font-family: 'Gabarito', cursive;
+    font-weight: 300;
+    background: linear-gradient(to right, #c72092ce, #6c14d0b5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.input-register {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border: 2px solid #1342653f;
+    border-radius: 10px;
+    margin: 35px 0;
+}
+
+.input-register label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #1629387b;
+    font-weight: 500;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-register input:focus ~ label,
+.input-register input:valid ~ label {
+    top: -10px;
+    color: #162938d5;
+}
+
+.input-register input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #162938;
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+.input-register .permission {
+    width: 100%;
+    height: 100%;
+    border: none;
+    backdrop-filter: blur(20px);
+    color: #16293869;
+    border-radius: 10px;
+    background: transparent;
+}
+
+.btn-register {
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to right, #c72092c2, #6c14d0c3);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+.login-register {
+    margin: 20px 0;
+}
+.login-register p {
+}
+.login-link {
+    margin-left: 5px;
+    background: linear-gradient(to right, #c72092ce, #6c14d0b5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+@media (max-width: 480px) {
+    .wrapper-register {
+        width: 300px;
+        height: auto;
+    }
+    .wrapper-register .form-box {
+        width: 100%;
+        padding: 20px;
+    }
+    .wrapper-register .form-box h2 {
+        font-size: 30px;
+        margin: 0;
+    }
+    .input-register {
+        margin: 20px 0;
+    }
+    .input-register input {
+        font-size: 0.8em;
+    }
+    .input-register .permission {
+        width: 100%;
+        height: 100%;
+
+        font-size: 0.8em;
+    }
+    .btn {
+        height: 30px;
+    }
+    .login-register {
+        font-size: 0.8em;
+        margin: 20px 0 10px;
+    }
+}
+
+@media (max-width: 350px) {
+    .wrapper-register {
+        width: 250px;
+        height: auto;
+    }
+    .wrapper-register .form-box {
+        width: 100%;
+        padding: 20px;
+    }
+    .wrapper-register .form-box h2 {
+        font-size: 25px;
+        margin: 0;
+    }
+    .input-register input {
+        font-size: 0.7em;
+    }
+    .input-register .permission {
+        width: 100%;
+        height: 100%;
+
+        font-size: 0.7em;
+    }
+    .login-register {
+        font-size: 0.7em;
+        margin: 20px 0 10px;
+    }
+    .btn {
+        height: 30px;
+    }
+}
+@media (max-width: 1024px) {
+    .wrapper-register {
+        width: auto;
+    }
+    .input-register {
+        margin: 25px 0;
+    }
+}
+input[type='number'] {
+    -webkit-appearance: none; /* Remove default arrow styles for Safari */
+    margin: 0; /* Remove default margin */
+    -moz-appearance: textfield; /* Firefox */
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Remove default arrow styles for WebKit browsers */
+    margin: 0; /* Remove default margin */
+}

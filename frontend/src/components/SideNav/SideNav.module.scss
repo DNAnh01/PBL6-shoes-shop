@@ -1,0 +1,32 @@
+.side-nav {
+    border-right: 3px solid var(--main-divider);
+    width: 65px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+
+    .image {
+        background-color: var(--main-text);
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+    }
+
+    .icon {
+        width: 30px;
+        height: 30px;
+        color: var(--main-text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(180deg);
+    }
+    .arrow {
+        color: var(--main-text);
+    }
+}

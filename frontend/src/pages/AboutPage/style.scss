@@ -1,0 +1,183 @@
+.about {
+    display: flex;
+    gap: 0 30px;
+    font: inherit;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 50px;
+}
+.about {
+    &-div {
+        position: relative;
+    }
+    &-image {
+        height: 70%;
+    }
+    &-voucher {
+        position: absolute;
+        top: 0;
+        right: 30px;
+        z-index: 2;
+        margin: 15px;
+        display: flex;
+        flex-direction: column;
+        width: 50px;
+    }
+    &-voucher-text {
+        border-radius: 20px;
+        background: linear-gradient(to right, #c72092cc, #6c14d0cc);
+        color: var(--white);
+        text-align: center;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    &-voucher-status {
+        border-radius: 20px;
+        background: linear-gradient(to right, #c72092cc, #6c14d0cc);
+        color: var(--white);
+        text-align: center;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    &-content {
+        margin-top: 50px;
+    }
+    &-information {
+        margin-bottom: 20px;
+    }
+    &-title {
+        font-size: 3rem;
+        font-family: 'Anton', sans-serif;
+        font-weight: 250;
+        background: linear-gradient(to right, #c72092e8, #6c14d0e4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    &-rating {
+        display: flex;
+        align-items: center;
+        color: var(--sandy-brown);
+        font-size: 20px;
+        padding: 10px 0;
+    }
+    &-description {
+        font-size: 20px;
+        text-align: justify;
+        font-weight: 600;
+    }
+    &-table {
+        background-color: #fff9f9;
+        border: #3535357e solid 2px;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 50px;
+    }
+    &-table-price {
+        font-size: 24px;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        gap: 0 10px;
+        margin-bottom: 10px;
+    }
+    &-table-price-old {
+        text-decoration: line-through;
+        color: var(--old-price);
+    }
+    &-table-price-current {
+        background: linear-gradient(to right, #c72092cc, #6c14d0cc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    &-table-size {
+        display: flex;
+        gap: 0 60px;
+        align-items: center;
+        margin: 10px;
+    }
+    &-size-name {
+        font-weight: 800;
+        color: var(--black);
+        text-align: center;
+    }
+    &-size-font {
+        width: 50%;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    &-table-color {
+        display: flex;
+        gap: 0 50px;
+        align-items: center;
+        margin: 10px;
+    }
+    &-color-name {
+        font-weight: 800;
+        color: var(--black);
+        text-align: center;
+    }
+    &-color-font {
+        width: 50%;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    &-quantity {
+        display: flex;
+        gap: 0 30px;
+    }
+    &-quantity-input {
+        width: 40px;
+        text-align: center;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px 5px;
+    }
+    &-payment {
+        display: flex;
+        gap: 0 30px;
+        margin-top: 10px;
+    }
+    &-quantity-detail {
+        display: flex;
+        margin-top: 15px;
+        gap: 0 30px;
+    }
+    &-pay {
+        background: linear-gradient(to right, #c389b1cc, #a48ac2cc);
+        color: white;
+        border: 0;
+        outline: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 570px) {
+    .about-table {
+        padding: 10px;
+    }
+    .btn-about {
+        font-size: 13px;
+        padding: 5px 10px;
+        height: auto;
+    }
+    .about-quantity-detail {
+        height: 40px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .about {
+        display: flex;
+        flex-direction: column;
+    }
+    .about-image {
+        width: 100%;
+    }
+}

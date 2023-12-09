@@ -1,0 +1,45 @@
+.pay {
+  &-title {
+    font-size: 26px;
+    margin: 20px;
+    font-weight: 600;
+  }
+}
+
+.delivery {
+  border: 1px solid var(--cultured);
+  padding: 15px;
+  border-radius: var(--border-radius-md);
+  height: 30.5rem;
+  overflow-y: scroll;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.delivery-main {
+  padding: 0 30px;
+}
+.delivery {
+  &-btn {
+    padding: 10px 5px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--cultured);
+  }
+
+  &-box {
+    border: 1px solid var(--cultured);
+    padding: 15px;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+}
+
+.ordersummary {
+  border: 1px solid var(--cultured);
+  padding: 15px;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.mt-30 {
+  margin-top: 30px;
+}

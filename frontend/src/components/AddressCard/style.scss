@@ -1,0 +1,32 @@
+.address {
+    display: grid;
+    gap: 20px 0;
+    margin: 20px;
+    border: 1px solid var(--cultured);
+    padding: 15px !important;
+    border-radius: var(--border-radius-md);
+}
+.address {
+    &-name,
+    &-phone-title,
+    &-email-title {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    &-phone,
+    &-email {
+        display: flex;
+        gap: 0 30px;
+        align-items: center;
+    }
+    &-id {
+        padding: 15px !important;
+    }
+}
+.address-title {
+    font-size: 24px;
+    font-weight: 600;
+    background: linear-gradient(to right, #008eff, #f60000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

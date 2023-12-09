@@ -1,0 +1,62 @@
+@mixin head-row-style {
+    font-size: 1.6rem;
+    font-weight: 500;
+    font-family: var(--font-family);
+    color: var(--white);
+    user-select: none;
+    text-align: center; // Center horizontally
+    vertical-align: middle; // Center vertically
+}
+
+@mixin table-row-style {
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-family: var(--font-family);
+    color: var(--main-text);
+    text-align: center; // Center horizontally
+    vertical-align: middle; // Center vertically
+}
+
+.table-head {
+    & .head-row {
+        background: var(--primary);
+
+        @each $property in image brand title description price quantity action {
+            & .#{$property} {
+                @include head-row-style;
+            }
+        }
+    }
+}
+
+.table-body {
+    & .body-row {
+        background: var(--white);
+
+        @each $property in image brand title description action {
+            & .#{$property} {
+                @include table-row-style;
+            }
+        }
+        & .price,
+        & .quantity {
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center; // Center horizontally
+            vertical-align: middle; // Center vertically
+        }
+        .product-img {
+            width: 4.6rem;
+            height: auto;
+        }
+
+        .brand-img {
+            width: 4.6rem;
+            height: auto;
+        }
+
+        .btn {
+            font-size: 1rem;
+        }
+    }
+}
