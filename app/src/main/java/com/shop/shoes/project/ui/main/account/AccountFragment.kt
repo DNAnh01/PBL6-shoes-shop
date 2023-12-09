@@ -102,4 +102,11 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         }
     }
 
+    override fun onResume() = binding.run {
+        super.onResume()
+        if (Pref.accessToken != "") {
+            tvLogout.visibility = View.VISIBLE
+            view.visibility = View.VISIBLE
+        }
+    }
 }
