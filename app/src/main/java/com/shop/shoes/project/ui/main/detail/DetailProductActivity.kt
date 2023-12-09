@@ -10,7 +10,7 @@ import com.shop.shoes.project.ShopShoesApp
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.Review
 import com.shop.shoes.project.databinding.ActivityDetailProductBinding
-import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.ui.base.BaseActivity
 import com.shop.shoes.project.utils.BottomSheetUtils
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Utils

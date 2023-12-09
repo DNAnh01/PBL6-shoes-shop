@@ -13,3 +13,10 @@ data class AuthResponse(
     val jwt: String = "",
     val message: String? = null
 )
+
+data class BodyChangePass(
+    @SerializedName("oldPassword")
+    var oldPass: String,
+    @SerializedName("newPassword")
+    var newPassword: String,
+)

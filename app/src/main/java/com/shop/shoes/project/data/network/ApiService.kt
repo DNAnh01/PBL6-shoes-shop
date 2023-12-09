@@ -3,6 +3,7 @@ package com.shop.shoes.project.data.network
 import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.data.model.AuthResponse
 import com.shop.shoes.project.data.model.BodyCart
+import com.shop.shoes.project.data.model.BodyChangePass
 import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.model.ResponseCartAdd
@@ -40,4 +41,7 @@ interface ApiService {
 
     @DELETE("${Constants.DELETE_CART}{cartId}")
     suspend fun deleteNewCart(@Path("cartId") cartId: Int): ResponseCartAdd
+
+    @POST(Constants.CHANGE_PASS)
+    suspend fun changePass(@Body body: BodyChangePass): String
 }

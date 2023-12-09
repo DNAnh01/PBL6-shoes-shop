@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import androidx.lifecycle.lifecycleScope
 import com.shop.shoes.project.databinding.ActivitySplashBinding
 import com.shop.shoes.project.ui.main.MainActivity
-import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.ui.base.BaseActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.databinding.ActivityLoginBinding
-import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.ui.base.BaseActivity
 import com.shop.shoes.project.utils.Utils
 import org.koin.android.ext.android.inject
 

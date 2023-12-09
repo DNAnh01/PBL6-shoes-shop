@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_bg"
+    android:orientation="vertical"
+    android:padding="@dimen/_20sdp">
+
+    <EditText
+        android:id="@+id/edtOld"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:background="@drawable/bg_input"
+        android:hint="@string/old_password"
+        android:lines="1"
+        android:padding="@dimen/_16sdp"
+        android:password="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
+
+    <EditText
+        android:id="@+id/edtNew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:background="@drawable/bg_input"
+        android:hint="@string/new_password"
+        android:lines="1"
+        android:padding="@dimen/_16sdp"
+        android:password="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
+
+    <CheckBox
+        android:id="@+id/cbShowPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:buttonTint="@color/black"
+        android:lines="1"
+        android:text="@string/show_password"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_box_view"
+            android:elevation="@dimen/_8sdp"
+            android:text="@string/cancel"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_box_view"
+            android:elevation="@dimen/_8sdp"
+            android:text="@string/change"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

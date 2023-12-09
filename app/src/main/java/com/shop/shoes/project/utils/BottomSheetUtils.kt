@@ -3,16 +3,20 @@ package com.shop.shoes.project.utils
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.BodyCart
+import com.shop.shoes.project.data.model.BodyChangePass
 import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.Size
 import com.shop.shoes.project.data.model.SizeShow
 import com.shop.shoes.project.databinding.BottomSheetCartBinding
+import com.shop.shoes.project.databinding.BottomSheetPassBinding
 import com.shop.shoes.project.ui.main.ShareViewModel
+import com.shop.shoes.project.ui.main.account.InfoViewModel
 import com.shop.shoes.project.ui.main.cart.SizeAdapter
 
 object BottomSheetUtils {
@@ -126,6 +130,44 @@ object BottomSheetUtils {
                     changeQuality(tvQuality.text.toString(), isPlus = true, isEdit = true)
                 btnMinus.visibility = View.VISIBLE
                 btnSave.text = context.getText(R.string.save)
+            }
+        }
+        bottomSheetDialog.show()
+    }
+
+    fun showBottomChangePass(context: Context, viewModel: InfoViewModel) {
+        val bottomSheetBinding = BottomSheetPassBinding.inflate(LayoutInflater.from(context))
+        val bottomSheetDialog = BottomSheetDialog(context)
+        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+        bottomSheetBinding.run {
+            cbShowPass.setOnCheckedChangeListener { _, isChecked ->
+                Utils.showCharactersEDT(edtOld, isChecked)
+                Utils.showCharactersEDT(edtNew, isChecked)
+            }
+            btnSave.setOnClickListener {
+                if (edtNew.text.toString().trim() == "" || edtOld.text.toString().trim() == "") {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.please_enter_enough_information),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else if (edtNew.text.toString().trim() == edtOld.text.toString().trim()) {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.please_enter_different_values),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    viewModel.changePass(
+                        BodyChangePass(
+                            oldPass = edtOld.text.toString().trim(),
+                            newPassword = edtNew.text.toString().trim()
+                        )
+                    ) { bottomSheetDialog.dismiss() }
+                }
+            }
+            btnCancel.setOnClickListener {
+                bottomSheetDialog.dismiss()
             }
         }
         bottomSheetDialog.show()
