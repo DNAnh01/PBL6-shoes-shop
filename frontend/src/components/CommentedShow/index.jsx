@@ -39,7 +39,7 @@ export default function CommentedShow() {
                 setReviews(response2?.data);
                 console.log(response2.data);
             } catch (error) {
-                // console.error("Error fetching product detail:", error);
+                console.error('Error fetching product detail:', error);
                 // toast.error("Error fetching product detail");
             } finally {
                 setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại

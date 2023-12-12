@@ -12,6 +12,7 @@ import Button from '~/pages/Button';
 export default function CartList() {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
+    console.log(products);
     // console.log(products);
     const fetchCarts = async () => {
         try {
@@ -19,6 +20,8 @@ export default function CartList() {
             setProducts(response.data);
         } catch (error) {
             // toast.error(error?.message);
+
+            console.log(error);
         }
     };
 
@@ -42,6 +45,7 @@ export default function CartList() {
             }
         } catch (error) {
             // toast.error(error.message);
+            console.log(error);
         }
     };
 

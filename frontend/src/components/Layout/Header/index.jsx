@@ -106,11 +106,11 @@ export default function Header({ cartItems = [] }) {
                             <i className="fa fa-home" aria-hidden="true"></i>
                         </button>
                     </Link>
+                    <Link to="/order" className="action-btn">
+                        <i className="fa fa-history" aria-hidden="true"></i>
+                    </Link>
                     <Link to="/profile" className="action-btn">
                         <i className="fa fa-id-card" aria-hidden="true"></i>
-                    </Link>
-                    <Link to="/login" className="action-btn">
-                        <i className="fa fa-user-o" aria-hidden="true"></i>
                     </Link>
                 </div>
                 <nav className={`mobile-navigation-menu  has-scrollbar ${active ? 'active' : ''}`} data-mobile-menu>

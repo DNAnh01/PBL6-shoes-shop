@@ -22,7 +22,7 @@ export default function CommentCard({ productId }) {
     const postCreateRaiting = async () => {
         if (!reviewText.trim()) {
             // If reviewText is empty or only contains whitespace
-            toast.error('Vui lòng nhập đánh giá của bạn trước khi gửi.');
+            toast.warning('Vui lòng nhập đánh giá của bạn trước khi gửi.');
             return; // Stop the function execution
         }
         const formData = {
@@ -53,6 +53,7 @@ export default function CommentCard({ productId }) {
                 const response2 = await apiReviewDetail.getReviewDetail(id);
                 setReviews(response2?.data);
             } catch (error) {
+                console.log(error);
             } finally {
                 setIsLoading(false);
             }
@@ -67,7 +68,13 @@ export default function CommentCard({ productId }) {
         }
 
         const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-        const averageRating = totalRating / reviews.length;
+        const numberOfReviews = reviews.filter((review) => review.rating > 0).length;
+
+        if (numberOfReviews === 0) {
+            return 0;
+        }
+
+        const averageRating = totalRating / numberOfReviews;
 
         return averageRating.toFixed(2);
     };

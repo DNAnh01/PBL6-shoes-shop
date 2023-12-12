@@ -20,7 +20,6 @@ export default function CartCardHistory({
     // useEffect(() => {
     //   onIncreaseQuantity(price, quantity);
     // }, []);
-    console.log(product);
     return (
         <>
             <div className="cartList-history" role="list">

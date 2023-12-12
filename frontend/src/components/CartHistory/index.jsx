@@ -8,7 +8,6 @@ import CartCardHistory from '../CartCardHistory';
 
 export default function CartHistory() {
     const [products, setProducts] = useState([]);
-    console.log(products);
     const handleBuyNow = async () => {
         try {
             const response = await apiBuyNow.postBuyNow();

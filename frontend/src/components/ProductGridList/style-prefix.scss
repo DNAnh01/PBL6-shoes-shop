@@ -73,17 +73,48 @@
     border-bottom: 3px solid var(--cultured);
     margin-bottom: 30px;
 }
+// pagination
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+/*-----------------------------------*\
+  #PRODUCT GRID
+\*-----------------------------------*/
 .productGrid {
     font: inherit;
     font-family: 'Poppins', sans-serif;
     -ms-scroll-chaining: none;
     overscroll-behavior: contain;
 }
-
-/*-----------------------------------*\
-  #PRODUCT GRID
-\*-----------------------------------*/
 
 .product-main {
     margin-bottom: 30px;

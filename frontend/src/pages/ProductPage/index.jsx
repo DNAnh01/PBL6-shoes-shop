@@ -10,7 +10,6 @@ export default function ProductPage() {
     const [valueSearch, setValueSearch] = useState('');
     const [products, setProducts] = useState();
     const [productSearch, setProductSearch] = useState();
-    console.log(valueSearch);
     const fetchData = async () => {
         const response = await apiProductGrid.getAllProduct();
         setProducts(response?.data?.content);

@@ -5,6 +5,10 @@ import Icon from '../Icons/Icon';
 import Card from '~/components/Card';
 import Achievement from '../Achievement/Achievement';
 import MonthlyOverview from '../MonthlyOverview';
+import LineChart from '../LineChart';
+import { WeekData } from '~/components/LineChart/WeekData';
+import { MonthData } from '../BarChart/MonthData';
+import BarChart from '../BarChart';
 
 const cx = classNames.bind(styles);
 const AdminDashboard = () => {
@@ -26,22 +30,14 @@ const AdminDashboard = () => {
                     </Card>
                 </div>
                 <div className={cx('section3')}>
-                    <Card headline={'Weekly Overview'}></Card>
+                    <Card headline={'Weekly Overview'}>
+                        <LineChart reqData={WeekData} />
+                    </Card>
                 </div>
                 <div className={cx('section4')}>
-                    <Card headline={'Total Earning'} />
-                </div>
-                <div className={cx('section5')}>
-                    <Card headline={'Total Profit'}></Card>
-                </div>
-                <div className={cx('section6')}>
-                    <Card headline={'Refunds'}></Card>
-                </div>
-                <div className={cx('section7')}>
-                    <Card headline={'Now Orders'}></Card>
-                </div>
-                <div className={cx('section8')}>
-                    <Card headline={'Sales Queries'} />
+                    <Card headline={'Monthly Overview'}>
+                        <BarChart reqData={MonthData} />
+                    </Card>
                 </div>
             </div>
         </Fragment>

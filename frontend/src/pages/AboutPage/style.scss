@@ -131,10 +131,8 @@
     &-quantity-input {
         width: 40px;
         text-align: center;
-        margin: 5px 0;
         border: 1px solid #ccc;
         border-radius: 5px;
-        padding: 10px 5px;
     }
     &-payment {
         display: flex;
@@ -156,6 +154,21 @@
         border-radius: 5px;
         cursor: pointer;
     }
+}
+.about-size-buttons {
+    display: flex;
+}
+.size-button {
+    padding: 8px 12px;
+    margin-right: 8px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    cursor: pointer;
+}
+
+.size-button.selected {
+    background-color: #ffffff;
+    border-color: #ff0000cc;
 }
 
 @media (max-width: 570px) {
