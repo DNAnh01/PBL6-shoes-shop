@@ -57,10 +57,6 @@ public class AppConfig {
                                                 "https://pbl6-shoes-shop-production.up.railway.app",
                                                 "https://study-fontend.vercel.app",
                                                 "https://phong-van-cv-srsf.vercel.app",
-                                                "https://sandbox.vnpayment.vn",
-<<<<<<< HEAD
-                                                "https://shoes-shop-mvaa.vercel.app"));
-=======
                                                 "https://shoes-shop-mvaa.vercel.app"
                                                 ));
 >>>>>>> 81a3d657d12e90d8bd797147a2651df07b2ed0e6
