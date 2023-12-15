@@ -59,7 +59,6 @@ public class AppConfig {
                                                 "https://phong-van-cv-srsf.vercel.app",
                                                 "https://shoes-shop-mvaa.vercel.app"
                                                 ));
->>>>>>> 81a3d657d12e90d8bd797147a2651df07b2ed0e6
                                         cfg.setAllowedMethods(Collections
                                                 .singletonList("*"));
                                         cfg.setAllowCredentials(true);
