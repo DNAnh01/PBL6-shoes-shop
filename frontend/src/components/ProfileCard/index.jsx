@@ -29,8 +29,7 @@ export default function ProfileCard() {
         fetchProfile();
     }, []);
 
-    const image =
-        'https://scontent.fsgn2-10.fna.fbcdn.net/v/t39.30808-6/328039816_914151769604724_1668073028896674479_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=maXa2WXfoYcAX-oaO4T&_nc_ht=scontent.fsgn2-10.fna&oh=00_AfD5fFLg63VB9q0uJccL8LAPi9EHJyJCiG9A9NOR0UJvhw&oe=6578758B';
+    const image = 'https://i.pinimg.com/736x/eb/1b/cc/eb1bcce796b5706ec0803a9e985eb45d.jpg';
 
     // personal
     const [isEditing, setIsEditing] = useState(false);

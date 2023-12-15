@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosClientGuest = axios.create({
-    baseURL: 'https://pbl6-shoes-shop-production-0dfd.up.railway.app/api',
+    baseURL: 'https://pbl6-shoes-shop-production-e59c.up.railway.app/api',
 });
 
 // Add a request interceptor
