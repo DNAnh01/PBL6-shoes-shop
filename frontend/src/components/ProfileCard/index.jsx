@@ -9,6 +9,7 @@ import apiChangePass from '../API/apiChangePass';
 
 export default function ProfileCard() {
     const [profiles, setProfiles] = useState([]);
+    console.log(profiles);
     const [streetAddress, setstreetAddress] = useState('');
     const [defaultAddress, setDefaultAddress] = useState(null);
     useEffect(() => {

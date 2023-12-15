@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 
 export default function ProductGridList({ productSearch }) {
     const [products, setProducts] = useState([]);
+    console.log(products);
     const [isLoading, setIsLoading] = useState(false);
     let [searchParams] = useSearchParams();
     const selectedBrand = searchParams.get('brand');
@@ -57,6 +58,7 @@ export default function ProductGridList({ productSearch }) {
                     const priceSort = criteria === 'price_low' ? 'price_low' : 'price_high';
                     const response = await apiFilterPrice.getFilerPrice(priceSort);
                     setProducts(response.data.content);
+                    setTotalPages(response.data.totalPages);
                 } else if (criteria === 'discountPersent') {
                     const sortedProducts = [...products].sort((a, b) => {
                         if (sortOrder === 'asc') {
@@ -69,6 +71,7 @@ export default function ProductGridList({ productSearch }) {
                 } else if (criteria === 'default') {
                     const response = await apiProductGrid.getAllProduct(pageNumber);
                     setProducts(response.data.content);
+                    setTotalPages(response.data.totalPages);
                 }
             } catch (error) {
                 console.log(error);
@@ -78,6 +81,7 @@ export default function ProductGridList({ productSearch }) {
         },
         [sortCriteria, sortOrder, products, pageNumber],
     );
+
     const handlePageClick = (data) => {
         const selectedPage = data.selected;
         setPageNumber(selectedPage);
@@ -89,7 +93,7 @@ export default function ProductGridList({ productSearch }) {
     }, [fetchData, selectedBrand, pageNumber]);
     useEffect(() => {
         handleSort('default');
-    }, [sortCriteria]);
+    }, []);
     return (
         <section>
             <div className="product-main container-layout">
