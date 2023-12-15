@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import apiProductDetail from '../../components/API/apiProductDetail';
 import apiAddItem from '../../components/API/apiAddItem';
 import CommentCard from '../../components/CommentCard';
-import CommentedShow from '../../components/CommentedShow';
 import { useCart } from '../../contexts/CartContext';
 import Button from '../Button';
 
@@ -228,7 +227,6 @@ export default function AboutPage({ quantity = 1 }) {
                 )}
             </div>
             <CommentCard productId={id} />
-            <CommentedShow />
         </>
     );
 }

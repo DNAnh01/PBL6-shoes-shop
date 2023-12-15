@@ -8,7 +8,17 @@ import Raiting from '../API/Raiting';
 import './style.scss';
 import apiReviewDetail from '../API/apiReviewDetail';
 
+//
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+import apiProductDetail from '../API/apiProductDetail';
+import { Keyboard, Mousewheel, Navigation } from 'swiper/modules';
+
 export default function CommentCard({ productId }) {
+    const image =
+        'https://png.pngtree.com/element_our/20200611/ourlarge/pngtree-doggie-cute-cheap-expression-pack-avatar-image_2251655.jpg';
+
+    const [product, setProduct] = useState();
     const [value, setValue] = useState(0);
     const [reviewText, setReviewText] = useState('');
     const [isLoading, setIsLoading] = useState(true); // Thêm isLoading vào đây
@@ -19,6 +29,18 @@ export default function CommentCard({ productId }) {
     const totalRating2 = reviews.filter((review) => review.rating === 2).length;
     const totalRating1 = reviews.filter((review) => review.rating === 1).length;
     let id = useParams();
+    useEffect(() => {
+        const fetchproductDetail = async () => {
+            try {
+                const response = await apiProductDetail.getProductDetail(id?.id);
+                setProduct(response.data);
+            } catch (error) {
+                console.error('Error fetching brands:', error);
+            }
+        };
+        fetchproductDetail();
+    }, [id?.id]);
+
     const postCreateRaiting = async () => {
         if (!reviewText.trim()) {
             // If reviewText is empty or only contains whitespace
@@ -38,6 +60,7 @@ export default function CommentCard({ productId }) {
             if (response) {
                 toast.success('Thêm đánh giá thành công');
                 setTimeout(() => {}, 2000);
+                fetchReviewDetail();
             } else {
                 toast.error('Có lỗi khi thêm đánh giá');
             }
@@ -46,21 +69,20 @@ export default function CommentCard({ productId }) {
         }
     };
 
+    const fetchReviewDetail = async () => {
+        try {
+            setIsLoading(true); // Bắt đầu loading
+            const response2 = await apiReviewDetail.getReviewDetail(id);
+            setReviews(response2?.data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
     useEffect(() => {
-        const fetchReviewDetail = async () => {
-            try {
-                setIsLoading(true); // Bắt đầu loading
-                const response2 = await apiReviewDetail.getReviewDetail(id);
-                setReviews(response2?.data);
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
         fetchReviewDetail();
-    }, [id]);
+    }, []);
 
     const calculateAverageRating = () => {
         if (reviews.length === 0) {
@@ -205,6 +227,63 @@ export default function CommentCard({ productId }) {
                     </div>
                 </div>
                 {/* <!-- End Customer Reviews -->/ */}
+            </div>
+            <div>
+                <div className="px-[20px] font container-layout">
+                    <div className="reviews-heading mb-[10px]">
+                        <h3 className="label-comment">
+                            Reviews for
+                            <span className="font-semibold"> {product?.title}</span>
+                        </h3>
+                    </div>
+                    <Swiper
+                        //   modules={[Pagination]}
+                        spaceBetween={20}
+                        slidesPerView={2}
+                        // navigation
+                        grabCursor={'true'}
+                        pagination={{ clickable: true }}
+                        cssMode={true}
+                        navigation={true}
+                        mousewheel={true}
+                        keyboard={true}
+                        modules={[Navigation, Mousewheel, Keyboard]}
+                        className="pb-[40px]"
+                    >
+                        {reviews.map((review, index) => (
+                            <SwiperSlide key={index}>
+                                <div className="bg-[#f8f8f8] review-card p-[10px] rounded-lg">
+                                    <div className="card-top">
+                                        <div className="comment-profile">
+                                            <div className="comment-profile-image">
+                                                <img src={image} alt="123" width={100} height={100} />
+                                            </div>
+                                            <div className="comment-profile-name">
+                                                <strong>
+                                                    {review?.user?.firstName} {review?.user?.lastName}
+                                                </strong>
+                                                <div className="likes">
+                                                    {[...Array(review?.rating)].map((_, index) => (
+                                                        <i
+                                                            key={index}
+                                                            className="fa fa-solid fa-star fa-2xl icon-star"
+                                                        ></i>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className="comment-date">
+                                                <span>{new Date(review.createAt).toLocaleString()}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="card-main">
+                                        <p>{review.review}</p>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
             </div>
         </section>
     );

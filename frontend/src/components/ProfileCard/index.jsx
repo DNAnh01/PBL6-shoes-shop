@@ -103,6 +103,7 @@ export default function ProfileCard() {
             const response = await apiUpdateProfile.putUpdateprofile(formdata);
             if (response.status === 200) {
                 toast.success('Cập nhật thông tin cá nhân thành công');
+                setIsEditing(false);
             } else {
                 toast.error('Đã có lỗi xảy ra khi cập nhật thông tin cá nhân');
             }

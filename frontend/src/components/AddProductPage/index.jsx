@@ -100,7 +100,7 @@ export default function AddProductPage() {
                     const response = await apiAddProduct.postAddProduct(formData);
                     // console.log('response:', response.data);
                     if (response) {
-                        toast.log('Thêm sản phẩm mới thành công');
+                        toast.success('Thêm sản phẩm mới thành công');
                         setTimeout(() => {
                             navigate('/admin/products');
                         }, 2000);
