@@ -1,7 +1,6 @@
 import { Popconfirm } from 'antd';
 import chroma from 'chroma-js';
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './style.scss';
 import { toast } from 'react-toastify';
@@ -96,12 +95,9 @@ export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuanti
                     </span>
                 </div>
                 <div className="cartList-operation">
-                    <Button
-                        style={{ backgroundColor: 'transparent', color: '#000', borderColor: 'transparent' }}
-                        onClick={handleDelete}
-                    >
+                    <button style={{ backgroundColor: 'transparent', fontSize: '18px' }} onClick={handleDelete}>
                         Delete
-                    </Button>
+                    </button>
                 </div>
             </div>
         </>

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 import styles from './RegisterPage.module.scss';
-import { register } from '~/states/Auth/Action';
 import { toast, ToastContainer } from 'react-toastify';
 import apiRegister from '~/api/user/apiRegister';
 

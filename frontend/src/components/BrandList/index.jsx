@@ -46,7 +46,7 @@ export default function BrandList() {
         };
 
         fetchData();
-    }, []);
+    }, [pageNumber]);
 
     const filterUniqueBrands = (brands) => {
         const uniqueBrandNames = new Set();

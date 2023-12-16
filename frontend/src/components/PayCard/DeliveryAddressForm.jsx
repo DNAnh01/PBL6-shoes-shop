@@ -71,6 +71,7 @@ export default function DeliveryAddressForm() {
                                         autoComplete="given-name"
                                         value={Firstname}
                                         onChange={(event) => setFirstname(event.target.value)}
+                                        style={{ fontSize: '18px' }}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
