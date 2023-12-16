@@ -63,8 +63,17 @@ public class OrderServiceImplementation implements OrderService {
 	public Order createOrder(User user, ShippingAddressRequest reqShippingAddress) {
 
 		List<Order> existingOrders = orderRepository.findByUser(user);
+		Address existingAddress = findExistingAddress(user, reqShippingAddress);
 		Address address;
-		address = createNewAddress(user, reqShippingAddress);
+
+		if (existingAddress != null) {
+			// Use the existing address if available
+			address = existingAddress;
+			updateOrder(existingOrders.get(0), reqShippingAddress);
+		} else {
+			// Create a new address if no existing address is found
+			address = createNewAddress(user, reqShippingAddress);
+		}
 		Cart cart = cartService.findUserCart(user.getId());
 		List<OrderItem> orderItems = new ArrayList<>();
 
