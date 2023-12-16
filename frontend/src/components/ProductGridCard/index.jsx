@@ -29,7 +29,6 @@ const ProductGridCard = ({ product }) => {
                     <h3 className="showcase-title">{product?.title}</h3>
                 </Link>
                 <div className="showcase-rating">
-                    {/* Hiển thị đánh giá dựa trên số sao */}
                     {Array.from({ length: product?.ratings }).map((_, index) => (
                         <i key={index} className="fa fa-star" aria-hidden="true"></i>
                     ))}

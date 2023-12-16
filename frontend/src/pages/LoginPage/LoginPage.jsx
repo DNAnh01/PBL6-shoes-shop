@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '~/states/Auth/Action';
+import apiLogin from '../../api/user/apiLogin';
 
 const cx = classNames.bind(styles);
 const getTokenFromLocalStorage = () => {
@@ -15,17 +14,10 @@ export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
-    const dispatch = useDispatch();
-    const { auth } = useSelector((store) => store);
     const navigate = useNavigate();
     useEffect(() => {
-        console.log(rememberMe);
         const storedToken = getTokenFromLocalStorage();
         if (storedToken) {
-            // Token exists, you can perform any additional actions if needed
-            console.log('Token exists:', storedToken);
-            // You can use the token as needed, for example, include it in your HTTP headers for API requests
-            // axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
         }
     }, [rememberMe]);
 
@@ -35,23 +27,25 @@ export default function LoginPage() {
                 email: username,
                 password,
             };
-
-            await dispatch(login(formData));
-
-            localStorage.setItem('user', JSON.stringify(formData));
-            if (auth?.user?.role === 'admin') {
-                toast.success('Đang vào trang admin');
-                setTimeout(() => {
-                    navigate('/admin');
-                }, 2000);
-            } else if (auth?.user?.role === 'user') {
-                toast.success('Đang vào trang chủ');
-                setTimeout(() => {
-                    navigate('/');
-                }, 2000);
+            const response = await apiLogin.postLogin(formData);
+            if (response) {
+                localStorage.setItem('token', response?.data?.jwt);
+                localStorage.setItem('user', JSON.stringify(formData));
+                localStorage.setItem('jwt', response?.data?.jwt);
+                if (response?.data?.role === 'admin') {
+                    toast.success('Đang vào trang admin');
+                    setTimeout(() => {
+                        navigate('/admin/dashboard');
+                    }, 2000);
+                } else if (response?.data?.role === 'user') {
+                    toast.success('Đang vào trang chủ');
+                    setTimeout(() => {
+                        navigate('/');
+                    }, 2000);
+                }
             }
         } catch (error) {
-            // toast.error(error?.message);
+            console.log(error?.message);
         }
     };
     return (

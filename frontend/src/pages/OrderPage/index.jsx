@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import OrderUser from '~/components/OrderUser/OrderUser';
-import Header from '../../components/Layout/Header';
-import PayCard from '../../components/PayCard';
+import Header from '../../layouts/UserDefaultLayout/Header';
 import { useCart } from '../../contexts/CartContext';
 
 export default function OrderPage() {

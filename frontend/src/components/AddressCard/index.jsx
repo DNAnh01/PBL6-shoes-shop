@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import apiProfile from '../API/apiProfile';
+import apiProfile from '~/api/user/apiProfile';
 import './style.scss';
 export default function AddressCard() {
     const [profiles, setProfiles] = useState([]);

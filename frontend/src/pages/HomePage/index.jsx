@@ -1,6 +1,5 @@
-import Footer from '../../components/Layout/Footer';
-import Header from '../../components/Layout/Header';
-import TrendingItem from '../../components/TrendingItem';
+import Footer from '../../layouts/UserDefaultLayout/Footer';
+import Header from '../../layouts/UserDefaultLayout/Header';
 import './style.scss';
 import ProductFeaturedCard from '../../components/ProductFeaturedCard';
 import BrandList from '../../components/BrandList';

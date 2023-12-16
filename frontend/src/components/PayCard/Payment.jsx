@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import apiCart from '../API/apiCart';
+import apiCart from '~/api/user/apiCart';
 
 export default function Payment({ orderId, totalPrice, paymentTime, transactionId, isSuccess }) {
     const [products, setProducts] = useState([]);

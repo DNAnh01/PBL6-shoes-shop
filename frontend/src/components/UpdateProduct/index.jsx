@@ -1,55 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import apiProductDetail from '~/states/API/apiProductDetail';
-import apiUpdateProduct from '~/states/API/apiUpdateProduct';
+import apiUpdateProduct from '~/api/admin/apiUpdateProduct';
 const UpdateProduct = ({ onClose, product }) => {
-    console.log(product);
-
     const [productName, setProductName] = useState('');
     const [productDescription, setProductDescription] = useState('');
     const [productPrice, setProductPrice] = useState('');
     const [productDiscountedPrice, setProductDiscountedPrice] = useState('');
     const [productDiscountPercent, setProductDiscountPersent] = useState('');
-    const [brand, setBrand] = useState('');
-    const [selectedColor, setSelectedColor] = useState('');
-    const [selectedImage, setSelectedImage] = useState(null);
-
-    const [selectedSizes, setSelectedSizes] = useState([]);
-    // Assuming arrSize is defined somewhere in your code
-    const [arrSize, setArrSize] = useState([
-        { name: 'M', quantity: null },
-        { name: 'L', quantity: null },
-        { name: 'S', quantity: null },
-    ]);
-
-    const handleQuantityChange = (event, sizeName) => {
-        const value = event.target.value;
-        console.log(value);
-        setArrSize((prevArrSize) =>
-            prevArrSize.map((item) =>
-                item.name === sizeName ? { ...item, quantity: value === '' ? null : parseInt(value, 10) } : item,
-            ),
-        );
-    };
-    // Thay đổi hàm xử lý sự kiện khi chọn size
-    const handleSizeChange = (event, sizeName, quantitySize) => {
-        if (event.target.checked) {
-            setArrSize((prevArrSize) =>
-                prevArrSize.map((item) => (item.name === sizeName ? { ...item, quantity: quantitySize } : item)),
-            );
-        } else {
-            setArrSize((prevArrSize) =>
-                prevArrSize.map((item) => (item.name === sizeName ? { ...item, quantity: null } : item)),
-            );
-        }
-
-        setSelectedSizes((prevSelectedSizes) =>
-            event.target.checked
-                ? [...prevSelectedSizes, { name: sizeName, quantity: quantitySize }]
-                : prevSelectedSizes.filter((size) => size.name !== sizeName),
-        );
-    };
 
     const handleSubmit = async () => {
         const formData = {

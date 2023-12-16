@@ -6,9 +6,6 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: url('../../assets/images/background5.png');
-    background-repeat: no-repeat;
-    background-size: cover;
     overflow: hidden;
     font-size: 16px;
     line-height: 1;
@@ -35,8 +32,7 @@
 
 .wrapper-register .form-box h2 {
     font-size: 43px;
-    font-family: 'Gabarito', cursive;
-    font-weight: 300;
+    font-weight: 500;
     background: linear-gradient(to right, #c72092ce, #6c14d0b5);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
-import apiAddProduct from '~/states/API/apiAddProduct';
+import apiAddProduct from '~/api/admin/apiAddProduct';
 import { toast, ToastContainer } from 'react-toastify';
 
 export default function AddProductPage() {
-    const [nameProduct, setnameProduct] = useState('GIÀY THỂ THAO REEBOK RIDER V');
-    const [descriptionProduct, setdescriptionProduct] = useState(
+    const [nameProduct, setNameProduct] = useState('GIÀY THỂ THAO REEBOK RIDER V');
+    const [descriptionProduct, setDescriptionProduct] = useState(
         'ĐÔI GIÀY LẤY CẢM HỨNG TỪ GIÀY CHẠY BỘ CỔ ĐIỂN VỚI PHONG CÁCH HIỆN ĐẠI Vẻ ngoài của bạn sẽ luôn trong khỏe khoắn năng động suốt ngày dài khi diện đôi Giày Reebok Rider V này',
     );
-    const [priceProduct, setpriceProduct] = useState('200000');
-    const [warehousePriceProduct, setwarehousePriceProduct] = useState('200000');
+    const [priceProduct, setPriceProduct] = useState('200000');
+    const [warehousePriceProduct, setWarehousePriceProduct] = useState('200000');
 
-    const [discountedPriceProduct, setdiscountedPriceProduct] = useState('180000');
-    const [discountPersentProduct, setdiscountPersentProduct] = useState('10');
-    const [imageProduct, setimageProduct] = useState('');
+    const [discountedPriceProduct, setDiscountedPriceProduct] = useState('180000');
+    const [discountPersentProduct, setDiscountPersentProduct] = useState('10');
+    const [imageProduct, setImageProduct] = useState('');
     const [selectedBrand, setSelectedBrand] = useState('Nike');
     const brandDefaultImages = {
         Nike: 'https://www.dl.dropboxusercontent.com/scl/fi/spftkm2g20w80w34yusw5/logoNike.png?rlkey=0u494s5a2j3ihrgsn92v9ped3&dl=0',
@@ -66,13 +66,6 @@ export default function AddProductPage() {
     };
     const calculateTotalQuantity = () => {
         return arrSize.reduce((total, size) => total + (size.quantity || 0), 0);
-    };
-    const handleBrandChange = (event) => {
-        const brandName = event.target.value;
-        setSelectedBrand(brandName);
-
-        // Set default image URL based on the selected brand
-        setimageProduct(brandDefaultImages[brandName]);
     };
     const handleSubmit = async () => {
         const totalQuantity = calculateTotalQuantity();
@@ -135,7 +128,7 @@ export default function AddProductPage() {
                             type="text"
                             className="add-name-input"
                             value={nameProduct}
-                            onChange={(event) => setnameProduct(event.target.value)}
+                            onChange={(event) => setNameProduct(event.target.value)}
                         />
                     </div>
                     <div className="add-description">
@@ -144,7 +137,7 @@ export default function AddProductPage() {
                             className="add-description-text"
                             rows="4"
                             value={descriptionProduct}
-                            onChange={(event) => setdescriptionProduct(event.target.value)}
+                            onChange={(event) => setDescriptionProduct(event.target.value)}
                         ></textarea>
                     </div>
                     <div className="add-price">
@@ -153,7 +146,7 @@ export default function AddProductPage() {
                             type="number"
                             className="add-price-input"
                             value={priceProduct}
-                            onChange={(event) => setpriceProduct(event.target.value)}
+                            onChange={(event) => setPriceProduct(event.target.value)}
                         />
                     </div>
                     <div className="add-warehousePrice">
@@ -162,7 +155,7 @@ export default function AddProductPage() {
                             type="number"
                             className="add-warehousePrice-input"
                             value={warehousePriceProduct}
-                            onChange={(event) => setwarehousePriceProduct(event.target.value)}
+                            onChange={(event) => setWarehousePriceProduct(event.target.value)}
                         />
                     </div>
                     <div className="add-discountedPrice">
@@ -171,7 +164,7 @@ export default function AddProductPage() {
                             type="number"
                             className="add-discountedPrice-input"
                             value={discountedPriceProduct}
-                            onChange={(event) => setdiscountedPriceProduct(event.target.value)}
+                            onChange={(event) => setDiscountedPriceProduct(event.target.value)}
                         />
                     </div>
                     <div className="add-discountPersent">
@@ -180,7 +173,7 @@ export default function AddProductPage() {
                             type="number"
                             className="add-discountPersent-input"
                             value={discountPersentProduct}
-                            onChange={(event) => setdiscountPersentProduct(event.target.value)}
+                            onChange={(event) => setDiscountPersentProduct(event.target.value)}
                         />
                     </div>
 
@@ -266,7 +259,7 @@ export default function AddProductPage() {
                             type="text" // Sử dụng type "text" thay vì "file"
                             className="add-image-input"
                             value={imageProduct} // Giữ giá trị trong state hoặc biến tương ứng
-                            onChange={(event) => setimageProduct(event.target.value)}
+                            onChange={(event) => setImageProduct(event.target.value)}
                             placeholder="Enter the product image URL"
                         />
                     </div>

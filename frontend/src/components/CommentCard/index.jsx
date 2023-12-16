@@ -1,18 +1,17 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import apiCreateReview from '../API/apiReview';
-import Raiting from '../API/Raiting';
 import './style.scss';
-import apiReviewDetail from '../API/apiReviewDetail';
 
 //
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper';
-import apiProductDetail from '../API/apiProductDetail';
 import { Keyboard, Mousewheel, Navigation } from 'swiper/modules';
+import apiProductDetail from '~/api/admin/apiProductDetail';
+import apiCreateReview from '~/api/user/apiReview';
+import apiReviewDetail from '~/api/user/apiReviewDetail';
+import Raiting from '~/api/user/Raiting';
 
 export default function CommentCard({ productId }) {
     const image =
@@ -21,7 +20,6 @@ export default function CommentCard({ productId }) {
     const [product, setProduct] = useState();
     const [value, setValue] = useState(0);
     const [reviewText, setReviewText] = useState('');
-    const [isLoading, setIsLoading] = useState(true); // Thêm isLoading vào đây
     const [reviews, setReviews] = useState([]);
     const totalRating5 = reviews.filter((review) => review.rating === 5).length;
     const totalRating4 = reviews.filter((review) => review.rating === 4).length;
@@ -69,20 +67,18 @@ export default function CommentCard({ productId }) {
         }
     };
 
-    const fetchReviewDetail = async () => {
+    const fetchReviewDetail = useCallback(async () => {
         try {
-            setIsLoading(true); // Bắt đầu loading
             const response2 = await apiReviewDetail.getReviewDetail(id);
             setReviews(response2?.data);
         } catch (error) {
             console.log(error);
-        } finally {
-            setIsLoading(false);
         }
-    };
+    }, [id]);
+
     useEffect(() => {
         fetchReviewDetail();
-    }, []);
+    }, [fetchReviewDetail]);
 
     const calculateAverageRating = () => {
         if (reviews.length === 0) {

@@ -1,9 +1,9 @@
-import Header from '../../components/Layout/Header';
+import Header from '../../layouts/UserDefaultLayout/Header';
 import BrandList from '../../components/BrandList';
-import ProductGridList from '../../components/ProductGridList';
 import { useCart } from '../../contexts/CartContext';
 import { useEffect, useState } from 'react';
-import apiProductGrid from '~/components/API/apiProductGrid';
+import apiProductGrid from '~/api/user/apiProductGrid';
+import ProductGridList from '~/components/ProductGridList';
 
 export default function ProductPage() {
     const { cartItems } = useCart();

@@ -45,7 +45,6 @@ export const login = (reqData) => async (dispatch) => {
     try {
         const res = await api_instance.post(`/auth/signin`, reqData);
         const user = res.data;
-        // console.log(' ============', user);
         if (user.jwt) {
             localStorage.setItem('jwt', user.jwt);
             localStorage.setItem('token', user.jwt);

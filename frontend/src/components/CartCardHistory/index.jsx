@@ -1,25 +1,11 @@
 import chroma from 'chroma-js';
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './style.scss';
-export default function CartCardHistory({
-    product,
-    // onIncreaseQuantity,
-    // onDeCreaseQuantity,
-    onDelete,
-    onUpdate,
-}) {
-    const [quantityDefault, setQuantityDefault] = useState(product?.quantity);
-    const [quantityNew, setQuantityNew] = useState(quantityDefault);
-    // console.log(quantityNew);
-    // console.log(quantityDefault);
+export default function CartCardHistory({ product }) {
+    const [quantityDefault] = useState(product?.quantity);
     const hexColorCode = product?.product.color;
     const colorName = chroma(hexColorCode).name();
-    // console.log(product);
-    // useEffect(() => {
-    //   onIncreaseQuantity(price, quantity);
-    // }, []);
     return (
         <>
             <div className="cartList-history" role="list">

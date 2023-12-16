@@ -1,4 +1,4 @@
-import Header from '../../components/Layout/Header';
+import Header from '../../layouts/UserDefaultLayout/Header';
 import CartList from '../../components/CartList';
 import { useCart } from '../../contexts/CartContext';
 import { useEffect } from 'react';

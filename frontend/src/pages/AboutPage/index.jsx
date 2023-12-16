@@ -1,13 +1,13 @@
-import Header from '../../components/Layout/Header';
+import Header from '../../layouts/UserDefaultLayout/Header';
 import './style.scss';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import apiProductDetail from '../../components/API/apiProductDetail';
-import apiAddItem from '../../components/API/apiAddItem';
-import CommentCard from '../../components/CommentCard';
 import { useCart } from '../../contexts/CartContext';
 import Button from '../Button';
+import apiAddItem from '~/api/user/apiAddItem';
+import apiProductDetail from '~/api/admin/apiProductDetail';
+import CommentCard from '~/components/CommentCard';
 
 export default function AboutPage({ quantity = 1 }) {
     const navigate = useNavigate();
@@ -17,7 +17,6 @@ export default function AboutPage({ quantity = 1 }) {
     const { updateCartItems } = useCart();
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedColor, setSelectedColor] = useState('');
-    const [selectedQuantity, setSelectedQuantity] = useState('');
     const [quantityDefault, setQuantityDefault] = useState(quantity);
     const [isLoading, setIsLoading] = useState(true); // Thêm isLoading vào đây
     const { id } = useParams();

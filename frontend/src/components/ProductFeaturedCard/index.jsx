@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import shoes from '../../images/shoes3.png';
+
 import './style.scss';
 import Button from '../../components/Button';
+import images from '~/assets/images';
 import { toast } from 'react-toastify';
 
 export default function ProductFeaturedCard(product) {
@@ -19,7 +20,7 @@ export default function ProductFeaturedCard(product) {
                 <h2 className="product-featured-title">Deal Of The Day</h2>
                 <div className="product-featured-content">
                     <Link to={`/product/${1}`} className="product-featured-link">
-                        <img src={shoes} alt="" className="product-featured-image"></img>
+                        <img src={images.shoes3} alt="" className="product-featured-image"></img>
                     </Link>
                     <div className="product-featured-detail">
                         <div className="product-featured-rating">

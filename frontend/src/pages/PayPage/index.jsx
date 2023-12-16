@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import Header from '../../components/Layout/Header';
+import Header from '../../layouts/UserDefaultLayout/Header';
 import PayCard from '../../components/PayCard';
 import { useCart } from '../../contexts/CartContext';
 

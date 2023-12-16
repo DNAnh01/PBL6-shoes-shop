@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 const SideNavLinks = () => {
     const menu = [
-        { icon: 'dashboard', tippyMessage: 'Admin dashboard', path: '/admin/' },
+        { icon: 'dashboard', tippyMessage: 'Admin dashboard', path: '/admin/dashboard' },
         { icon: 'products', tippyMessage: 'Products', path: '/admin/products' },
         { icon: 'customers', tippyMessage: 'Customers', path: '/admin/customers' },
         { icon: 'orders', tippyMessage: 'Orders', path: '/admin/orders' },

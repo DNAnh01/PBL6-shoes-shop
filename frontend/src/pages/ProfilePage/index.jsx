@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileCard from '~/components/ProfileCard';
-import Header from '../../components/Layout/Header';
+import Header from '../../layouts/UserDefaultLayout/Header';
 import { useCart } from '../../contexts/CartContext';
 
 export default function ProfilePage() {

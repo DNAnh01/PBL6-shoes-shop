@@ -1,27 +1,28 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import apiOrderUser from '~/api/user/apiOrderUser';
 import './style.scss';
-import apiOrderUser from '../API/apiOrderUser';
 
 export default function OrderUser() {
     const [userOrders, setUserOrders] = useState([]);
-    console.log(userOrders);
+
+    const fetchData = async () => {
+        try {
+            // Assuming apiOrderByID.getOrderByID(id) returns a promise
+            const response = await apiOrderUser.getOrderUser();
+
+            // Assuming the response.data contains the relevant order information
+            setUserOrders(response.data);
+        } catch (error) {
+            console.error('Error fetching order data:', error);
+            // Handle the error, e.g., show a toast error message
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Assuming apiOrderByID.getOrderByID(id) returns a promise
-                const response = await apiOrderUser.getOrderUser();
-
-                // Assuming the response.data contains the relevant order information
-                setUserOrders(response.data);
-            } catch (error) {
-                console.error('Error fetching order data:', error);
-                // Handle the error, e.g., show a toast error message
-            }
-        };
-
-        fetchData(); // Call fetchData when the component mounts
+        fetchData();
     }, []);
+
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(undefined, options);
