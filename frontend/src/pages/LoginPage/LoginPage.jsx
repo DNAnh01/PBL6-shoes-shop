@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.scss';
-import apiLogin from '../../api/user/apiLogin';
+import apiLogin from '~/api/user/apiLogin';
 
 const cx = classNames.bind(styles);
 const getTokenFromLocalStorage = () => {

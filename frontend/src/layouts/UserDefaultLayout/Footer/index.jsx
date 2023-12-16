@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './style-prefix.scss';
 
+import images from '~/assets/images';
 export default function Footer() {
     return (
         <section>
@@ -131,7 +132,7 @@ export default function Footer() {
                     </div>
                     <div className="footer-bottom">
                         <div className="container">
-                            <img alt="payment method" className="payment-img" />
+                            <img alt="payment method" src={images.payment} className="payment-img" />
                             <p className="copyright">
                                 Copyright © <Link href="#">Anon</Link> all rights reserved.
                             </p>

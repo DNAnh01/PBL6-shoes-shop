@@ -2,6 +2,9 @@
     margin: 30px 85px;
     font: inherit;
     font-family: 'Poppins', sans-serif;
+    background: url(../../assets/images/contain/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .profile {
     &-title {
