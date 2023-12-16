@@ -58,9 +58,7 @@ public class PaymentController {
             throws UserException {
     	
     	User user = userService.findUserProfileByJwt(jwt);
-    	
     	Order order = orderRepository.findByUserId(user.getId());
-
         Cart cart = cartServiceImplementation.findUserCart(user.getId());
         BigDecimal total = new BigDecimal(cart.getTotalDiscountedPrice());
         // trang frontend cấu hình
@@ -68,12 +66,6 @@ public class PaymentController {
         String vnpayUrl = vnPayService.createOrder(total, order, baseUrl);
         return ResponseEntity.ok(vnpayUrl);
     } 
-
-    @GetMapping("/thanhtoan")
-    public String home(){
-        return "index";
-    }
-    
     @GetMapping("/vnpay-payment")
     public String vnpayPayment(HttpServletRequest request, Model model){
     	//User user = userService.findUserProfileByJwt(jwt);

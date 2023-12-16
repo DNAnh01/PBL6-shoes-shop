@@ -17,6 +17,7 @@ import com.dnanh01.backend.model.HistoryOrderItem;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.OrderItem;
 import com.dnanh01.backend.model.Product;
+import com.dnanh01.backend.model.Size;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.AddressRepository;
 import com.dnanh01.backend.repository.CartRepository;
@@ -32,15 +33,18 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
 	private OrderRepository orderRepository;
+	@Autowired
 	private CartService cartService;
+	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
 	private UserRepository userRepository;
+	@Autowired
 	private OrderItemService orderItemService;
 	@Autowired
 	private HistoryOrderRepository historyOrderRepository;
-
-	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
 	@Autowired
@@ -61,29 +65,20 @@ public class OrderServiceImplementation implements OrderService {
 	@Override
 	public Order createOrder(User user, ShippingAddressRequest reqShippingAddress) {
 
-		// Check if an order already exists for the user
 		List<Order> existingOrders = orderRepository.findByUser(user);
 
-		if (!existingOrders.isEmpty()) {
-			// Handle the case where orders already exist
-			// You might need to iterate through the list or choose a specific order based
-			// on your logic
-			// For example, you can choose the first order in the list:
-			// existingOrders.get(0)
-			return updateOrder(existingOrders.get(0), reqShippingAddress);
-		}
-		// Continue with the order creation logic if no existing order is found
+
 		Address existingAddress = findExistingAddress(user, reqShippingAddress);
 		Address address;
 
 		if (existingAddress != null) {
 			// Use the existing address if available
 			address = existingAddress;
+			updateOrder(existingOrders.get(0), reqShippingAddress);
 		} else {
 			// Create a new address if no existing address is found
 			address = createNewAddress(user, reqShippingAddress);
 		}
-
 		// Continue with the rest of the order creation logic
 		Cart cart = cartService.findUserCart(user.getId());
 		List<OrderItem> orderItems = new ArrayList<>();
@@ -130,7 +125,6 @@ public class OrderServiceImplementation implements OrderService {
 		existingOrder.setShippingAddress(findExistingAddress(existingOrder.getUser(), reqShippingAddress));
 		existingOrder.setOrderDate(LocalDateTime.now());
 		existingOrder.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
-		existingOrder.setOrderStatus("PENDING");
 
 		return orderRepository.save(existingOrder);
 	}
@@ -204,6 +198,10 @@ public class OrderServiceImplementation implements OrderService {
 
 	    // Xóa giỏ hàng sau khi đã xác nhận
 	    clearCart(confirmedOrder.getUser().getId());
+	    
+	    //Thay dổid số lượng khi đã xác nhận
+	    
+	    quantityOrder(confirmedOrder.getUser().getId());
 
 	    return confirmedOrder;
 	}
@@ -242,6 +240,37 @@ public class OrderServiceImplementation implements OrderService {
 	    Cart cart = cartService.findUserCart(userId);
 	    cart.getCartItems().clear();
 	    cartRepository.save(cart);
+	}
+	
+		
+	
+	private void quantityOrder(Long orderId) throws OrderException{
+
+		Order order = findOrderById(orderId);
+
+		List<OrderItem> orderItems = order.getOrderItems();
+
+		for (OrderItem item : orderItems) {
+			int quantity = item.getQuantity();
+			String sizeName = item.getSize();
+			Long productId = item.getProduct().getId();
+			Product product = productRepository.findById(productId)
+					.orElseThrow(() -> new OrderException("Product not found"));
+
+			Optional<Size> optionalSize = product.getSizes().stream()
+					.filter(size -> size.getName().equals(sizeName))
+					.findFirst();
+
+			optionalSize.ifPresent(size -> {
+				int updatedQuantity = size.getQuantity() - quantity;
+				size.setQuantity(updatedQuantity);
+
+				product.setQuantity(product.getQuantity() - quantity);
+
+				productRepository.save(product);
+			});
+		}
+		orderRepository.save(order);
 	}
 
 

@@ -2,10 +2,7 @@ package com.dnanh01.backend.model;
 
 
 public class Size {
-
-	private Long id;
-
-    
+  
     private String name;
     
     private int quantity;
@@ -14,14 +11,6 @@ public class Size {
     
 	public Size() {
 	
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
