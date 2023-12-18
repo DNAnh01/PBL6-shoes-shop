@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './states/store';
 import { publicRoutes } from './routes';
 import { Fragment } from 'react';
-import { CartProvider } from './contexts/CartContext';
+import { CartProvider } from './api/user/CartContext';
 
 import 'react-toastify/dist/ReactToastify.css';
 

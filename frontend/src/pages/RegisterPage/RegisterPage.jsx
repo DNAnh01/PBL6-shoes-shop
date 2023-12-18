@@ -13,6 +13,7 @@ const RegisterPage = () => {
     const [firstName, setFirstName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -28,17 +29,17 @@ const RegisterPage = () => {
     };
     const handleSubmit = async () => {
         if (!password || !lastName || !firstName || !phone || !email) {
-            toast.error('Please fill in all required fields');
+            toast.warning('Vui lòng nhập đủ thông tin yêu cầu');
             return;
         }
         // Kiểm tra định dạng email
         if (!validateEmail(email)) {
-            toast.error('Please enter a valid email address');
+            toast.warning('Vui lòng nhập đúng định dạng email');
             return;
         }
         // Kiểm tra mật khẩu
         if (!validatePassword(password)) {
-            toast.error('Password must contain at least 8 characters, one uppercase letter, and one digit');
+            toast.warning('Mật khẩu phải có 8 ký tự bao gồm 1 số, 1 chữ hoa, 1 ký tự đặc biệt');
             return;
         }
 
@@ -51,11 +52,10 @@ const RegisterPage = () => {
                 email,
                 role: 'user',
             };
-            const response = apiRegister.postRegister(formData);
-            if (response) {
+            const response = await apiRegister.postRegister(formData);
+            if (response.status === 201) {
                 toast.success('Đăng ký thành công');
-                localStorage.setItem('user', JSON.stringify(formData));
-
+                sessionStorage.setItem('user', JSON.stringify(formData));
                 setTimeout(() => {
                     navigate('/login');
                 }, 2000);
@@ -86,7 +86,7 @@ const RegisterPage = () => {
                         </div>
                         <div className={cx('input-register')}>
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 id="password"
                                 name="password"
                                 value={password}
@@ -95,6 +95,14 @@ const RegisterPage = () => {
                                 required
                             />
                             <label>Password</label>
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{ background: 'transparent' }}
+                                className={cx('toggle-password-button')}
+                            >
+                                <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`} aria-hidden="true"></i>
+                            </button>
                         </div>
                         <div className={cx('input-register')}>
                             <input

@@ -3,7 +3,7 @@ import './style.scss';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useCart } from '../../contexts/CartContext';
+import { useCart } from '~/api/user/CartContext';
 import Button from '../Button';
 import apiAddItem from '~/api/user/apiAddItem';
 import apiProductDetail from '~/api/admin/apiProductDetail';
@@ -65,10 +65,8 @@ export default function AboutPage({ quantity = 1 }) {
 
                 const response = await apiProductDetail.getProductDetail(id);
                 setProductDetail(response.data);
-                console.log(response.data);
             } catch (error) {
-                // console.error('Error fetching product detail:', error);
-                // toast.error('Error fetching product detail');
+                toast.error('Sản phẩm không tồn tại', error);
             } finally {
                 setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại
             }
@@ -103,6 +101,10 @@ export default function AboutPage({ quantity = 1 }) {
             toast.warning(`Bạn không thể thêm nhiều hơn  ${maxQuantity} mục cho kích thước đã chọn.`);
         }
     };
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <>
             <Header cartItems={cartItems} />

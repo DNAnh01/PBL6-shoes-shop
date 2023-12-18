@@ -3,11 +3,10 @@ import apiProfile from '~/api/user/apiProfile';
 import './style.scss';
 export default function AddressCard() {
     const [profiles, setProfiles] = useState([]);
-    console.log(profiles);
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await apiProfile.getProfile();
+                const response = await apiProfile();
                 setProfiles(response.data);
             } catch (error) {
                 // toast.error(error?.message);

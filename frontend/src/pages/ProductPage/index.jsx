@@ -1,6 +1,6 @@
 import Header from '../../layouts/UserDefaultLayout/Header';
 import BrandList from '../../components/BrandList';
-import { useCart } from '../../contexts/CartContext';
+import { useCart } from '~/api/user/CartContext';
 import { useEffect, useState } from 'react';
 import apiProductGrid from '~/api/user/apiProductGrid';
 import ProductGridList from '~/components/ProductGridList';

@@ -5,7 +5,7 @@ import ProductFeaturedCard from '../../components/ProductFeaturedCard';
 import BrandList from '../../components/BrandList';
 import ProductBoxList from '../../components/ProductBoxList';
 import { ToastContainer } from 'react-toastify';
-import { useCart } from '../../contexts/CartContext';
+import { useCart } from '~/api/user/CartContext';
 import ProductGridList from '~/components/ProductGridList';
 
 export default function HomePage() {

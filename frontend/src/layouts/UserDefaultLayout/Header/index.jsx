@@ -7,7 +7,7 @@ export default function Header({ cartItems = [] }) {
     const cartItemCount = cartItems?.length || 0;
     const dropdownRef = useRef(null);
     const [active, setActive] = useState(false);
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(sessionStorage.getItem('user'));
     const onMenuAccount = (e) => {
         e.preventDefault();
         setActive(true);

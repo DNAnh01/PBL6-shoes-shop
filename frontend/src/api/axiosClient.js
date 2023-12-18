@@ -7,8 +7,10 @@ const axiosClient = axios.create({
 // Add a request interceptor
 axiosClient.interceptors.request.use(
     function (config) {
-        const access_token = localStorage.getItem('jwt');
-        config.headers.Authorization = `Bearer ${access_token}`;
+        const access_token = sessionStorage.getItem('jwt');
+        if (access_token) {
+            config.headers.Authorization = `Bearer ${access_token}`;
+        }
         // Do something before request is sent
         return config;
     },

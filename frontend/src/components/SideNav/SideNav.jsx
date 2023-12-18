@@ -13,9 +13,9 @@ const cx = classNames.bind(styles);
 const SideNav = () => {
     const navigate = useNavigate();
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        localStorage.removeItem('jwt');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('jwt');
         setTimeout(() => {
             navigate('/login');
         }, 2000);

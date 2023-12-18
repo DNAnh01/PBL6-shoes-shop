@@ -63,7 +63,7 @@ export default function CommentCard({ productId }) {
                 toast.error('Có lỗi khi thêm đánh giá');
             }
         } catch (error) {
-            console.error('Error submitting review:', error);
+            toast.error('Bạn cần đăng nhập', error);
         }
     };
 

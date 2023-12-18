@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import './style.scss';
 
 export default function ForgetPassPage() {
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState();
+    const navigate = useNavigate();
     const [passwordconfim, setPasswordconfim] = useState('');
 
     const handleReset = async () => {
-        // if (
-        //   username === "admin" &&
-        //   password === "admin" &&
-        //   passwordconfim === "admin"
-        // ) {
-        //   toast.success("Thay đổi mật khẩu thành công");
-        //   setTimeout(() => {
-        //     navigate("/login");
-        //   }, 2000);
-        // } else {
-        //   toast.error("Sai tài khoản hoặc mật khẩu chưa giống nhau");
-        // }
+        if (username === 'user@gmail.com' && password === 'demoA@1234' && passwordconfim === 'demoA@1234') {
+            toast.success('Thay đổi mật khẩu thành công');
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
+        } else {
+            toast.error('Sai tài khoản hoặc mật khẩu chưa giống nhau');
+        }
     };
 
     return (
@@ -28,7 +25,7 @@ export default function ForgetPassPage() {
             <ToastContainer />
             <div className="wrapper">
                 <div className="form-box login">
-                    <h1>Forget Password</h1>
+                    <h1 className="form-box-title">Forget Password</h1>
                     <form>
                         <div className="input-box">
                             <input
