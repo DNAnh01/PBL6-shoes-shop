@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import apiCart from '~/api/user/apiCart';
 
-export default function Payment({ orderId, totalPrice, paymentTime, transactionId, isSuccess }) {
+export default function Payment({ orderId, totalPrice, paymentTime, transactionId }) {
     const [products, setProducts] = useState([]);
+    const [isSuccess, setIsSuccess] = useState(false);
     console.log(products);
     const fetchCarts = async () => {
         try {
@@ -15,13 +16,16 @@ export default function Payment({ orderId, totalPrice, paymentTime, transactionI
     // API cart
     useEffect(() => {
         // Gọi hàm fetchCarts
+        const urlParams = new URLSearchParams(window.location.search);
+        const result = urlParams.get('result');
+        setIsSuccess(result === 'success');
         fetchCarts();
     }, []);
     return (
         <div>
             <div className="container">
                 <div className="w-50 m-auto">
-                    <h1 className={`my-3 text-${isSuccess ? 'success' : 'danger'} text-center`}>
+                    <h1 className={`my-3 text-${isSuccess ? 'success' : 'failure'} text-center`}>
                         {isSuccess ? 'Thanh toán thành công' : 'Thanh toán thất bại'}
                     </h1>
                     <h2 className="my-2">Chi tiết đơn hàng</h2>

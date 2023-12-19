@@ -4,7 +4,7 @@ import axiosClient from '../axiosClient';
 
 const apiBuyNow = {
     postBuyNow() {
-        const url = `/api/payment/submitOrder?orderInfo=thanh toan`;
+        const url = `/api/payment/submitOrder`;
         return axiosClient.post(url);
     },
 };
