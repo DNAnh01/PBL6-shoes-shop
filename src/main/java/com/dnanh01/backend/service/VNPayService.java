@@ -25,7 +25,8 @@ public class VNPayService {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String vnp_TxnRef = VNPayConfig.getRandomNumber(8);
-        String vnp_IpAddr = "127.0.0.1";
+        String vnp_IpAddr = "0:0:0:0:0:0:0:1";
+        //String vnp_IpAddr = "127.0.0.1";
         String vnp_TmnCode = VNPayConfig.vnp_TmnCode;
         String orderType = "order-type";
 
@@ -40,8 +41,11 @@ public class VNPayService {
         vnp_Params.put("vnp_OrderInfo", getOrderItemsInfoFromOrder(order));
         vnp_Params.put("vnp_OrderType", orderType);
 
-        String locate = "vn";
-        vnp_Params.put("vnp_Locale", locate);
+        String locate = "";
+        if (locate != null && !locate.isEmpty()) vnp_Params.put("vnp_Locale", locate);
+        else vnp_Params.put("vnp_Locale", "vn");
+        //String locate = "vn";
+        //vnp_Params.put("vnp_Locale", locate);
 
         urlReturn += VNPayConfig.vnp_Returnurl;
         vnp_Params.put("vnp_ReturnUrl", urlReturn);
@@ -52,7 +56,7 @@ public class VNPayService {
         String vnp_CreateDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_CreateDate", vnp_CreateDate);
 
-        cld.add(Calendar.MINUTE, 15);
+        cld.add(Calendar.MINUTE, 436);//15
         String vnp_ExpireDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
 
