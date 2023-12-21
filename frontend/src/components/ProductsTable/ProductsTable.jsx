@@ -7,6 +7,7 @@ import styles from './ProductsTable.module.scss';
 
 import { deleteProduct, findProducts } from '~/states/Product/Action';
 import Button from '../Button';
+import { ToastContainer } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 const ProductsTable = ({ handleProductUpdate }) => {
@@ -48,6 +49,7 @@ const ProductsTable = ({ handleProductUpdate }) => {
     };
     return (
         <div>
+            <ToastContainer />
             <TableContainer component={Paper} variant="outlined">
                 <Table aria-label="demo table">
                     <TableHead className={cx('table-head')}>

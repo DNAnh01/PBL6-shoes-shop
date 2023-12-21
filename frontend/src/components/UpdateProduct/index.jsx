@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import apiUpdateProduct from '~/api/admin/apiUpdateProduct';
 const UpdateProduct = ({ onClose, product }) => {
+    console.log(product);
     const [productName, setProductName] = useState('');
     const [productDescription, setProductDescription] = useState('');
     const [productPrice, setProductPrice] = useState('');
@@ -19,10 +20,9 @@ const UpdateProduct = ({ onClose, product }) => {
         };
         try {
             const response = await apiUpdateProduct.putUpdateProduct(product?.id, formData);
-            // Handle the success response, you might want to show a success message
             console.log('Product updated successfully:', response.data);
             toast.success('Product updated successfully');
-            onClose(); // Close the modal or navigate away
+            onClose();
         } catch (error) {
             console.log(error);
         }
@@ -30,7 +30,7 @@ const UpdateProduct = ({ onClose, product }) => {
 
     const handleCancel = () => {
         onClose();
-        window.location.reload();
+        // window.location.reload();
     };
     useEffect(() => {
         console.log('UpdateProduct is mounted');

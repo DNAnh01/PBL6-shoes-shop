@@ -56,7 +56,7 @@ export default function ProductGridList({ productSearch }) {
                         if (sortOrder === 'asc') {
                             return b.id - a.id;
                         } else {
-                            return a.id - b.id;
+                            return b.id - a.id;
                         }
                     });
                     setProducts(sortedProducts);

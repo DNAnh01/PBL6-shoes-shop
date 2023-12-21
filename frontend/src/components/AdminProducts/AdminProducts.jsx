@@ -9,24 +9,22 @@ const AdminProducts = () => {
     const [selectedProduct, setSelectedProduct] = useState(null); // State để lưu trữ sản phẩm được chọn
     const [showProductsTable, setShowProductsTable] = useState(true);
 
-    const handleProductUpdate = (product) => {
-        // Hiển thị form update khi người dùng click nút update
-        setSelectedProduct(product);
-        setShowUpdateForm(true);
-        // Ẩn ProductsTable khi hiển thị UpdateProduct
-        setShowProductsTable(false);
-    };
     const handleProductsButtonClick = () => {
-        // Hiển thị lại ProductsTable khi người dùng ấn nút
         setShowProductsTable(true);
         setShowUpdateForm(false);
     };
+    // Hiển thị form update khi người dùng click nút update
+    const handleProductUpdate = (product) => {
+        setSelectedProduct(product);
+        setShowUpdateForm(true);
+        setShowProductsTable(false);
+    };
 
+    // Hiển thị form product table khi người dùng click nút cancel hoặc sau khi cập nhật thành công
     const handleFormClose = () => {
-        // Đóng form update khi người dùng hoàn tất cập nhật hoặc hủy bỏ
         setShowUpdateForm(false);
-        // Reset thông tin sản phẩm được chọn
         setSelectedProduct(null);
+        setShowProductsTable(true);
     };
     return (
         <div>
