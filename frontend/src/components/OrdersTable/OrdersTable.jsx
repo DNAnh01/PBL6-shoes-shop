@@ -116,7 +116,10 @@ export default function OrdersTable() {
                                     {new Date(order.deliveryDate).toLocaleString()}
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
-                                    {order.totalDiscountedPrice} VND
+                                    {order.totalDiscountedPrice.toLocaleString('it-IT', {
+                                        style: 'currency',
+                                        currency: 'VND',
+                                    })}
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
                                     <span className="custom-status">{order.orderStatus.toUpperCase()}</span>

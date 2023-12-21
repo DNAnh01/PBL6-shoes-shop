@@ -9,11 +9,10 @@ import ReactPaginate from 'react-paginate';
 
 export default function ProductGridList({ productSearch }) {
     const [products, setProducts] = useState([]);
-    console.log(products);
     const [isLoading, setIsLoading] = useState(false);
     let [searchParams] = useSearchParams();
     const selectedBrand = searchParams.get('brand');
-    const [sortCriteria, setSortCriteria] = useState('default');
+    const [sortCriteria, setSortCriteria] = useState('price_low');
     const [sortOrder, setSortOrder] = useState('desc');
     const [pageNumber, setPageNumber] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
@@ -52,25 +51,29 @@ export default function ProductGridList({ productSearch }) {
                     setSortCriteria(criteria);
                     setSortOrder('asc');
                 }
-
-                if (criteria === 'price_low' || criteria === 'price_high') {
+                if (criteria === 'new') {
+                    const sortedProducts = [...products].sort((a, b) => {
+                        if (sortOrder === 'asc') {
+                            return b.id - a.id;
+                        } else {
+                            return a.id - b.id;
+                        }
+                    });
+                    setProducts(sortedProducts);
+                } else if (criteria === 'price_low' || criteria === 'price_high') {
                     const priceSort = criteria === 'price_low' ? 'price_low' : 'price_high';
                     const response = await apiFilterPrice.getFilerPrice(priceSort);
                     setProducts(response.data.content);
                     setTotalPages(response.data.totalPages);
                 } else if (criteria === 'discountPersent') {
                     const sortedProducts = [...products].sort((a, b) => {
-                        if (sortOrder === 'asc') {
+                        if (sortOrder === 'desc') {
                             return a.discountPersent - b.discountPersent;
                         } else {
                             return b.discountPersent - a.discountPersent;
                         }
                     });
                     setProducts(sortedProducts);
-                } else if (criteria === 'default') {
-                    const response = await apiProductGrid.getAllProduct(pageNumber);
-                    setProducts(response.data.content);
-                    setTotalPages(response.data.totalPages);
                 }
             } catch (error) {
                 console.log(error);
@@ -78,7 +81,7 @@ export default function ProductGridList({ productSearch }) {
                 setIsLoading(false);
             }
         },
-        [sortCriteria, sortOrder, products, pageNumber],
+        [sortCriteria, sortOrder, products],
     );
 
     const handlePageClick = (data) => {
@@ -92,7 +95,7 @@ export default function ProductGridList({ productSearch }) {
     }, [fetchData]);
 
     useEffect(() => {
-        handleSort('default');
+        handleSort('price_low');
     }, []);
 
     return (
@@ -105,9 +108,9 @@ export default function ProductGridList({ productSearch }) {
                         style={{ margin: '0 10px', padding: '10px', borderRadius: '5px' }}
                         onChange={(e) => handleSort(e.target.value)}
                     >
-                        <option value="default">Default</option>
                         <option value="price_low">Price Low</option>
                         <option value="price_high">Price High</option>
+                        <option value="new">New Product</option>
                         <option value="discountPersent">Discount Persent</option>
                     </select>
                 </div>

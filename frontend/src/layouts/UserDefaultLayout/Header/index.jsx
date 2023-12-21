@@ -22,10 +22,8 @@ export default function Header({ cartItems = [] }) {
             }
         };
 
-        // Add click event listener
         document.addEventListener('click', handleClickOutside);
 
-        // Remove click event listener on component unmount
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
@@ -45,7 +43,7 @@ export default function Header({ cartItems = [] }) {
                         <Link to="/profile" className="action-btn">
                             <i className="fa fa-id-card" aria-hidden="true"></i>
                         </Link>
-                        <Link to="/login" className="action-btn">
+                        <Link to="/login" className="action-btn" style={{ display: user ? 'none' : 'block' }}>
                             <i className="fa fa-user-o" aria-hidden="true"></i>
                         </Link>
                         <Link to="/cart" className="action-btn">

@@ -12,6 +12,7 @@ import apiRemoveCartItems from '~/api/user/apiRemoveCartItems';
 export default function CartList() {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
+    console.log(products);
     const navigate = useNavigate();
     const checksessionStorage = () => {
         if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user') || !sessionStorage.getItem('jwt')) {
@@ -41,14 +42,13 @@ export default function CartList() {
     }, []);
 
     const handleQuantityChange = async (productId, newQuantity) => {
-        console.log(newQuantity);
         const formData = {
             quantity: newQuantity,
         };
         try {
             const response = await apiUpdateCartItems.putUpdateCartItems(productId, formData);
             if (response) {
-                console.log('Bạn tăng số lượng sản phẩm lên 1');
+                fetchCarts();
             } else {
                 // toast.error('Update quantity failed');
             }
@@ -63,7 +63,6 @@ export default function CartList() {
         const currentQuantity = product ? product.quantity : 0;
         const newQuantity = currentQuantity + 1;
         handleQuantityChange(productId, newQuantity);
-        fetchCarts();
     };
 
     const handleDecreaseQuantity = (productId) => {
@@ -71,7 +70,6 @@ export default function CartList() {
         const currentQuantity = product ? product.quantity : 0;
         const newQuantity = currentQuantity - 1;
         handleQuantityChange(productId, newQuantity);
-        fetchCarts();
     };
 
     const handleDeleteProduct = async (productId) => {
@@ -114,27 +112,29 @@ export default function CartList() {
                     </Link>
                 </div>
                 <div className="cartRow">
-                    <div className="cartRow-product font-15">Product</div>
-                    <div className="cartRow-price font-15">Unit price</div>
-                    <div className="cartRow-priceSale font-15">Sale price</div>
-                    <div className="cartRow-quantity font-15">Quantity</div>
-                    <div className="cartRow-money font-15">Total</div>
-                    <div className="cartRow-operation font-15">Operation</div>
+                    <div className="cartRow-product">Product</div>
+                    <div className="cartRow-price">Unit price</div>
+                    <div className="cartRow-priceSale">Sale price</div>
+                    <div className="cartRow-quantity">Quantity</div>
+                    <div className="cartRow-money">Total</div>
+                    <div className="cartRow-operation">Operation</div>
                 </div>
 
                 {/* Danh sách sản phẩm  */}
                 {products?.cartItems?.length > 0 &&
-                    products?.cartItems?.map((product) => {
-                        return (
-                            <CartCard
-                                key={product?.id}
-                                product={product}
-                                onDelete={() => handleDeleteProduct(product.id)}
-                                onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
-                                onDeCreaseQuantity={() => handleDecreaseQuantity(product.id)}
-                            />
-                        );
-                    })}
+                    products?.cartItems
+                        .sort((a, b) => b.timestamp - a.timestamp)
+                        ?.map((product) => {
+                            return (
+                                <CartCard
+                                    key={product?.id}
+                                    product={product}
+                                    onDelete={() => handleDeleteProduct(product.id)}
+                                    onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
+                                    onDeCreaseQuantity={() => handleDecreaseQuantity(product.id)}
+                                />
+                            );
+                        })}
             </div>
             <div className="payment">
                 <div className="payment-voucher">

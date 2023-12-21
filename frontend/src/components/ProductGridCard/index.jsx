@@ -35,8 +35,18 @@ const ProductGridCard = ({ product }) => {
                     {product?.halfRating && <i className="fa fa-star-half-o" aria-hidden="true"></i>}
                 </div>
                 <div className="price-box">
-                    <p className="price">${product?.discountedPrice}</p>
-                    <p className="deal">${product?.price}</p>
+                    <p className="price">
+                        {product?.discountedPrice.toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'VND',
+                        })}
+                    </p>
+                    <p className="deal">
+                        {product?.price.toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'VND',
+                        })}
+                    </p>
                 </div>
             </div>
         </div>

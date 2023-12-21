@@ -90,14 +90,13 @@ export default function ProfileCard() {
                 const response = await apiChangePass.postChangepass(formdata);
                 if (response.status === 200) {
                     toast.success('Thay đổi mật khẩu thành công');
-                } else {
-                    toast.error('Đã có lỗi xảy ra khi thay đổi mật khẩu');
+                    handleCancel();
                 }
             } catch (error) {
-                toast.error('Error changing password:', error);
+                toast.error('Đã có lỗi xảy ra khi thay đổi mật khẩu', error);
             }
         } else {
-            toast.error('Mật khẩu không khớp');
+            toast.warning('Mật khẩu không khớp');
         }
     };
     const handleUpdateProfile = async () => {
@@ -110,6 +109,7 @@ export default function ProfileCard() {
             console.log(formdata);
             const response = await apiUpdateProfile.putUpdateprofile(formdata);
             if (response.status === 200) {
+                fetchProfile();
                 toast.success('Cập nhật thông tin cá nhân thành công');
                 setIsEditing(false);
             } else {

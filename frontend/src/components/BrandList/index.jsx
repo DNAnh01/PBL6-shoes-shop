@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 import './style.scss';
 import apiProductGrid from '~/api/user/apiProductGrid';
+import { useCallback } from 'react';
 
 const breakpointsSwiper = {
     320: {
@@ -29,14 +30,16 @@ const breakpointsSwiper = {
 
 export default function BrandList() {
     const [brands, setBrands] = useState([]);
+    const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [pageNumber] = useState('0');
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await apiProductGrid.getAllProduct(pageNumber);
                 const uniqueBrands = filterUniqueBrands(response?.data?.content);
-
+                setProducts(response.data.content);
                 setBrands(uniqueBrands);
                 setIsLoading(false);
             } catch (error) {
@@ -44,10 +47,8 @@ export default function BrandList() {
                 console.log(error);
             }
         };
-
         fetchData();
     }, [pageNumber]);
-
     const filterUniqueBrands = (brands) => {
         const uniqueBrandNames = new Set();
         const uniqueBrands = [];
@@ -62,7 +63,12 @@ export default function BrandList() {
 
         return uniqueBrands;
     };
-
+    const countBrandElements = useCallback(
+        (brandName) => {
+            return products.filter((product) => product?.brand?.name === brandName).length;
+        },
+        [products],
+    );
     return (
         <div className="container-layout">
             <div className="brandList">
@@ -87,7 +93,11 @@ export default function BrandList() {
                 ) : (
                     brands.map((brand) => (
                         <SwiperSlide key={brand?.brand?.id}>
-                            <BrandCard imageUrl={brand?.brand?.imageUrl} name={brand?.brand?.name} amount="53" />
+                            <BrandCard
+                                imageUrl={brand?.brand?.imageUrl}
+                                name={brand?.brand?.name}
+                                amount={countBrandElements(brand?.brand?.name)}
+                            />
                         </SwiperSlide>
                     ))
                 )}

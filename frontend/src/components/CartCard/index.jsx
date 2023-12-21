@@ -34,7 +34,6 @@ export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuanti
     const handleDelete = () => {
         onDelete();
     };
-    console.log(product);
     return (
         <>
             <div className="cartList" role="list">
@@ -53,17 +52,27 @@ export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuanti
                             {product?.product?.brand?.name}
                         </Link>
                         <div className="cartList-content-color">
-                            <span>Color</span>
+                            <span className="color-main-text">Color</span>
                             <div className="color-display" style={{ backgroundColor: color }}></div>
-                            <span className="cartList-content-color-p">Size: {product?.size}</span>
+                            <span className="cartList-content-color-p color-main-text">Size: {product?.size}</span>
                         </div>
                     </div>
                 </div>
                 <div className="cartList-price">
-                    <span className="font-15">{product?.product?.discountedPrice + ' '}VND</span>
+                    <span className="color-main-text">
+                        {product?.product?.discountedPrice.toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'VND',
+                        })}
+                    </span>
                 </div>
                 <div className="cartList-priceSale">
-                    <span className="font-15">{product?.product?.price + ' '}VND</span>
+                    <span className="color-main-text">
+                        {product?.product?.price.toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'VND',
+                        })}
+                    </span>
                 </div>
                 <div className="cartList-quantity">
                     {newQuantity === 1 ? (
@@ -89,9 +98,11 @@ export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuanti
                     </button>
                 </div>
                 <div className="cartList-money">
-                    <span className="font-15">
-                        {quantityDefault * Number(product?.product?.discountedPrice) + ' '}
-                        VND
+                    <span className="color-main-text">
+                        {(quantityDefault * Number(product?.product?.discountedPrice)).toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'VND',
+                        })}
                     </span>
                 </div>
                 <div className="cartList-operation">

@@ -81,7 +81,12 @@ const ProductsTable = ({ handleProductUpdate }) => {
                                             ? `${item?.description?.substring(0, 50)}...`
                                             : item?.description}
                                     </TableCell>
-                                    <TableCell className={cx('price')}>{item?.price} VND</TableCell>
+                                    <TableCell className={cx('price')}>
+                                        {item?.price.toLocaleString('it-IT', {
+                                            style: 'currency',
+                                            currency: 'VND',
+                                        })}
+                                    </TableCell>
                                     <TableCell className={cx('quantity')}>{item?.quantity}</TableCell>
                                     <TableCell className={cx('action')}>
                                         <Button
