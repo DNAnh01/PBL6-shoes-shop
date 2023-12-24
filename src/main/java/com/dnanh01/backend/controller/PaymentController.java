@@ -95,10 +95,12 @@ public class PaymentController {
                 // Handle exception, e.g., log it or show an error message
                 return "redirect:/ordersai";
             }*/
-            return "redirect:https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success";
+            return "redirect:https://www.facebook.com/DAONGOCANH.INFO";
+                //"redirect:https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success";
         } else {
             // Payment failed, handle accordingly
-            return "redirect:https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
+            return "redirect:https://www.facebook.com/DAONGOCANH.INFO";
+                //"redirect:https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
         }
     }
 }
