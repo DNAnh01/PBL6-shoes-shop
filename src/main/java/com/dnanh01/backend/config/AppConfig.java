@@ -60,7 +60,8 @@ public class AppConfig {
                                                 "https://study-fontend.vercel.app",
                                                 "https://phong-van-cv-srsf.vercel.app",
                                                 "https://sandbox.vnpayment.vn",
-                                                "https://shoes-shop-mvaa.vercel.app"));
+                                                "https://shoes-shop-mvaa.vercel.app",
+                                                "https://www.facebook.com"));
                                         cfg.setAllowedMethods(Collections
                                                 .singletonList("*"));
                                         cfg.setAllowCredentials(true);
