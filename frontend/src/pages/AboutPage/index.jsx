@@ -45,9 +45,9 @@ export default function AboutPage({ quantity = 1 }) {
             const response = await apiAddItem.putAddItem(formData);
             toast.success('Thêm sản phẩm vào giỏ thành công');
             updateCartItems();
-            // setTimeout(() => {
-            //   navigate("/cart");
-            // }, 2000);
+            setTimeout(() => {
+                navigate('/cart');
+            }, 2000);
             console.log(response);
         } catch (error) {
             console.error('Add to Cart Error:', error);

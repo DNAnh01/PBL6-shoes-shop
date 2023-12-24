@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import apiUpdateProduct from '~/api/admin/apiUpdateProduct';
 const UpdateProduct = ({ onClose, product }) => {
-    console.log(product);
     const [productName, setProductName] = useState('');
     const [productDescription, setProductDescription] = useState('');
     const [productPrice, setProductPrice] = useState('');
@@ -30,7 +29,7 @@ const UpdateProduct = ({ onClose, product }) => {
 
     const handleCancel = () => {
         onClose();
-        // window.location.reload();
+        window.location.reload();
     };
     useEffect(() => {
         console.log('UpdateProduct is mounted');

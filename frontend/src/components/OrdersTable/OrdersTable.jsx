@@ -8,7 +8,6 @@ import apiOrder from '~/api/admin/apiOrder';
 
 export default function OrdersTable() {
     const [orders, setOrders] = useState([]);
-    console.log(orders);
     const [selectedOrderIds, setSelectedOrderIds] = useState([]);
     const [localStatus, setLocalStatus] = useState({});
 
