@@ -86,19 +86,19 @@ public class PaymentController {
         model.addAttribute("transactionId", transactionId);
 
         // Check payment status
-        if (paymentStatus == 1) {
+       if (paymentStatus == 1) {
             // Payment successful, confirm the order
-        	return "ordersuccess";
             /*try {
                 orderService.confirmedOrder(order.getId());
-                return "ordersuccess";
+                return "redirect:/ordersuccess";
             } catch (OrderException e) {
                 // Handle exception, e.g., log it or show an error message
-                return "ordersai";
+                return "redirect:/ordersai";
             }*/
+            return "redirect:https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success";
         } else {
             // Payment failed, handle accordingly
-            return "orderfail";
+            return "redirect:https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
         }
     }
 }
