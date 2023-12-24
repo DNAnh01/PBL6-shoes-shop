@@ -56,6 +56,7 @@ public class AppConfig {
                                                 "http://localhost:5454",
                                                 "https://pbl6-shoes-shop-production.up.railway.app",
                                                 "https://pbl6-shoes-shop-production-9b7e.up.railway.app",
+                                                "https://pbl6-shoes-shop-production-f927.up.railway.app",
                                                 "https://study-fontend.vercel.app",
                                                 "https://phong-van-cv-srsf.vercel.app",
                                                 "https://sandbox.vnpayment.vn"));
