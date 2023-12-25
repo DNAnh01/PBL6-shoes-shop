@@ -33,18 +33,17 @@ export default function BrandList() {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [pageNumber] = useState('0');
-
+    const pageSize = 100;
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await apiProductGrid.getAllProduct(pageNumber);
+                const response = await apiProductGrid.getAllProduct(pageNumber, pageSize);
                 const uniqueBrands = filterUniqueBrands(response?.data?.content);
                 setProducts(response.data.content);
                 setBrands(uniqueBrands);
                 setIsLoading(false);
             } catch (error) {
                 setIsLoading(false);
-                console.log(error);
             }
         };
         fetchData();

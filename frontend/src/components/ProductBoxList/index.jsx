@@ -10,14 +10,14 @@ export default function ProductBoxList() {
             products: [
                 {
                     image: images.shoes1,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Adidas',
                     price: 500000,
                     salePrice: 700000,
                 },
                 {
                     image: images.shoes4,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Nike',
                     price: 500000,
                     salePrice: 700000,
@@ -29,14 +29,14 @@ export default function ProductBoxList() {
             products: [
                 {
                     image: images.shoes2,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Nike',
                     price: 500000,
                     salePrice: 700000,
                 },
                 {
                     image: images.shoes7,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Nike',
                     price: 500000,
                     salePrice: 700000,
@@ -48,14 +48,14 @@ export default function ProductBoxList() {
             products: [
                 {
                     image: images.shoes4,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Nike',
                     price: 500000,
                     salePrice: 700000,
                 },
                 {
                     image: images.shoes4,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Nike',
                     price: 500000,
                     salePrice: 700000,
@@ -67,28 +67,28 @@ export default function ProductBoxList() {
             products: [
                 {
                     image: images.shoes3,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Nike',
                     price: 500000,
                     salePrice: 700000,
                 },
                 {
                     image: images.shoes4,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Nike',
                     price: 500000,
                     salePrice: 700000,
                 },
                 {
                     image: images.shoes4,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Nike',
                     price: 500000,
                     salePrice: 700000,
                 },
                 {
                     image: images.shoes4,
-                    name: 'Giày Jordan Cổ Thấp',
+                    title: 'Giày Jordan Cổ Thấp',
                     brand: 'Nike',
                     price: 500000,
                     salePrice: 700000,
@@ -108,7 +108,7 @@ export default function ProductBoxList() {
                                 <ProductBoxCard
                                     key={index}
                                     image={product.image}
-                                    name={product.name}
+                                    title={product.title}
                                     brand={product.brand}
                                     price={product.price}
                                     salePrice={product.salePrice}

@@ -7,6 +7,7 @@ import apiFilterPrice from '~/api/user/apiFilterPrice';
 import apiProductGrid from '~/api/user/apiProductGrid';
 import ReactPaginate from 'react-paginate';
 
+const pageSize = 10;
 export default function ProductGridList({ productSearch }) {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -14,31 +15,34 @@ export default function ProductGridList({ productSearch }) {
     const selectedBrand = searchParams.get('brand');
     const [sortCriteria, setSortCriteria] = useState('price_low');
     const [sortOrder, setSortOrder] = useState('desc');
-    const [pageNumber, setPageNumber] = useState(0);
-    const [totalPages, setTotalPages] = useState(0);
+    const [pageCount, setPageCount] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0);
 
-    const fetchData = useCallback(async () => {
-        try {
-            setIsLoading(true);
-            let response;
-            if (selectedBrand) {
-                response = await apiBrand.getProductByBrand(selectedBrand, pageNumber);
-                setProducts(response?.data?.content);
-            } else {
-                if (productSearch && productSearch.length > 0) {
-                    setProducts(productSearch);
+    const handleGetAllProduct = useCallback(
+        async (pageNumber) => {
+            try {
+                setIsLoading(true);
+                let response;
+                if (selectedBrand) {
+                    response = await apiBrand.getProductByBrand(selectedBrand, pageNumber);
+                    setProducts(response?.data?.content);
                 } else {
-                    response = await apiProductGrid.getAllProduct(pageNumber);
-                    setProducts(response.data.content);
-                    setTotalPages(response.data.totalPages);
+                    if (productSearch && productSearch.length > 0) {
+                        setProducts(productSearch);
+                    } else {
+                        response = await apiProductGrid.getAllProduct(pageNumber, pageSize);
+                        setProducts(response.data.content);
+                        setPageCount(response.data.totalPages);
+                    }
                 }
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
             }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
-        }
-    }, [selectedBrand, productSearch, pageNumber]);
+        },
+        [selectedBrand, productSearch],
+    );
 
     const handleSort = useCallback(
         async (criteria) => {
@@ -64,7 +68,7 @@ export default function ProductGridList({ productSearch }) {
                     const priceSort = criteria === 'price_low' ? 'price_low' : 'price_high';
                     const response = await apiFilterPrice.getFilerPrice(priceSort);
                     setProducts(response.data.content);
-                    setTotalPages(response.data.totalPages);
+                    setPageCount(response.data.totalPages);
                 } else if (criteria === 'discountPersent') {
                     const sortedProducts = [...products].sort((a, b) => {
                         if (sortOrder === 'desc') {
@@ -86,13 +90,13 @@ export default function ProductGridList({ productSearch }) {
 
     const handlePageClick = (data) => {
         const selectedPage = data.selected;
-        setPageNumber(selectedPage);
-        fetchData();
+        setCurrentPage(Number(selectedPage));
+        handleGetAllProduct(Number(selectedPage));
     };
 
     useEffect(() => {
-        fetchData();
-    }, [fetchData]);
+        handleGetAllProduct();
+    }, [handleGetAllProduct]);
 
     useEffect(() => {
         handleSort('price_low');
@@ -127,12 +131,13 @@ export default function ProductGridList({ productSearch }) {
                     nextLabel={'Next'}
                     breakLabel={'...'}
                     breakClassName={'break-me'}
-                    pageCount={totalPages}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={handlePageClick}
+                    pageCount={pageCount}
                     containerClassName={'pagination'}
                     activeClassName={'active'}
+                    forcePage={currentPage - 1}
                 />
             </div>
         </section>
