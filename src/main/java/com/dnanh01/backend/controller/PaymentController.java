@@ -75,7 +75,7 @@ public class PaymentController {
     	
         int paymentStatus = vnPayService.orderReturn(request);
 
-        String orderInfo = request.getParameter("vnp_OrderInfo");
+       /* String orderInfo = request.getParameter("vnp_OrderInfo");
         String paymentTime = request.getParameter("vnp_PayDate");
         String transactionId = request.getParameter("vnp_TransactionNo");
         String totalPrice = request.getParameter("vnp_Amount");
@@ -84,7 +84,7 @@ public class PaymentController {
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("paymentTime", paymentTime);
         model.addAttribute("transactionId", transactionId);
-
+*/
         // Check payment status
        if (paymentStatus == 1) {
             // Payment successful, confirm the order
