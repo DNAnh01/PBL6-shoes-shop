@@ -31,39 +31,6 @@ import com.dnanh01.backend.service.OrderService;
 import com.dnanh01.backend.service.UserService;
 import com.dnanh01.backend.service.VNPayService;
 
-package com.dnanh01.backend.controller;
-
-import jakarta.servlet.http.HttpServletRequest;
-
-import java.math.BigDecimal;
-import java.security.Principal;
-import java.util.List;
-
-import javax.print.attribute.standard.JobOriginatingUserName;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
-
-import com.dnanh01.backend.exception.OrderException;
-import com.dnanh01.backend.exception.UserException;
-import com.dnanh01.backend.model.Cart;
-import com.dnanh01.backend.model.Order;
-import com.dnanh01.backend.model.User;
-import com.dnanh01.backend.repository.OrderRepository;
-import com.dnanh01.backend.service.CartServiceImplementation;
-import com.dnanh01.backend.service.OrderService;
-import com.dnanh01.backend.service.UserService;
-import com.dnanh01.backend.service.VNPayService;
-
 @RestController
 @RequestMapping("/api/payment")
 public class PaymentController {
