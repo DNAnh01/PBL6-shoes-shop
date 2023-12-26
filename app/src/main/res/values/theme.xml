@@ -1,0 +1,26 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ShopShoes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#CD9BE4</item>
+        <item name="android:navigationBarColor">@color/color_view</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="DotsIndicator">
+        <item name="dotsColor">@color/color_green</item>
+    </style>
+
+    <style name="Theme.DetailProduct" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+</resources>

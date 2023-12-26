@@ -1,0 +1,15 @@
+<resources>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+
+    <string name="admob_app_open_id">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="admob_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_native_id">ca-app-pub-3940256099942544/1044960115</string>
+
+    <!--    Free trial key   -->
+    <string name="subs_free_trial_key">com.dj.yearly</string>
+    <!--    Monthly   -->
+    <string name="subs_monthly">com.dj.monthly</string>
+    <!--    Onetime   -->
+    <string name="subs_in_app">com.dj.lifetime</string>
+</resources>

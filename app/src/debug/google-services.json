@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1030907829300",
+    "project_id": "base-33069",
+    "storage_bucket": "base-33069.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030907829300:android:073346d1426fddae633e61",
+        "android_client_info": {
+          "package_name": "com.betamixer.drumpad.machine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030907829300-gsvldd8hlu8l5q84a5nj5fi4c91moj4m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeyhd6WVjsH4xN4NkzwiqfSXIROMMorA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030907829300-gsvldd8hlu8l5q84a5nj5fi4c91moj4m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
