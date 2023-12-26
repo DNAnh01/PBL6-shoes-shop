@@ -66,13 +66,12 @@ public class PaymentController {
         String vnpayUrl = vnPayService.createOrder(total, order, baseUrl);
         return ResponseEntity.ok(vnpayUrl);
     } 
-   @GetMapping("/vnpay-payment")
+    @GetMapping("/vnpay-payment")
     @ResponseBody
-    //public String vnpayPayment(HttpServletRequest request, Model model){
-    public ResponseEntity<?> vnpayPayment(
-            HttpServletRequest request,  
+    public String vnpayPayment(
+    		HttpServletRequest request,  
             @RequestHeader("Authorization") String jwt) 
-            throws UserException {
+            throws UserException{
     	User user = userService.findUserProfileByJwt(jwt);
     	
     	Order order = orderRepository.findByUserId(user.getId());
@@ -84,14 +83,14 @@ public class PaymentController {
             // Payment successful, confirm the order
             try {
                 orderService.confirmedOrder(order.getId());
-                return ResponseEntity.ok("https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success");
+                return "ordersuccess";
             } catch (OrderException e) {
                 // Handle exception, e.g., log it or show an error message
-                return ResponseEntity.ok("https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure");
+                return "orderfail";
             }
         } else {
             // Payment failed, handle accordingly
-            return ResponseEntity.ok("https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure");
+        	return "orderfail";
         }
     }
 }
