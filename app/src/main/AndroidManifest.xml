@@ -24,7 +24,7 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="34">
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
