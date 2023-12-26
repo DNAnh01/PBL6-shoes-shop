@@ -1,7 +1,8 @@
-package com.shop.shoes.project
+package com.shop.shoes.project.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.shop.shoes.project.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,9 +1,11 @@
-package com.shop.shoes.project
+package com.shop.shoes.project.ui.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import com.shop.shoes.project.ui.main.MainActivity
+import com.shop.shoes.project.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
