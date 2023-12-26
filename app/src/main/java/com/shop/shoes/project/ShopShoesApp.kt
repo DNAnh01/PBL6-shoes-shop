@@ -10,7 +10,9 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.chibatching.kotpref.Kotpref
 import com.shop.shoes.project.di.appModule
+import com.shop.shoes.project.ui.main.ShareViewModel
 import com.shop.shoes.project.utils.eventbus.EventBusLifeCycle
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -21,6 +23,8 @@ class ShopShoesApp : MultiDexApplication(),
     companion object {
         lateinit var instance: ShopShoesApp
     }
+
+    val shareViewModel by inject<ShareViewModel>()
 
     private var currentActivity: Activity? = null
     override fun onCreate() {
