@@ -27,7 +27,7 @@ public class AppConfig {
         http.sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(Authorize -> Authorize
-                        .requestMatchers("/api/products/**","https://shoes-shop-mvaa.vercel.app/**","/vnpay-payment/**").permitAll() // Permit access
+                        .requestMatchers("/api/products/**","https://shoes-shop-mvaa.vercel.app/**","/vnpay-payment/**","/api/payment/**").permitAll() // Permit access
                         // to
                         // without
                         // authentication
