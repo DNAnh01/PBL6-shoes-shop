@@ -66,41 +66,32 @@ public class PaymentController {
         String vnpayUrl = vnPayService.createOrder(total, order, baseUrl);
         return ResponseEntity.ok(vnpayUrl);
     } 
-    @GetMapping("/vnpay-payment")
-    public String vnpayPayment(HttpServletRequest request, Model model){
-    	//User user = userService.findUserProfileByJwt(jwt);
+   @GetMapping("/vnpay-payment")
+    @ResponseBody
+    //public String vnpayPayment(HttpServletRequest request, Model model){
+    public ResponseEntity<?> vnpayPayment(
+            HttpServletRequest request,  
+            @RequestHeader("Authorization") String jwt) 
+            throws UserException {
+    	User user = userService.findUserProfileByJwt(jwt);
     	
-    	//Order order = orderRepository.findByUserId(user.getId());
+    	Order order = orderRepository.findByUserId(user.getId());
     	
     	
         int paymentStatus = vnPayService.orderReturn(request);
 
-       /* String orderInfo = request.getParameter("vnp_OrderInfo");
-        String paymentTime = request.getParameter("vnp_PayDate");
-        String transactionId = request.getParameter("vnp_TransactionNo");
-        String totalPrice = request.getParameter("vnp_Amount");
-
-        model.addAttribute("orderId", orderInfo);
-        model.addAttribute("totalPrice", totalPrice);
-        model.addAttribute("paymentTime", paymentTime);
-        model.addAttribute("transactionId", transactionId);
-*/
-        // Check payment status
-       if (paymentStatus == 1) {
+        if (paymentStatus == 1) {
             // Payment successful, confirm the order
-            /*try {
+            try {
                 orderService.confirmedOrder(order.getId());
-                return "redirect:/ordersuccess";
+                return ResponseEntity.ok("https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success");
             } catch (OrderException e) {
                 // Handle exception, e.g., log it or show an error message
-                return "redirect:/ordersai";
-            }*/
-            return "redirect:https://www.facebook.com/DAONGOCANH.INFO";
-                //"redirect:https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success";
+                return ResponseEntity.ok("https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure");
+            }
         } else {
             // Payment failed, handle accordingly
-            return "redirect:https://www.facebook.com/DAONGOCANH.INFO";
-                //"redirect:https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
+            return ResponseEntity.ok("https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure");
         }
     }
 }
