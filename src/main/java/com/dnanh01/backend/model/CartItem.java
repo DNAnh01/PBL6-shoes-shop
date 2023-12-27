@@ -1,5 +1,7 @@
 package com.dnanh01.backend.model;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -31,6 +33,8 @@ public class CartItem {
     private Integer discountedPrice;
 
     private Long userId;
+    
+    private LocalDateTime createCartItem;
 
     public CartItem() {
     }
@@ -97,6 +101,13 @@ public class CartItem {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+    public LocalDateTime getCreateCartItem() {
+        return createCartItem;
+    }
+
+    public void setCreateCartItem(LocalDateTime createCartItem) {
+        this.createCartItem = createCartItem;
     }
 
 }

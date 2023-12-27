@@ -27,7 +27,7 @@ public class AppConfig {
         http.sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(Authorize -> Authorize
-                        .requestMatchers("/api/products/**").permitAll() // Permit access
+                        .requestMatchers("/api/products/**","/api/payment/**").permitAll() // Permit access
                         // to
                         // without
                         // authentication

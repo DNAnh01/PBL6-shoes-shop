@@ -21,10 +21,11 @@ public class VNPayService {
 	 @Autowired
 	 private OrderService orderService;
 
-    public String createOrder(BigDecimal total, Order order, String urlReturn) {
+    public String createOrder(BigDecimal total, String urlReturn) {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String vnp_TxnRef = VNPayConfig.getRandomNumber(8);
+       //String vnp_IpAddr = "0:0:0:0:0:0:0:1";
         String vnp_IpAddr = "127.0.0.1";
         String vnp_TmnCode = VNPayConfig.vnp_TmnCode;
         String orderType = "order-type";
@@ -37,11 +38,14 @@ public class VNPayService {
         vnp_Params.put("vnp_CurrCode", "VND");
 
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
-        vnp_Params.put("vnp_OrderInfo", getOrderItemsInfoFromOrder(order));
+        vnp_Params.put("vnp_OrderInfo", "thanh toán shopshoes");
         vnp_Params.put("vnp_OrderType", orderType);
 
-        String locate = "vn";
-        vnp_Params.put("vnp_Locale", locate);
+        String locate = "";
+        if (locate != null && !locate.isEmpty()) vnp_Params.put("vnp_Locale", locate);
+        else vnp_Params.put("vnp_Locale", "vn");
+        //String locate = "vn";
+        //vnp_Params.put("vnp_Locale", locate);
 
         urlReturn += VNPayConfig.vnp_Returnurl;
         vnp_Params.put("vnp_ReturnUrl", urlReturn);
@@ -89,25 +93,6 @@ public class VNPayService {
         String paymentUrl = VNPayConfig.vnp_PayUrl + "?" + queryUrl;
         return paymentUrl;
     }
-    
-    private String getOrderItemsInfoFromOrder(Order order) {
-        List<String> orderItemsInfo = new ArrayList<>();
-
-        for (OrderItem orderItem : order.getOrderItems()) {
-            StringBuilder itemInfo = new StringBuilder();
-            itemInfo.append("Product: ").append(orderItem.getProduct().getTitle()).append("\n");
-            itemInfo.append("Size: ").append(orderItem.getSize()).append("\n");
-            itemInfo.append("Quantity: ").append(orderItem.getQuantity()).append("\n");
-            itemInfo.append("Price: ").append(orderItem.getPrice()).append("\n");
-            itemInfo.append("Discounted Price: ").append(orderItem.getDiscountedPrice()).append("\n");
-
-            orderItemsInfo.add(itemInfo.toString());
-        }
-
-        // Chuyển danh sách các chuỗi thành một chuỗi duy nhất, mỗi mục được ngăn cách bằng dòng mới ("\n")
-        return String.join("\n", orderItemsInfo);
-    }
-
 
 	public int orderReturn(HttpServletRequest request) {
         Map fields = new HashMap();

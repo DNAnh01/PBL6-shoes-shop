@@ -1,5 +1,7 @@
 package com.dnanh01.backend.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
 import com.dnanh01.backend.exception.CartItemException;
@@ -54,7 +56,7 @@ public class CartServiceImplementation implements CartService {
             cartItem.setUserId(userId);
             cartItem.setCart(cart);
             cartItem.setProduct(product);
-
+            cartItem.setCreateCartItem(LocalDateTime.now());
             CartItem createdCartItem = cartItemService.createCartItem(cartItem);
 
             cart.getCartItems().add(createdCartItem);
@@ -69,7 +71,7 @@ public class CartServiceImplementation implements CartService {
             cartItem.setUserId(userId);
             cartItem.setCart(cart);
             cartItem.setProduct(product);
-
+            cartItem.setCreateCartItem(LocalDateTime.now());
             cartItemService.updateCartItem(userId, isPresent.getId(), cartItem);
 
         }

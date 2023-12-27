@@ -1,5 +1,7 @@
 package com.dnanh01.backend.request;
 
+import java.time.LocalDateTime;
+
 public class AddItemRequest {
     private Long productId;
     private String size;
@@ -41,4 +43,5 @@ public class AddItemRequest {
     public void setPrice(Integer price) {
         this.price = price;
     }
+    
 }

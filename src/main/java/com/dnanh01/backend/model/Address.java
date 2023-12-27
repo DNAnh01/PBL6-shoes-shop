@@ -1,5 +1,7 @@
 package com.dnanh01.backend.model;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -9,19 +11,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "address")
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
 
     @Column(name = "street_address")
     private String streetAddress;
@@ -35,24 +33,26 @@ public class Address {
     @Column(name = "zip_code")
     private String zipCode;
 
+    @Column(name = "creation_time")
+    private LocalDateTime creationTime;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
-    private String mobile;
-
     public Address() {
     }
 
-    public Address(Long id, String streetAddress, String city, String state, String zipCode, User user, String mobile) {
+    public Address(Long id, String streetAddress, String city, String state, String zipCode, LocalDateTime creationTime,
+            User user) {
         this.id = id;
         this.streetAddress = streetAddress;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
+        this.creationTime = creationTime;
         this.user = user;
-        this.mobile = mobile;
     }
 
     public Long getId() {
@@ -95,20 +95,20 @@ public class Address {
         this.zipCode = zipCode;
     }
 
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(LocalDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
     }
 
 }
