@@ -74,16 +74,11 @@ public class PaymentController {
     @GetMapping("/vnpay-payment")
     @ResponseBody
     public ResponseEntity<?> vnpayPayment(
-            HttpServletRequest request,
-            @RequestParam("orderId") Long orderId) throws OrderException {
+            HttpServletRequest request) {
 
         int paymentStatus = vnPayService.orderReturn(request);
 
         if (paymentStatus == 1) {
-            // update trong co so du lieu
-
-            orderService.deliveredOrder(orderId);
-
             return ResponseEntity.ok("success");
         } else {
             return ResponseEntity.ok("cancel");
