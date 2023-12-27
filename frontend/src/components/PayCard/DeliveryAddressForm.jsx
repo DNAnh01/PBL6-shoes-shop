@@ -94,8 +94,6 @@ export default function DeliveryAddressForm() {
                                         label="Address"
                                         fullWidth
                                         autoComplete="given-name"
-                                        multiline
-                                        rows={4}
                                         value={streetAddress}
                                         onChange={(event) => setstreetAddress(event.target.value)}
                                     />
