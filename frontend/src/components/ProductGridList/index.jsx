@@ -90,6 +90,7 @@ export default function ProductGridList({ productSearch }) {
 
     const handlePageClick = (data) => {
         const selectedPage = data.selected;
+        console.log(selectedPage);
         setCurrentPage(Number(selectedPage));
         handleGetAllProduct(Number(selectedPage));
     };

@@ -1,32 +1,21 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import apiGetAllOrder from '~/api/admin/apiGetAllOrder';
-import './style.scss'; // Import your CSS file
-import _debounce from 'lodash/debounce';
+import './style.scss';
 import apiOrder from '~/api/admin/apiOrder';
-// ... Import các thư viện và component khác ...
+import { Modal } from 'antd';
 
 export default function OrdersTable() {
     const [orders, setOrders] = useState([]);
     const [selectedOrderIds, setSelectedOrderIds] = useState([]);
     const [localStatus, setLocalStatus] = useState({});
-
-    // Hàm xử lý khi giá trị thay đổi sau một khoảng thời gian
-    const handleStatusChangeDebounced = _debounce(async () => {
-        try {
-            // toast.success('Đang chờ thay đổi thông tin Order');
-        } catch (error) {
-            console.error(error);
-        }
-    });
+    const [isModalOpen, setIsModalOpen] = useState(false); // Step 1
+    const [selectedOrderId, setSelectedOrderId] = useState(null);
 
     const handleStatusChange = (newStatus, orderId) => {
         handleOrderSelect(orderId, newStatus);
-        handleStatusChangeDebounced();
         try {
             apiOrder.putOrder(orderId, newStatus);
-
-            handleStatusChangeDebounced.flush();
         } catch (error) {
             console.error('Error updating order status:', error);
         }
@@ -50,7 +39,7 @@ export default function OrdersTable() {
         );
     };
 
-    const fetchData = useCallback(async () => {
+    const getAllOrder = useCallback(async () => {
         try {
             const response = await apiGetAllOrder.getAllOrder();
             setOrders(response.data);
@@ -67,9 +56,18 @@ export default function OrdersTable() {
     }, []);
 
     useEffect(() => {
-        fetchData();
-    }, [fetchData]);
+        getAllOrder();
+    }, [getAllOrder]);
 
+    const openModal = (orderId) => {
+        setSelectedOrderId(orderId);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setSelectedOrderId(null);
+        setIsModalOpen(false);
+    };
     return (
         <div>
             <TableContainer component={Paper} variant="outlined" className="custom-table-container">
@@ -84,7 +82,7 @@ export default function OrdersTable() {
                             <TableCell className="custom-header-order">ToTal Price</TableCell>
                             <TableCell className="custom-header-order">Status</TableCell>
                             <TableCell className="custom-header-order">Update</TableCell>
-                            {/* <TableCell className="custom-header-order">Delete</TableCell> */}
+                            <TableCell className="custom-header-order">View</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -140,19 +138,137 @@ export default function OrdersTable() {
                                         <option value="canceled">Canceled</option>
                                     </select>
                                 </TableCell>
-                                {/* <TableCell align="left" className="custom-cell-order">
-                                    <button className="custom-button">Delete</button>
-                                </TableCell> */}
+                                <TableCell align="left" className="custom-cell-order">
+                                    <button type="button" style={{ background: 'transparent' }} onClick={openModal}>
+                                        <i className="fa fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
+                    <div className="w-[500px] h-[300px]">
+                        <Modal
+                            open={isModalOpen}
+                            footer={[
+                                <button key="cancel" onClick={closeModal} className="ant-btn">
+                                    Cancel
+                                </button>,
+                            ]}
+                            onCancel={closeModal}
+                            width={950}
+                            style={{ maxHeight: '60vh', overflow: 'auto' }}
+                        >
+                            <TableContainer
+                                component={Paper}
+                                variant="outlined"
+                                className="custom-table-container container-layout"
+                            >
+                                <Table aria-label="demo table" className="custom-table">
+                                    <TableHead>
+                                        <TableRow className="custom-header">
+                                            <TableCell
+                                                className="custom-header-order-user"
+                                                style={{ textAlign: 'center' }}
+                                            >
+                                                Image
+                                            </TableCell>
+                                            <TableCell
+                                                className="custom-header-order-user"
+                                                style={{ textAlign: 'center' }}
+                                            >
+                                                Title
+                                            </TableCell>
+                                            <TableCell
+                                                className="custom-header-order-user"
+                                                style={{ textAlign: 'center' }}
+                                            >
+                                                Brand
+                                            </TableCell>
+                                            <TableCell
+                                                className="custom-header-order-user"
+                                                style={{ textAlign: 'center' }}
+                                            >
+                                                Size
+                                            </TableCell>
+                                            <TableCell
+                                                className="custom-header-order-user"
+                                                style={{ textAlign: 'center' }}
+                                            >
+                                                Quantity
+                                            </TableCell>
+                                            <TableCell
+                                                className="custom-header-order-user"
+                                                style={{ textAlign: 'center' }}
+                                            >
+                                                Price
+                                            </TableCell>
+                                            <TableCell
+                                                className="custom-header-order-user"
+                                                style={{ textAlign: 'center' }}
+                                            >
+                                                Total Price
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {selectedOrderId &&
+                                            orders
+                                                .filter((order) => order.id === selectedOrderId)
+                                                .map((order) =>
+                                                    order?.orderItems.map((item) => (
+                                                        <TableRow key={item.id} className="custom-cell">
+                                                            <TableCell
+                                                                align="left"
+                                                                scope="row"
+                                                                className="custom-cell-order-user-title"
+                                                            >
+                                                                <img
+                                                                    src={item.product.imageUrl}
+                                                                    alt=""
+                                                                    style={{ width: '70px', height: '70px' }}
+                                                                />
+                                                            </TableCell>
+
+                                                            <TableCell align="left" className="custom-cell-order-user">
+                                                                <span className="custom-cell-order-title">
+                                                                    {item.product.title}
+                                                                </span>
+                                                            </TableCell>
+                                                            <TableCell align="left" className="custom-cell-order-user">
+                                                                <span className="custom-cell-order-title">
+                                                                    {item.product.brand.name}
+                                                                </span>
+                                                            </TableCell>
+                                                            <TableCell align="left" className="custom-cell-order-user">
+                                                                <span className="custom-cell-order-title">
+                                                                    {item.size}
+                                                                </span>
+                                                            </TableCell>
+                                                            <TableCell align="left" className="custom-cell-order-user">
+                                                                <span className="custom-cell-order-title">
+                                                                    {item.quantity}
+                                                                </span>
+                                                            </TableCell>
+                                                            <TableCell align="left" className="custom-cell-order-user">
+                                                                <span className="custom-cell-order-title">
+                                                                    {item.product.discountedPrice}
+                                                                </span>
+                                                            </TableCell>
+                                                            <TableCell align="left" className="custom-cell-order-user">
+                                                                <span className="custom-cell-order-title">
+                                                                    {item.discountedPrice}
+                                                                </span>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    )),
+                                                )}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Modal>
+                    </div>
                 </Table>
             </TableContainer>
-            {/* <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
-                <button onClick={handleSaveClick} className="custom-btn-ok">
-                    Lưu
-                </button>
-            </div> */}
         </div>
     );
 }

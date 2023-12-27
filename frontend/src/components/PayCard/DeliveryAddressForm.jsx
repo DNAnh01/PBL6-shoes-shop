@@ -9,10 +9,7 @@ import Button from '~/pages/Button';
 import apiCreateOrder from '~/api/user/apiCreateOrder';
 
 export default function DeliveryAddressForm() {
-    const [Firstname, setFirstname] = useState('');
-    const [Lastname, setLastname] = useState('');
     const [streetAddress, setstreetAddress] = useState('');
-    const [mobile, setMobile] = useState('');
     const [City, setCity] = useState('');
     const [State, setState] = useState('');
     const [Zipcode, setZipcode] = useState('');
@@ -22,20 +19,16 @@ export default function DeliveryAddressForm() {
         e.preventDefault();
 
         const address = {
-            firstName: Firstname,
-            lastName: Lastname,
             streetAddress: streetAddress,
             city: City,
             state: State,
             zipCode: parseInt(Zipcode),
-            mobile: mobile,
         };
-        console.log('address', address);
         try {
             const response = await apiCreateOrder.postCreateOrder(address);
-            // const response = await axiosInstance.post("/admin/products/", formData);
-            console.log('response:', response);
+
             if (response) {
+                sessionStorage.setItem('currentOrderId', response.data.id);
                 toast.success('Thêm thông tin thành công ');
                 setTimeout(() => {
                     navigate('/pay?step=2');
@@ -43,10 +36,7 @@ export default function DeliveryAddressForm() {
             } else {
                 toast.error('Có lỗi khi thêm thông tin');
             }
-        } catch (error) {
-            // console.error('Lỗi khi thực hiện yêu cầu API:', error);
-            // toast.error(`Có lỗi khi thực hiện yêu cầu API: ${error.message}`);
-        }
+        } catch (error) {}
     };
     return (
         <div>
@@ -69,8 +59,6 @@ export default function DeliveryAddressForm() {
                                         label="First Name"
                                         fullWidth
                                         autoComplete="given-name"
-                                        value={Firstname}
-                                        onChange={(event) => setFirstname(event.target.value)}
                                         style={{ fontSize: '18px' }}
                                     />
                                 </Grid>
@@ -82,8 +70,6 @@ export default function DeliveryAddressForm() {
                                         label="Last Name"
                                         fullWidth
                                         autoComplete="given-name"
-                                        value={Lastname}
-                                        onChange={(event) => setLastname(event.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -106,8 +92,6 @@ export default function DeliveryAddressForm() {
                                         label="Phone Number"
                                         fullWidth
                                         autoComplete="given-name"
-                                        value={mobile}
-                                        onChange={(event) => setMobile(event.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>

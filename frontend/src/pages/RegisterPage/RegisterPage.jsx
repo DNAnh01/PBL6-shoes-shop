@@ -50,7 +50,7 @@ const RegisterPage = () => {
                 firstName,
                 mobile: phone,
                 email,
-                role: 'admin',
+                role: 'user',
             };
             const response = await apiRegister.postRegister(formData);
             if (response.status === 201) {

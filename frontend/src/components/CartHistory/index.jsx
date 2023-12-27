@@ -4,17 +4,45 @@ import Button from '~/pages/Button';
 import CartCardHistory from '../CartCardHistory';
 import apiBuyNow from '~/api/user/apiBuyNow';
 import apiCart from '~/api/user/apiCart';
+import axiosClient from '~/api/axiosClient';
 
 export default function CartHistory() {
     const [products, setProducts] = useState([]);
     const handleBuyNow = async () => {
+        const currentOrderId = sessionStorage.getItem('currentOrderId');
+        const formData = {
+            currentOrderId: currentOrderId,
+        };
+
         try {
-            const response = await apiBuyNow.postBuyNow();
-            console.log(response.data);
+            const response = await apiBuyNow.postBuyNow(formData);
+            console.log(response);
             if (response) {
-                console.log('Đang chuyển sang trang thanh toán');
-                const externalURL = response.data;
-                window.location.href = externalURL;
+                const externalURL = response.data.vnpayUrl;
+                window.open(`${externalURL}`);
+                const apiVNpay = await axiosClient.get('/api/payment/vnpay-payment');
+                const paymentInfoData = apiVNpay.data;
+                const pollForSuccess = async () => {
+                    try {
+                        const pageContent = await fetch(externalURL).then((res) => res.text());
+                        console.log(pageContent);
+
+                        if (pageContent.includes('success')) {
+                            console.log('Payment success!');
+                            window.location.href = 'https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success';
+                            return;
+                        }
+
+                        // Nếu chưa thành công, tiếp tục đợi và kiểm tra lại sau một khoảng thời gian
+                        setTimeout(pollForSuccess, 1000); // Chờ 1 giây trước khi kiểm tra lại
+                    } catch (error) {
+                        console.error('Error polling for success:', error);
+                    }
+                };
+                document.addEventListener('DOMContentLoaded', pollForSuccess);
+                return () => {
+                    document.removeEventListener('DOMContentLoaded', pollForSuccess);
+                };
             } else {
                 console.error('Có lỗi khi thêm thanh toán ');
             }
@@ -30,11 +58,10 @@ export default function CartHistory() {
             console.error(error?.message);
         }
     };
-    // API cart
     useEffect(() => {
-        // Gọi hàm fetchCarts
         fetchCarts();
     }, []);
+
     return (
         <div>
             <div className="cart container-layout">

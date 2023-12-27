@@ -2,9 +2,6 @@
     &-featured {
         font: inherit;
         font-family: var(--font-family);
-        background: url(../../assets/images/contain/background.png);
-        background-repeat: no-repeat;
-        background-size: cover;
     }
     &-featured-title {
         font-size: 20px;
@@ -22,6 +19,9 @@
         display: flex;
         gap: 0 50px;
         border-radius: var(--border-radius-md);
+        background: url(../../assets/images/contain/background.png);
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     &-featured-link {
         display: block;

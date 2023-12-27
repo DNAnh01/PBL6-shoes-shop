@@ -1,5 +1,5 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import chroma from 'chroma-js';
+
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import apiOrderUser from '~/api/user/apiOrderUser';
@@ -10,12 +10,10 @@ export default function OrderUser() {
     const [userOrders, setUserOrders] = useState([]);
     const [orderDetail, setOrderDetail] = useState([]);
 
-    const fetchData = async () => {
+    const getOrderHistory = async () => {
         try {
-            // Assuming apiOrderByID.getOrderByID(id) returns a promise
             const response = await apiOrderUser.getOrderUser();
 
-            // Assuming the response.data contains the relevant order information
             setUserOrders(response.data);
         } catch (error) {
             console.error('Error fetching order data:', error);
@@ -24,11 +22,7 @@ export default function OrderUser() {
     };
 
     useEffect(() => {
-        console.log('order detail:', orderDetail);
-    }, [orderDetail]);
-
-    useEffect(() => {
-        fetchData();
+        getOrderHistory();
     }, []);
     return (
         <div>

@@ -21,6 +21,7 @@ export default function Payment({ orderId, totalPrice, paymentTime, transactionI
         setIsSuccess(result === 'success');
         fetchCarts();
     }, []);
+
     return (
         <div>
             <div className="container">
@@ -62,9 +63,6 @@ export default function Payment({ orderId, totalPrice, paymentTime, transactionI
                             </tr>
                         </tbody>
                     </table>
-                    <a href="/" className="btn btn-primary">
-                        Về trang chủ
-                    </a>
                 </div>
             </div>
         </div>

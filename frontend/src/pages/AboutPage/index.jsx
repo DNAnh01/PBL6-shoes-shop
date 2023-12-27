@@ -45,9 +45,9 @@ export default function AboutPage({ quantity = 1 }) {
             const response = await apiAddItem.putAddItem(formData);
             toast.success('Thêm sản phẩm vào giỏ thành công');
             updateCartItems();
-            setTimeout(() => {
-                navigate('/cart');
-            }, 2000);
+            // setTimeout(() => {
+            //     navigate('/cart');
+            // }, 2000);
             console.log(response);
         } catch (error) {
             console.error('Add to Cart Error:', error);
@@ -140,21 +140,6 @@ export default function AboutPage({ quantity = 1 }) {
                                     <span className="about-table-price-old">${productDetail.price}</span>
                                     <span className="about-table-price-current">${productDetail.discountedPrice}</span>
                                 </div>
-                                {/* <div className="about-table-size">
-                                    <span className="about-size-name">Size:</span>
-                                    <select
-                                        className="about-size-font"
-                                        value={selectedSize}
-                                        onChange={(e) => setSelectedSize(e.target.value)}
-                                    >
-                                        <option value="1" defaultCheckedy>
-                                            Choose an option
-                                        </option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                    </select>
-                                </div> */}
                                 <div className="about-table-size">
                                     <span className="about-size-name">Size:</span>
                                     <div className="about-size-buttons">

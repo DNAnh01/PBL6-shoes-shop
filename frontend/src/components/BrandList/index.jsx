@@ -70,37 +70,38 @@ export default function BrandList() {
     );
     return (
         <div className="container-layout">
+            <h1 className="brandList-title">Danh mục</h1>
             <div className="brandList">
-                <h1 className="brandList-title">Danh mục</h1>
-            </div>
-            <Swiper
-                spaceBetween={20}
-                slidesPerView={4}
-                breakpoints={breakpointsSwiper}
-                cssMode={true}
-                navigation={true}
-                pagination={true}
-                mousewheel={true}
-                keyboard={true}
-                modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-            >
-                {isLoading ? (
-                    <SwiperSlide>
-                        {/* Loading state */}
-                        <div className="brandCard-loading"></div>
-                    </SwiperSlide>
-                ) : (
-                    brands.map((brand) => (
-                        <SwiperSlide key={brand?.brand?.id}>
-                            <BrandCard
-                                imageUrl={brand?.brand?.imageUrl}
-                                name={brand?.brand?.name}
-                                amount={countBrandElements(brand?.brand?.name)}
-                            />
+                <Swiper
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    breakpoints={breakpointsSwiper}
+                    cssMode={true}
+                    navigation={true}
+                    pagination={true}
+                    mousewheel={true}
+                    keyboard={true}
+                    modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                    
+                >
+                    {isLoading ? (
+                        <SwiperSlide>
+                            {/* Loading state */}
+                            <div className="brandCard-loading"></div>
                         </SwiperSlide>
-                    ))
-                )}
-            </Swiper>
+                    ) : (
+                        brands.map((brand) => (
+                            <SwiperSlide key={brand?.brand?.id}>
+                                <BrandCard
+                                    imageUrl={brand?.brand?.imageUrl}
+                                    name={brand?.brand?.name}
+                                    amount={countBrandElements(brand?.brand?.name)}
+                                />
+                            </SwiperSlide>
+                        ))
+                    )}
+                </Swiper>
+            </div>
         </div>
     );
 }
