@@ -61,11 +61,6 @@ public class PaymentController {
     	Order order = orderRepository.findByUserId(user.getId());
         Cart cart = cartServiceImplementation.findUserCart(user.getId());
         BigDecimal total = new BigDecimal(cart.getTotalDiscountedPrice());
-        // trang frontend cấu hình
-        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-        
-        // Lưu giá trị jwt vào session hoặc có thể thêm vào các đối tượng khác cho việc sử dụng sau này
-        request.getSession().setAttribute("jwt", jwt);
         
         String vnpayUrl = vnPayService.createOrder(total, order, baseUrl);
         return ResponseEntity.ok(vnpayUrl);
@@ -74,23 +69,11 @@ public class PaymentController {
     @GetMapping("/vnpay-payment")
     @ResponseBody
     public ResponseEntity<?> vnpayPayment(
-    		HttpServletRequest request) 
-            throws UserException, OrderException{
-        
-        // Lấy giá trị jwt từ session hoặc các đối tượng khác đã lưu trước đó
-        String jwt = (String) request.getSession().getAttribute("jwt");
-        if (jwt == null) {
-            // Xử lý trường hợp jwt không tồn tại
-            return ResponseEntity.ok("false");
-        }
-
-        User user = userService.findUserProfileByJwt(jwt);
-        Order order = orderRepository.findByUserId(user.getId());
-        
+    		HttpServletRequest request) {
         int paymentStatus = vnPayService.orderReturn(request);
 
         if (paymentStatus == 1) {
-             orderService.confirmedOrder(order.getId());
+             //orderService.confirmedOrder(order.getId());
              return ResponseEntity.ok("success");
         } else {
             // Payment failed, handle accordingly
