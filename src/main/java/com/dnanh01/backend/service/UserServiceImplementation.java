@@ -1,5 +1,6 @@
 package com.dnanh01.backend.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dnanh01.backend.config.JwtProvider;
 import com.dnanh01.backend.exception.UserException;
+import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.UserRepository;
 import com.dnanh01.backend.request.ChangePasswordRequest;
@@ -108,10 +110,10 @@ public class UserServiceImplementation implements UserService {
         // Handle the case when the user is not found (throw exception or return null)
         return null;
     }
+    
     @Override
-    public List<User> getAllUser() {
-	return userRepository.findAll();
-    }
-
+	public List<User> getAllUser() {
+		return userRepository.findAll();
+	}
 
 }
