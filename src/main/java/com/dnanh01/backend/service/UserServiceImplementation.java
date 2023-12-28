@@ -110,8 +110,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-	public List<User> getAllUser() {
-		return userRepository.findAll();
-	}
+    public List<User> getAllUser() {
+	return userRepository.findAll();
+    }
 
 }
