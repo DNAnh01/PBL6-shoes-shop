@@ -108,10 +108,10 @@ public class UserServiceImplementation implements UserService {
         // Handle the case when the user is not found (throw exception or return null)
         return null;
     }
-
     @Override
     public List<User> getAllUser() {
 	return userRepository.findAll();
     }
+
 
 }
