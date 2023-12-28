@@ -109,5 +109,9 @@ public class UserServiceImplementation implements UserService {
         return null;
     }
 
+    @Override
+	public List<User> getAllUser() {
+		return userRepository.findAll();
+	}
 
 }
