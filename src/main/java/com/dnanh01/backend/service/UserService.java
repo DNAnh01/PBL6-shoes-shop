@@ -17,4 +17,6 @@ public interface UserService {
     public boolean validatePassword(Long userId, ChangePasswordRequest req) throws UserException;
     
     public User updateUserProfile(Long userId, User req) throws UserException;
+
+    public List<User> getAllUser();
 }
