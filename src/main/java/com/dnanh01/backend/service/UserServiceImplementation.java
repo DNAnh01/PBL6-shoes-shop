@@ -50,7 +50,10 @@ public class UserServiceImplementation implements UserService {
         return userRepository.findByEmail(email);
     }
 
-    
+@Override
+public List<User> getAllUser() {
+	return userRepository.findAll();
+}
     @Override
     public boolean validatePassword(Long userId, ChangePasswordRequest req) {
         Optional<User> userOptional = userRepository.findById(userId);
@@ -111,9 +114,4 @@ public class UserServiceImplementation implements UserService {
         return null;
     }
     
-    @Override
-	public List<User> getAllUser() {
-		return userRepository.findAll();
-	}
-
 }
