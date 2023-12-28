@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dnanh01.backend.dto.RevenueOrProfitStatsDto;
@@ -21,6 +22,7 @@ import com.dnanh01.backend.model.Size;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.AddressRepository;
 import com.dnanh01.backend.repository.CartItemRepository;
+import com.dnanh01.backend.repository.CartRepository;
 import com.dnanh01.backend.repository.OrderItemRepository;
 import com.dnanh01.backend.repository.OrderRepository;
 import com.dnanh01.backend.repository.ProductRepository;
@@ -31,7 +33,9 @@ import com.dnanh01.backend.response.StatisticsByDateOrMonthResponse;
 
 @Service
 public class OrderServiceImplementation implements OrderService {
-
+	
+	@Autowired
+    private CartRepository cartRepository;
 	private OrderRepository orderRepository;
 	private CartService cartService;
 	private AddressRepository addressRepository;
@@ -39,15 +43,15 @@ public class OrderServiceImplementation implements OrderService {
 	private OrderItemRepository orderItemRepository;
 	private ProductRepository productRepository;
 	private CartItemRepository cartItemRepository;
+	
+	
 
-	public OrderServiceImplementation(
-			OrderRepository orderRepository,
-			CartService cartService,
-			AddressRepository addressRepository,
-			UserRepository userRepository,
-			OrderItemRepository orderItemRepository,
-			ProductRepository productRepository,
+	public OrderServiceImplementation(CartRepository cartRepository, OrderRepository orderRepository,
+			CartService cartService, AddressRepository addressRepository, UserRepository userRepository,
+			OrderItemRepository orderItemRepository, ProductRepository productRepository,
 			CartItemRepository cartItemRepository) {
+		super();
+		this.cartRepository = cartRepository;
 		this.orderRepository = orderRepository;
 		this.cartService = cartService;
 		this.addressRepository = addressRepository;
@@ -242,10 +246,17 @@ public class OrderServiceImplementation implements OrderService {
 		}
 
 		order.setOrderStatus("DELIVERED");
-
+		
+		clearCart(order.getUser().getId());
 		return orderRepository.save(order);
 	}
 
+	// Phương thức xóa giỏ hàng
+		private void clearCart(Long userId) {
+		    Cart cart = cartService.findUserCart(userId);
+		    cart.getCartItems().clear();
+		    cartRepository.save(cart);
+		}
 	@Override
 	public Order canceledOrder(Long orderId) throws OrderException {
 		Order order = findOrderById(orderId);
