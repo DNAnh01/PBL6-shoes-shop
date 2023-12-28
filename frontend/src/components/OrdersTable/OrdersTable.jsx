@@ -60,6 +60,7 @@ export default function OrdersTable() {
     }, [getAllOrder]);
 
     const openModal = (orderId) => {
+        console.log(orderId);
         setSelectedOrderId(orderId);
         setIsModalOpen(true);
     };
@@ -139,7 +140,11 @@ export default function OrdersTable() {
                                     </select>
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
-                                    <button type="button" style={{ background: 'transparent' }} onClick={openModal}>
+                                    <button
+                                        type="button"
+                                        style={{ background: 'transparent' }}
+                                        onClick={(e) => openModal(order.id, e)}
+                                    >
                                         <i className="fa fa-eye" aria-hidden="true"></i>
                                     </button>
                                 </TableCell>
@@ -158,11 +163,7 @@ export default function OrdersTable() {
                             width={950}
                             style={{ maxHeight: '60vh', overflow: 'auto' }}
                         >
-                            <TableContainer
-                                component={Paper}
-                                variant="outlined"
-                                className="custom-table-container container-layout"
-                            >
+                            <TableContainer component={Paper} variant="outlined" className="custom-table-container">
                                 <Table aria-label="demo table" className="custom-table">
                                     <TableHead>
                                         <TableRow className="custom-header">
@@ -211,57 +212,45 @@ export default function OrdersTable() {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {selectedOrderId &&
-                                            orders
-                                                .filter((order) => order.id === selectedOrderId)
-                                                .map((order) =>
-                                                    order?.orderItems.map((item) => (
-                                                        <TableRow key={item.id} className="custom-cell">
-                                                            <TableCell
-                                                                align="left"
-                                                                scope="row"
-                                                                className="custom-cell-order-user-title"
-                                                            >
-                                                                <img
-                                                                    src={item.product.imageUrl}
-                                                                    alt=""
-                                                                    style={{ width: '70px', height: '70px' }}
-                                                                />
-                                                            </TableCell>
-
-                                                            <TableCell align="left" className="custom-cell-order-user">
-                                                                <span className="custom-cell-order-title">
-                                                                    {item.product.title}
-                                                                </span>
-                                                            </TableCell>
-                                                            <TableCell align="left" className="custom-cell-order-user">
-                                                                <span className="custom-cell-order-title">
-                                                                    {item.product.brand.name}
-                                                                </span>
-                                                            </TableCell>
-                                                            <TableCell align="left" className="custom-cell-order-user">
-                                                                <span className="custom-cell-order-title">
-                                                                    {item.size}
-                                                                </span>
-                                                            </TableCell>
-                                                            <TableCell align="left" className="custom-cell-order-user">
-                                                                <span className="custom-cell-order-title">
-                                                                    {item.quantity}
-                                                                </span>
-                                                            </TableCell>
-                                                            <TableCell align="left" className="custom-cell-order-user">
-                                                                <span className="custom-cell-order-title">
-                                                                    {item.product.discountedPrice}
-                                                                </span>
-                                                            </TableCell>
-                                                            <TableCell align="left" className="custom-cell-order-user">
-                                                                <span className="custom-cell-order-title">
-                                                                    {item.discountedPrice}
-                                                                </span>
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    )),
-                                                )}
+                                        {orders
+                                            .find((order) => order.id === selectedOrderId)
+                                            ?.orderItems.map((item) => (
+                                                <TableRow key={item.id}>
+                                                    <TableCell align="left" className="custom-cell-order-user-title">
+                                                        <img
+                                                            src={item.product.imageUrl}
+                                                            alt=""
+                                                            style={{ width: '70px', height: '70px' }}
+                                                        />
+                                                    </TableCell>
+                                                    <TableCell align="left" className="custom-cell-order-user">
+                                                        <span className="custom-cell-order-title">
+                                                            {item.product.title}
+                                                        </span>
+                                                    </TableCell>
+                                                    <TableCell align="left" className="custom-cell-order-user">
+                                                        <span className="custom-cell-order-title">
+                                                            {item.product.brand.name}
+                                                        </span>
+                                                    </TableCell>
+                                                    <TableCell align="left" className="custom-cell-order-user">
+                                                        <span className="custom-cell-order-title">{item.size}</span>
+                                                    </TableCell>
+                                                    <TableCell align="left" className="custom-cell-order-user">
+                                                        <span className="custom-cell-order-title">{item.quantity}</span>
+                                                    </TableCell>
+                                                    <TableCell align="left" className="custom-cell-order-user">
+                                                        <span className="custom-cell-order-title">
+                                                            {item.product.discountedPrice}
+                                                        </span>
+                                                    </TableCell>
+                                                    <TableCell align="left" className="custom-cell-order-user">
+                                                        <span className="custom-cell-order-title">
+                                                            {item.discountedPrice}
+                                                        </span>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
                                     </TableBody>
                                 </Table>
                             </TableContainer>

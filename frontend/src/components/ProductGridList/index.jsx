@@ -7,7 +7,7 @@ import apiFilterPrice from '~/api/user/apiFilterPrice';
 import apiProductGrid from '~/api/user/apiProductGrid';
 import ReactPaginate from 'react-paginate';
 
-const pageSize = 10;
+const pageSize = 12;
 export default function ProductGridList({ productSearch }) {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +16,6 @@ export default function ProductGridList({ productSearch }) {
     const [sortCriteria, setSortCriteria] = useState('price_low');
     const [sortOrder, setSortOrder] = useState('desc');
     const [pageCount, setPageCount] = useState(null);
-    const [currentPage, setCurrentPage] = useState(0);
 
     const handleGetAllProduct = useCallback(
         async (pageNumber) => {
@@ -24,8 +23,9 @@ export default function ProductGridList({ productSearch }) {
                 setIsLoading(true);
                 let response;
                 if (selectedBrand) {
-                    response = await apiBrand.getProductByBrand(selectedBrand, pageNumber);
+                    response = await apiBrand.getProductByBrand(selectedBrand, pageNumber, pageSize);
                     setProducts(response?.data?.content);
+                    setPageCount(response.data.totalPages);
                 } else {
                     if (productSearch && productSearch.length > 0) {
                         setProducts(productSearch);
@@ -45,7 +45,7 @@ export default function ProductGridList({ productSearch }) {
     );
 
     const handleSort = useCallback(
-        async (criteria) => {
+        async (criteria, pageNumber) => {
             try {
                 setIsLoading(true);
 
@@ -66,7 +66,7 @@ export default function ProductGridList({ productSearch }) {
                     setProducts(sortedProducts);
                 } else if (criteria === 'price_low' || criteria === 'price_high') {
                     const priceSort = criteria === 'price_low' ? 'price_low' : 'price_high';
-                    const response = await apiFilterPrice.getFilerPrice(priceSort);
+                    const response = await apiFilterPrice.getFilerPrice(priceSort, pageNumber);
                     setProducts(response.data.content);
                     setPageCount(response.data.totalPages);
                 } else if (criteria === 'discountPersent') {
@@ -91,7 +91,6 @@ export default function ProductGridList({ productSearch }) {
     const handlePageClick = (data) => {
         const selectedPage = data.selected;
         console.log(selectedPage);
-        setCurrentPage(Number(selectedPage));
         handleGetAllProduct(Number(selectedPage));
     };
 
@@ -138,7 +137,6 @@ export default function ProductGridList({ productSearch }) {
                     pageCount={pageCount}
                     containerClassName={'pagination'}
                     activeClassName={'active'}
-                    forcePage={currentPage - 1}
                 />
             </div>
         </section>

@@ -30,9 +30,6 @@ export default function OrderUser() {
                 <Table aria-label="demo table" className="custom-table">
                     <TableHead>
                         <TableRow className="custom-header">
-                            {/* <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
-                                Image
-                            </TableCell> */}
                             <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
                                 Email
                             </TableCell>
