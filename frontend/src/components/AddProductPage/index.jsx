@@ -113,7 +113,7 @@ export default function AddProductPage() {
                         toast.success('Thêm sản phẩm mới thành công');
                         setTimeout(() => {
                             navigate('/admin/products');
-                        }, 2000);
+                        }, 500);
                     } else {
                         toast.error('Có lỗi khi thêm sản phẩm');
                     }

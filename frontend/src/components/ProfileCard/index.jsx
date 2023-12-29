@@ -71,7 +71,7 @@ export default function ProfileCard() {
         sessionStorage.removeItem('jwt');
         setTimeout(() => {
             navigate('/login');
-        }, 2000);
+        }, 500);
     };
 
     const handleEdit = () => {

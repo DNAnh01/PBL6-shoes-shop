@@ -68,7 +68,7 @@ const RegisterPage = () => {
                 sessionStorage.setItem('user', JSON.stringify(formData));
                 setTimeout(() => {
                     navigate('/login');
-                }, 2000);
+                }, 500);
             }
         } catch (error) {
             toast.error(error?.message);
