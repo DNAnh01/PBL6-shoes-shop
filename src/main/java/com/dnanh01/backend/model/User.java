@@ -39,11 +39,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
-    @Embedded
-    @ElementCollection
-    @CollectionTable(name = "payment_information", joinColumns = @JoinColumn(name = "user_id"))
-    private List<PaymentInFormation> paymentInFormations = new ArrayList<>();
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
@@ -54,7 +49,7 @@ public class User {
     }
 
     public User(Long id, String firstName, String lastName, String password, String email, String role, String mobile,
-            List<Address> addresses, List<PaymentInFormation> paymentInFormations,
+            List<Address> addresses,
             List<Review> reviews, LocalDateTime createAt) {
         this.id = id;
         this.firstName = firstName;
@@ -64,7 +59,6 @@ public class User {
         this.role = role;
         this.mobile = mobile;
         this.addresses = addresses;
-        this.paymentInFormations = paymentInFormations;
         this.reviews = reviews;
         this.createAt = createAt;
     }
@@ -132,15 +126,6 @@ public class User {
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
     }
-
-    public List<PaymentInFormation> getPaymentInFormations() {
-        return paymentInFormations;
-    }
-
-    public void setPaymentInFormations(List<PaymentInFormation> paymentInFormations) {
-        this.paymentInFormations = paymentInFormations;
-    }
-
     public List<Review> getReviews() {
         return reviews;
     }
