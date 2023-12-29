@@ -74,4 +74,17 @@ public class PaymentController {
         String redirectUrl = (paymentStatus == 1) ? "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success" : "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
         return new RedirectView(redirectUrl);
     }
+    
+    @PostMapping("/confirmOrder")
+    @ResponseBody
+    public ResponseEntity<?> confirmOrder(
+            HttpServletRequest request,
+            @RequestBody PaymentRequest req)
+            throws OrderException {
+
+        Long currentOrderId = req.getCurrentOrderId();
+        Order order = orderService.confirmedOrder(currentOrderId);
+        return new ResponseEntity<>(order, HttpStatus.OK);
+    }
+    
 }
