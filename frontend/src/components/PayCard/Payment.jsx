@@ -26,6 +26,7 @@ export default function Payment({ paymentTime, transactionId }) {
             console.log(res);
             if (res.status === 200) {
                 toast.success('Xác nhận đơn hàng thành công');
+                sessionStorage.removeItem('currentOrderId');
                 setTimeout(() => {
                     navigate('/pay?step=4');
                 }, 500);

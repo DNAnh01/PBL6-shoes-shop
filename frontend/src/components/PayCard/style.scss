@@ -59,3 +59,30 @@
     justify-content: center;
     align-items: center;
 }
+
+.complete-title {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: table-header-group;
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    overflow: hidden; /* Ẩn nội dung vượt ra khỏi khung chứa */
+    animation: marquee 8s linear infinite; /* Tốc độ chạy và lặp vô hạn */
+    transition: background-color 0.3s ease;
+    background: linear-gradient(to left, #008eff, #f60000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.complete-content {
+    margin: 30px auto;
+    width: 400px;
+    height: 400px;
+}
+.complete-content img {
+    width: 100%;
+    height: 100%;
+}

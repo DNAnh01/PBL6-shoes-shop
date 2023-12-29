@@ -6,13 +6,13 @@ import apiProfile from '~/api/user/apiProfile';
 import './style.scss';
 import apiUpdateProfile from '~/api/user/apiUpdateProfile';
 import apiChangePass from '~/api/user/apiChangePass';
-
+import img from '../../assets/images/index.js';
 export default function ProfileCard() {
     const [profiles, setProfiles] = useState([]);
     const [defaultAddress, setDefaultAddress] = useState(null);
 
     const checksessionStorage = () => {
-        if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user') || !sessionStorage.getItem('jwt')) {
+        if (!sessionStorage.getItem('jwt')) {
             navigate('/login');
             return false;
         }
@@ -37,8 +37,6 @@ export default function ProfileCard() {
     useEffect(() => {
         fetchProfile();
     }, []);
-
-    const image = 'https://i.pinimg.com/736x/eb/1b/cc/eb1bcce796b5706ec0803a9e985eb45d.jpg';
 
     // personal
     const [isEditing, setIsEditing] = useState(false);
@@ -66,9 +64,7 @@ export default function ProfileCard() {
     };
     const handleLogout = () => {
         toast.success('Đăng xuất thành công');
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('user');
-        sessionStorage.removeItem('jwt');
+        sessionStorage.clear();
         setTimeout(() => {
             navigate('/login');
         }, 500);
@@ -131,7 +127,7 @@ export default function ProfileCard() {
                 <h1 className="profile-title">Profile information</h1>
                 <div className="profile-content">
                     <div className="profile-info">
-                        <img src={image} alt="" className="profile-img"></img>
+                        <img src={img.complete} alt="" className="profile-img"></img>
                         <div className="profile-accout">
                             <span>{`${profiles.lastName} ${profiles.firstName}`}</span>
                         </div>

@@ -12,17 +12,15 @@ import apiRemoveCartItems from '~/api/user/apiRemoveCartItems';
 export default function CartList() {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
-    console.log(products);
     const navigate = useNavigate();
     const checksessionStorage = () => {
-        if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user') || !sessionStorage.getItem('jwt')) {
+        if (!sessionStorage.getItem('jwt')) {
             navigate('/login');
 
             return false;
         }
         return true;
     };
-    // console.log(products);
     const fetchCarts = async () => {
         if (!checksessionStorage()) {
             return;
@@ -79,7 +77,6 @@ export default function CartList() {
                 fetchCarts();
                 toast.success('Xóa sản phẩm thành công');
             } else {
-                // toast.error('Xóa sản phẩm thất bại');
             }
         } catch (error) {
             toast.error(error.message);
@@ -88,17 +85,22 @@ export default function CartList() {
 
     const handleDeleteAllProducts = async () => {
         try {
-            // Iterate through all cart items and delete them one by one
             for (const product of products.cartItems) {
                 await apiRemoveCartItems.delRemoveCartItems(product.id);
             }
-
-            // After all items are deleted, update the state
-            dispatch(setProducts({ ...products, cartItems: [] }));
+            fetchCarts();
             window.location.reload();
             toast.success('Xóa tất cả sản phẩm thành công');
         } catch (error) {
             toast.error('Đã xóa tất cả sản phẩm');
+        }
+    };
+    const handleBuyNow = () => {
+        if (products.cartItems.length === 0) {
+            toast.warning('Không có sản phẩm trong giỏ hàng. Vui lòng thêm sản phẩm trước khi thanh toán.');
+        } else {
+            // Chuyển đến trang thanh toán
+            navigate('/pay?step=1');
         }
     };
 
@@ -153,7 +155,7 @@ export default function CartList() {
                     </div>
                 </div>
                 <div className="payment-btn">
-                    <Button text="Buy Now" to="/pay?step=1" className={'payment-btn-buy'}>
+                    <Button text="Buy Now" onClick={handleBuyNow} className={'payment-btn-buy'}>
                         Buy Now
                     </Button>
                 </div>

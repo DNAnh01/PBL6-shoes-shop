@@ -43,11 +43,10 @@ const RegisterPage = () => {
             return;
         }
         if (phone.length !== 10) {
-            toast.warning('Số điện thoại phải có đủ 10 số');
+            toast.warning('Số điện thoại không hợp lệ');
             return;
         }
-        const nameRegex = /^[a-zA-ZÀ-Ỹà-ỹ]+$/;
-
+        const nameRegex = /^[a-zA-ZÀ-Ỹà-ỹ ]+$/;
         if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
             toast.warning('Họ và Tên chỉ được chứa chữ cái và không có số hoặc ký tự đặc biệt');
             return;
@@ -64,7 +63,6 @@ const RegisterPage = () => {
             const response = await apiRegister.postRegister(formData);
             if (response.status === 201) {
                 toast.success('Đăng ký thành công');
-                sessionStorage.setItem('user', JSON.stringify(formData));
                 setTimeout(() => {
                     navigate('/login');
                 }, 500);

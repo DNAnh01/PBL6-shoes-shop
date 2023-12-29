@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
-export default function AddressCard({ maxAddress }) {
+export default function AddressCard() {
+    const [maxAddress, setMaxAddress] = useState(null);
+
+    useEffect(() => {
+        const storedMaxAddress = sessionStorage.getItem('maxAddress');
+        if (storedMaxAddress) {
+            setMaxAddress(JSON.parse(storedMaxAddress));
+        }
+    }, []);
     return (
         <section>
             {maxAddress && (

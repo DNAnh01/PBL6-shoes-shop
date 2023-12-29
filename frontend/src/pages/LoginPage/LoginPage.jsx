@@ -8,7 +8,7 @@ import apiLogin from '~/api/user/apiLogin';
 
 const cx = classNames.bind(styles);
 const getTokenFromsessionStorage = () => {
-    return sessionStorage.getItem('token');
+    return sessionStorage.getItem('jwt');
 };
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -30,8 +30,6 @@ export default function LoginPage() {
             const response = await apiLogin.postLogin(formData);
             console.log(response);
             if (response.status === 201) {
-                sessionStorage.setItem('token', response?.data?.jwt);
-                sessionStorage.setItem('user', JSON.stringify(formData));
                 sessionStorage.setItem('jwt', response?.data?.jwt);
                 if (response?.data?.role === 'admin') {
                     toast.success('Đang vào trang admin');

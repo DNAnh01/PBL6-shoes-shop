@@ -64,15 +64,16 @@ export default function DeliveryAddressForm() {
         if (maxAddress) {
             handleSelectAddress(maxAddress.id);
         }
+        sessionStorage.setItem('maxAddress', JSON.stringify(maxAddress));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (phone.length !== 10) {
-            toast.warning('Số điện thoại phải có đủ 10 số');
+            toast.warning('Số điện thoại không hợp lệ');
             return;
         }
-        const nameRegex = /^[a-zA-ZÀ-Ỹà-ỹ]+$/;
+        const nameRegex = /^[a-zA-ZÀ-Ỹà-ỹ ]+$/;
         if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
             toast.warning('Họ và Tên chỉ được chứa chữ cái và không có số hoặc ký tự đặc biệt');
             return;
@@ -92,8 +93,10 @@ export default function DeliveryAddressForm() {
             if (response.status === 201) {
                 sessionStorage.setItem('currentOrderId', response.data.id);
                 toast.success('Thêm thông tin thành công ');
+                sessionStorage.setItem('maxAddress', JSON.stringify(address));
                 setTimeout(() => {
                     navigate('/pay?step=2');
+                    window.location.reload();
                 }, 500);
             } else {
                 toast.error('Có lỗi khi thêm thông tin');

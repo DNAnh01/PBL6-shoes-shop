@@ -7,7 +7,6 @@ export default function Header({ cartItems = [] }) {
     const cartItemCount = cartItems?.length || 0;
     const dropdownRef = useRef(null);
     const [active, setActive] = useState(false);
-    const user = JSON.parse(sessionStorage.getItem('user'));
     const onMenuAccount = (e) => {
         e.preventDefault();
         setActive(true);
@@ -67,9 +66,6 @@ export default function Header({ cartItems = [] }) {
                         <Link to="/profile" className="action-btn">
                             <i className="fa fa-id-card" aria-hidden="true"></i>
                         </Link>
-                        <Link to="/login" className="action-btn" style={{ display: user ? 'none' : 'block' }}>
-                            <i className="fa fa-user-o" aria-hidden="true"></i>
-                        </Link>
                         <Link to="/cart" className="action-btn">
                             <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                             <span className="count">{cartItemCount}</span>
@@ -80,11 +76,7 @@ export default function Header({ cartItems = [] }) {
                     </div>
                 </div>
             </div>
-            <div>
-                <Link to="/profile" className="hello-auth">
-                    Hello, Welcome Back {user?.email}!!!
-                </Link>
-            </div>
+            <div></div>
             <div ref={dropdownRef}>
                 <div className="mobile-bottom-navigation">
                     <button className="action-btn" onClick={(e) => onMenuAccount(e)} data-mobile-menu-open-btn>
