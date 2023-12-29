@@ -191,7 +191,38 @@ public class OrderServiceImplementation implements OrderService {
 	@Override
 	public Order confirmedOrder(Long orderId) throws OrderException {
 		Order order = findOrderById(orderId);
+		List<OrderItem> orderItems = order.getOrderItems();
+
+		for (OrderItem item : orderItems) {
+			int quantity = item.getQuantity();
+			String sizeName = item.getSize();
+			Long productId = item.getProduct().getId();
+
+			Product product = productRepository.findById(productId)
+					.orElseThrow(() -> new OrderException("Product not found"));
+
+			Optional<Size> optionalSize = product.getSizes().stream()
+					.filter(size -> size.getName().equals(sizeName))
+					.findFirst();
+
+			optionalSize.ifPresent(size -> {
+				int updatedQuantity = size.getQuantity() - quantity;
+				if (updatedQuantity < 0) {
+					try {
+						throw new OrderException("Not enough quantity in size: ");
+					} catch (OrderException e) {
+						e.printStackTrace();
+					}
+				}
+				size.setQuantity(updatedQuantity);
+				product.setQuantity(product.getQuantity() - quantity);
+				productRepository.save(product);
+			});
+		}
+
 		order.setOrderStatus("CONFIRMED");
+		
+		clearCart(order.getUser().getId());
 		return orderRepository.save(order);
 	}
 
