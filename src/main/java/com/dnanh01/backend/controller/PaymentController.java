@@ -66,22 +66,11 @@ public class PaymentController {
 
         return ResponseEntity.status(HttpStatus.OK).body(paymentSubmitResponse);
     }
-    // sau bước 1
-
-    // FE (vnpayUrl, jwt, currentOrderId)
-
-    // /b2
     @GetMapping("/vnpay-payment")
-    @ResponseBody
-    public ResponseEntity<?> vnpayPayment(
-            HttpServletRequest request) {
-
+    public RedirectView getMapping(HttpServletRequest request) {
         int paymentStatus = vnPayService.orderReturn(request);
+        String redirectUrl = (paymentStatus == 1) ? "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success" : "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
 
-        if (paymentStatus == 1) {
-            return ResponseEntity.ok("success");
-        } else {
-            return ResponseEntity.ok("cancel");
-        }
+        return new RedirectView(redirectUrl);
     }
 }
