@@ -57,6 +57,7 @@ public class AppConfig {
                                                 "https://pbl6-shoes-shop-production.up.railway.app",
                                                 "https://study-fontend.vercel.app",
                                                 "https://phong-van-cv-srsf.vercel.app",
+                                                "https://shoes-shop-mvaa.vercel.app",
                                                 "https://sandbox.vnpayment.vn"));
                                         cfg.setAllowedMethods(Collections
                                                 .singletonList("*"));
