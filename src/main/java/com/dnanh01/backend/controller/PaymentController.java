@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.dnanh01.backend.exception.OrderException;
 import com.dnanh01.backend.exception.UserException;
@@ -70,7 +72,6 @@ public class PaymentController {
     public RedirectView getMapping(HttpServletRequest request) {
         int paymentStatus = vnPayService.orderReturn(request);
         String redirectUrl = (paymentStatus == 1) ? "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success" : "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
-
         return new RedirectView(redirectUrl);
     }
 }
