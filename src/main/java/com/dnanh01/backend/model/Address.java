@@ -21,6 +21,15 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "firstName")
+    private String firstName;
+
+    @Column(name = "lastName")
+    private String lastName;
+
+    @Column(name = "mobile")
+    private String mobile;
+    
     @Column(name = "street_address")
     private String streetAddress;
 
@@ -44,18 +53,26 @@ public class Address {
     public Address() {
     }
 
-    public Address(Long id, String streetAddress, String city, String state, String zipCode, LocalDateTime creationTime,
-            User user) {
-        this.id = id;
-        this.streetAddress = streetAddress;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.creationTime = creationTime;
-        this.user = user;
-    }
+  
 
-    public Long getId() {
+    public Address(Long id, String firstName, String lastName, String mobile, String streetAddress, String city,
+			String state, String zipCode, LocalDateTime creationTime, User user) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobile = mobile;
+		this.streetAddress = streetAddress;
+		this.city = city;
+		this.state = state;
+		this.zipCode = zipCode;
+		this.creationTime = creationTime;
+		this.user = user;
+	}
+
+
+
+	public Long getId() {
         return id;
     }
 
@@ -63,7 +80,31 @@ public class Address {
         this.id = id;
     }
 
-    public String getStreetAddress() {
+    public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getStreetAddress() {
         return streetAddress;
     }
 
