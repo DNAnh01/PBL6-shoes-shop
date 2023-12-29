@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style-prefix.scss';
-import Icon, { FacebookOutlined, InstagramOutlined } from '@ant-design/icons';
+import { FacebookOutlined, InstagramOutlined } from '@ant-design/icons';
 
 import images from '~/assets/images';
 import apiProductGrid from '~/api/user/apiProductGrid';
 export default function Footer() {
     const [brands, setBrands] = useState([]);
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
     const [pageNumber] = useState('0');
     const pageSize = 100;
     useEffect(() => {
@@ -16,11 +14,9 @@ export default function Footer() {
             try {
                 const response = await apiProductGrid.getAllProduct(pageNumber, pageSize);
                 const uniqueBrands = filterUniqueBrands(response?.data?.content);
-                setProducts(response.data.content);
                 setBrands(uniqueBrands);
-                setIsLoading(false);
             } catch (error) {
-                setIsLoading(false);
+                console.log(error);
             }
         };
         fetchData();

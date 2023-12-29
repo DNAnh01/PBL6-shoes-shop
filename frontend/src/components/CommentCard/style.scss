@@ -8,7 +8,6 @@
 .customerReviews-wrapper {
     display: grid;
     grid-template-rows: 10% 62%;
-    margin: 20px 20px;
     background-color: #f8f8f8;
     border-radius: 5px;
     padding: 20px;
@@ -68,17 +67,7 @@
     font-size: 16px;
 }
 
-.customerReviews-wrapper .total .total-Rating .rating-main .wrapper-proportional-area {
-    height: 10px;
-    width: 100%;
-}
 
-.customerReviews-wrapper .total .total-Rating .rating-main .rating-five .wrapper-proportional-area .proportional-area {
-    border-radius: 20px;
-    height: 100%;
-    width: 100%;
-    background-color: #ce1515c4;
-}
 
 .customerReviews-wrapper .total .total-Rating .rating-main .rating-five .quantity-area span {
     font-size: 17px;
@@ -86,12 +75,6 @@
     color: #191717;
 }
 
-.customerReviews-wrapper .total .total-Rating .rating-main .wrapper-proportional-area .proportional-area {
-    border-radius: 20px;
-    height: 100%;
-    width: 100%;
-    background-color: var(--proportional-area);
-}
 
 .customerReviews-wrapper .total .total-Rating .rating-main .quantity-area span {
     font-size: 17px;
@@ -123,16 +106,6 @@
     color: var(--fontcolor);
 }
 
-.customerReviews-wrapper .total .review-form-wrapper .review-form .require {
-    color: var(--bcg-add);
-}
-
-.customerReviews-wrapper .total .review-form-wrapper .review-form .comment-form-rating .stars {
-    margin-left: 10px;
-    font-size: 17px;
-    color: var(--icon-down);
-}
-
 .customerReviews-wrapper .total .review-form-wrapper .review-form .comment-form-comment,
 .comment-form-author,
 .comment-form-email {
@@ -153,20 +126,8 @@ textarea {
     padding: 20px;
 }
 
-// input[type="email"],
-// input[type="text"] {
-//   height: 42px;
-//   padding: 20px;
-// }
-
 input[type='checkbox'] {
     background-color: var(--bcg-buy);
-}
-
-.customerReviews-wrapper .total .review-form-wrapper .review-form .comment-form-consent {
-    display: flex;
-    gap: 0 8px;
-    align-items: center;
 }
 
 .customerReviews-wrapper .total .review-form-wrapper .review-form .form-submit .submit {
@@ -183,45 +144,13 @@ input[type='checkbox'] {
     background-color: #bc1313dd;
 }
 
-.customerReviews-wrapper .comments-area {
-    margin-top: 20px;
-}
-
-.customerReviews-wrapper .comments-area .reviews-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.customerReviews-wrapper .comments-area .reviews-heading .default {
-    width: 100px;
-    padding: 8px 15px;
-    border-radius: 30px;
-    background-color: rgba(255, 255, 255, 0.605);
-    border: #979494 solid 1px;
-    font-size: 14px;
-    color: #979494;
-}
-
-.customerReviews-wrapper .comments-area .review-box {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 49% 49%;
-    margin-top: 25px;
-    gap: 0 18px;
-}
-
-.customerReviews-wrapper .comments-area .review-box .review-card {
+.review-card {
+    width: 85%;
     background-color: rgb(255, 255, 255);
     border: #979494c0 solid 1px;
     border-radius: 10px;
     padding: 20px;
     position: relative;
-}
-.card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .form-submit {

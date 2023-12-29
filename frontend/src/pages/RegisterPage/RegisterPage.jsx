@@ -46,7 +46,7 @@ const RegisterPage = () => {
             toast.warning('Số điện thoại phải có đủ 10 số');
             return;
         }
-        const nameRegex = /^[a-zA-Z]+$/;
+        const nameRegex = /^[a-zA-ZÀ-Ỹà-ỹ]+$/;
 
         if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
             toast.warning('Họ và Tên chỉ được chứa chữ cái và không có số hoặc ký tự đặc biệt');

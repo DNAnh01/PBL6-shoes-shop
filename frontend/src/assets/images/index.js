@@ -24,6 +24,8 @@ const images = {
     icon3: require('~/assets/images/contain/icon3.png'),
     icon4: require('~/assets/images/contain/icon4.png'),
     icon5: require('~/assets/images/contain/icon5.png'),
+    paymentSucces: require('~/assets/images/contain/mascot-icon-13.png'),
+    paymentFail: require('~/assets/images/contain/payment_fail.png'),
 };
 
 export default images;

@@ -78,7 +78,6 @@ export default function AboutPage({ quantity = 1 }) {
         }, 500);
     };
     useEffect(() => {
-        // Update maxQuantity based on the selectedSize
         if (selectedSize) {
             const selectedSizeInfo = productDetail.sizes.find((size) => size.name === selectedSize);
             setMaxQuantity(selectedSizeInfo ? selectedSizeInfo.quantity : 1);
