@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './style-prefix.scss';
+import Icon, { FacebookOutlined, InstagramOutlined } from '@ant-design/icons';
 
 import images from '~/assets/images';
 export default function Footer() {
@@ -15,28 +16,28 @@ export default function Footer() {
                                     <h2 className="nav-title">Popular Categories</h2>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
+                                    <Link to="/product?brand=Nike" lassName="footer-nav-link">
                                         Nike
                                     </Link>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
+                                    <Link to="/product?brand=Adidas" className="footer-nav-link">
                                         Adidas
                                     </Link>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
+                                    <Link to="/product?brand=Puma" className="footer-nav-link">
                                         Puma
                                     </Link>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
+                                    <Link to="/product?brand=Reebok" className="footer-nav-link">
                                         Reebok
                                     </Link>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
-                                        Converse
+                                    <Link to="/product?brand=Convere" className="footer-nav-link">
+                                        Convere
                                     </Link>
                                 </li>
                             </ul>
@@ -45,60 +46,57 @@ export default function Footer() {
                                     <h2 className="nav-title">Products</h2>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
+                                    <Link to="/hot" className="footer-nav-link">
                                         Deal Of The Day
                                     </Link>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
+                                    <Link to="/hot" className="footer-nav-link">
                                         Best Seller
                                     </Link>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
+                                    <Link to="/hot" className="footer-nav-link">
                                         Trending
                                     </Link>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
+                                    <Link to="/hot" className="footer-nav-link">
                                         New Arrivals
                                     </Link>
                                 </li>
                                 <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
+                                    <Link to="/hot" className="footer-nav-link">
                                         Top Rate
                                     </Link>
                                 </li>
                             </ul>
-
                             <ul className="footer-nav-list">
                                 <li className="footer-nav-item">
-                                    <h2 className="nav-title">Services</h2>
+                                    <h2 className="nav-title">Contact</h2>
                                 </li>
-                                <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
-                                        Shop with Shoes
+                                <li className="footer-nav-item flex">
+                                    <div className="icon-box">
+                                        <FacebookOutlined />
+                                    </div>
+                                    <Link
+                                        to="https://www.facebook.com/groups/891809415594105"
+                                        className="footer-nav-link"
+                                    >
+                                        facebook.ShoeShop.vn
                                     </Link>
                                 </li>
-                                <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
-                                        Promotions & offers
-                                    </Link>
+                                <li className="footer-nav-item flex">
+                                    <div className="icon-box">
+                                        <InstagramOutlined />
+                                    </div>
+                                    <Link className="footer-nav-link">Intargram.vn</Link>
                                 </li>
-                                <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
-                                        Pay
-                                    </Link>
-                                </li>
-                                <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
-                                        Orders & shipping
-                                    </Link>
-                                </li>
-                                <li className="footer-nav-item">
-                                    <Link href="#" className="footer-nav-link">
-                                        General information
-                                    </Link>
+                                <li className="footer-nav-item flex">
+                                    <div className="icon-box">
+                                        <i class="fa fa-telegram" aria-hidden="true"></i>
+                                    </div>
+                                    <Link className="footer-nav-link">Telegram.com.vn</Link>
                                 </li>
                             </ul>
                             <ul className="footer-nav-list">

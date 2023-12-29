@@ -42,6 +42,16 @@ const RegisterPage = () => {
             toast.warning('Mật khẩu phải có 8 ký tự bao gồm 1 số, 1 chữ hoa, 1 ký tự đặc biệt');
             return;
         }
+        if (phone.length !== 10) {
+            toast.warning('Số điện thoại phải có đủ 10 số');
+            return;
+        }
+        const nameRegex = /^[a-zA-Z]+$/;
+
+        if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
+            toast.warning('Họ và Tên chỉ được chứa chữ cái và không có số hoặc ký tự đặc biệt');
+            return;
+        }
 
         try {
             const formData = {

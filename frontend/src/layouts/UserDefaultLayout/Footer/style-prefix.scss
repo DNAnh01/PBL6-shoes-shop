@@ -214,7 +214,19 @@
     padding: 3px 0;
 }
 
-.footer-nav-link,
+.footer-nav-link{
+    margin-top: 10px;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    color: #000;
+    font-size: 15px;
+    text-transform: capitalize;
+    -webkit-transition: var(--transition-timing);
+    -o-transition: var(--transition-timing);
+    transition: var(--transition-timing);
+    text-decoration: none;
+}
 .footer-nav-item .content {
     width: -webkit-max-content;
     width: -moz-max-content;
