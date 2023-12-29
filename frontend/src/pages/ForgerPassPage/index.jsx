@@ -14,7 +14,7 @@ export default function ForgetPassPage() {
             toast.success('Thay đổi mật khẩu thành công');
             setTimeout(() => {
                 navigate('/login');
-            }, 2000);
+            }, 500);
         } else {
             toast.error('Sai tài khoản hoặc mật khẩu chưa giống nhau');
         }

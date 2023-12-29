@@ -19,30 +19,31 @@ export default function CartHistory() {
             console.log(response);
             if (response) {
                 const externalURL = response.data.vnpayUrl;
-                window.open(`${externalURL}`);
-                const apiVNpay = await axiosClient.get('/api/payment/vnpay-payment');
-                const paymentInfoData = apiVNpay.data;
-                const pollForSuccess = async () => {
-                    try {
-                        const pageContent = await fetch(externalURL).then((res) => res.text());
-                        console.log(pageContent);
+                // window.open(`${externalURL}`);
+                window.location.href = externalURL;
+                // const apiVNpay = await axiosClient.get('/api/payment/vnpay-payment');
+                // const paymentInfoData = apiVNpay.data;
+                // const pollForSuccess = async () => {
+                //     try {
+                //         const pageContent = await fetch(externalURL).then((res) => res.text());
+                //         console.log(pageContent);
 
-                        if (pageContent.includes('success')) {
-                            console.log('Payment success!');
-                            window.location.href = 'https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success';
-                            return;
-                        }
+                //         if (pageContent.includes('success')) {
+                //             console.log('Payment success!');
+                //             window.location.href = 'https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success';
+                //             return;
+                //         }
 
-                        // Nếu chưa thành công, tiếp tục đợi và kiểm tra lại sau một khoảng thời gian
-                        setTimeout(pollForSuccess, 1000); // Chờ 1 giây trước khi kiểm tra lại
-                    } catch (error) {
-                        console.error('Error polling for success:', error);
-                    }
-                };
-                document.addEventListener('DOMContentLoaded', pollForSuccess);
-                return () => {
-                    document.removeEventListener('DOMContentLoaded', pollForSuccess);
-                };
+                //         // Nếu chưa thành công, tiếp tục đợi và kiểm tra lại sau một khoảng thời gian
+                //         setTimeout(pollForSuccess, 1000); // Chờ 1 giây trước khi kiểm tra lại
+                //     } catch (error) {
+                //         console.error('Error polling for success:', error);
+                //     }
+                // };
+                // document.addEventListener('DOMContentLoaded', pollForSuccess);
+                // return () => {
+                //     document.removeEventListener('DOMContentLoaded', pollForSuccess);
+                // };
             } else {
                 console.error('Có lỗi khi thêm thanh toán ');
             }
@@ -82,7 +83,7 @@ export default function CartHistory() {
             <div className="payment">
                 <span>Tổng số tiền cần thanh toán là: {products?.totalDiscountedPrice}</span>
                 <div className="payment-btn">
-                    <Button text="Buy Now" onClick={handleBuyNow} className={'payment-btn-buy'}></Button>
+                    <Button text="Pay" onClick={handleBuyNow} className={'payment-btn-buy'}></Button>
                 </div>
             </div>
         </div>

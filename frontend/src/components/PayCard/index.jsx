@@ -38,7 +38,7 @@ export default function PayCard() {
         toast.success('Giao dịch đã hoàn thành!');
         setTimeout(() => {
             navigate('/');
-        }, 2000); // 1000 milliseconds = 1 second
+        }, 500); // 1000 milliseconds = 1 second
     };
 
     return (
@@ -79,10 +79,6 @@ export default function PayCard() {
                             </Button>
 
                             <Box sx={{ flex: '1 1 auto' }} />
-
-                            <Button onClick={handleNext} style={{ fontSize: '14px' }}>
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
                         </Box>
                         <div className="mt-30">
                             {step === 1 ? (

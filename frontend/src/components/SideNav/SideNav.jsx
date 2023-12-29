@@ -20,7 +20,7 @@ const SideNav = () => {
         setTimeout(() => {
             toast.success('Đăng xuất thành công');
             navigate('/login');
-        }, 2000);
+        }, 500);
     };
     return (
         <>

@@ -52,7 +52,6 @@ const RegisterPage = () => {
             toast.warning('Họ và Tên chỉ được chứa chữ cái và không có số hoặc ký tự đặc biệt');
             return;
         }
-
         try {
             const formData = {
                 password,

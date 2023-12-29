@@ -57,7 +57,6 @@ export default function CommentCard({ productId }) {
 
             if (response) {
                 toast.success('Thêm đánh giá thành công');
-                setTimeout(() => {}, 500);
                 fetchReviewDetail();
             } else {
                 toast.error('Có lỗi khi thêm đánh giá');

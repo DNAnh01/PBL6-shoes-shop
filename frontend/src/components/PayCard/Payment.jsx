@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import apiCart from '~/api/user/apiCart';
 
-export default function Payment({ orderId, totalPrice, paymentTime, transactionId }) {
+export default function Payment({ paymentTime, transactionId }) {
     const [products, setProducts] = useState([]);
     const [isSuccess, setIsSuccess] = useState(false);
     console.log(products);
@@ -33,6 +34,12 @@ export default function Payment({ orderId, totalPrice, paymentTime, transactionI
                     <table className="table table-bordered">
                         <tbody>
                             <tr>
+                                <td>Mã giao dịch:</td>
+                                <td>
+                                    <span>{transactionId}</span>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Thông tin đơn hàng:</td>
                                 <td>
                                     {products?.cartItems?.map((item, index) => (
@@ -55,14 +62,11 @@ export default function Payment({ orderId, totalPrice, paymentTime, transactionI
                                     <span>{paymentTime}</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Mã giao dịch:</td>
-                                <td>
-                                    <span>{transactionId}</span>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
+                    <button>
+                        <Link to="/pay?step=1">Pay Again</Link>
+                    </button>
                 </div>
             </div>
         </div>

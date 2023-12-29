@@ -12,7 +12,7 @@ export default function ProductFeaturedCard(product) {
         toast.success('Thêm sản phẩm vào giỏ thành công');
         setTimeout(() => {
             navigate(`/cart`);
-        }, 2000);
+        }, 500);
     };
     return (
         <section>

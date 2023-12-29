@@ -38,13 +38,13 @@ export default function LoginPage() {
                     setTimeout(() => {
                         navigate('/admin/dashboard');
                         window.location.reload();
-                    }, 2000);
+                    }, 500);
                 } else if (response?.data?.role === 'user') {
                     toast.success('Đang vào trang chủ');
                     setTimeout(() => {
                         navigate('/');
                         window.location.reload();
-                    }, 2000);
+                    }, 500);
                 }
             }
         } catch (error) {
