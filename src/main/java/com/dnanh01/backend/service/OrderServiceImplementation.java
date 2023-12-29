@@ -152,6 +152,9 @@ public class OrderServiceImplementation implements OrderService {
 
 	private Address createNewAddress(User user, ShippingAddressRequest reqShippingAddress) {
 		Address newAddress = new Address();
+		newAddress.setFirstName(reqShippingAddress.getFirstName());
+		newAddress.setLastName(reqShippingAddress.getLastName());
+		newAddress.setMobile(reqShippingAddress.getMobile());
 		newAddress.setStreetAddress(reqShippingAddress.getStreetAddress());
 		newAddress.setCity(reqShippingAddress.getCity());
 		newAddress.setState(reqShippingAddress.getState());
