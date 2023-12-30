@@ -22,8 +22,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "AND (o.orderStatus = 'PENDING' OR o.orderStatus = 'CONFIRMED' OR o.orderStatus = 'SHIPPED' OR o.orderStatus = 'DELIVERED')")
 	public List<Order> getUsersOrders(@Param("userId") Long userId);
 
+	
 	@Query("SELECT o FROM Order o WHERE o.orderStatus IN ('PENDING', 'CONFIRMED', 'SHIPPED', 'DELIVERED')")
-    	public List<Order> getAllOrders();
+    public List<Order> getAllOrders();
 	
 	public List<Order> findByUser(User user);
 
@@ -32,7 +33,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "AND (o.orderStatus = 'CONFIRMED')")
 	public List<Order> getConfirmedOrdersForUser(@Param("userId") Long userId);
     
- // --------------------DASHBOARD ADMIN--------------------
+    // --------------------DASHBOARD ADMIN--------------------
 
     // thống kê doanh thu, lợi nhuận theo từng giờ của một ngày nhất định được
     // chọn
@@ -173,7 +174,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                     "    JOIN `product` p ON oi.`product_id` = p.`id` " +
                     "WHERE " +
                     "    DATE_FORMAT(o.`order_date`, '%d/%m/%Y') = :selectedDay " +
-                    "    AND o.order_status = 'DELIVERED' " +
+                    "    AND o.`order_status` = 'DELIVERED' " +
                     "GROUP BY " +
                     "    selected_day " +
                     "ORDER BY " +
@@ -312,5 +313,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                     "LIMIT 1;", nativeQuery = true)
     @QueryHints(value = { @QueryHint(name = "org.hibernate.readOnly", value = "true") })
     public List<Object[]> getBestSellingProductMonth(@Param("selectedMonth") String selectedMonth);
+
 
 }
