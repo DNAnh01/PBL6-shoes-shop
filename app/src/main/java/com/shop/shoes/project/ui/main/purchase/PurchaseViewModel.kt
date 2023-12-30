@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class PurchaseViewModel(application: Application, private val repository: Repository) :
     AndroidViewModel(application) {
 
-    private val _order = MutableLiveData<ResponseOrder>()
+    private val _order = MutableLiveData<ResponseOrder?>()
     val order = _order
 
     fun createOrder(bodyOrder: BodyOrder, listenSuccess: () -> Unit, listenFail: () -> Unit) {
@@ -23,7 +23,7 @@ class PurchaseViewModel(application: Application, private val repository: Reposi
                 _order.postValue(response)
                 listenSuccess.invoke()
             } catch (e: Exception) {
-                Log.d("VANVAN", "$e")
+                _order.postValue(null)
                 listenFail.invoke()
             }
         }

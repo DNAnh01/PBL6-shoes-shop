@@ -81,4 +81,7 @@
     <string name="zipcode">ZipCode</string>
     <string name="enter_your_zipcode">Enter your ZipCode</string>
     <string name="buy">Buy</string>
+    <string name="confirm">Confirm</string>
+    <string name="name">Name</string>
+    <string name="back">Back</string>
 </resources>

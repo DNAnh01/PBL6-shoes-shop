@@ -23,7 +23,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
 
     private val cartViewModel by lazy { (context as MainActivity).shareViewModel }
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
-        CartAdapter(carts,
+        CartAdapter(true, carts,
             listener = { pos ->
                 goToDetail(carts[pos].product!!)
             },

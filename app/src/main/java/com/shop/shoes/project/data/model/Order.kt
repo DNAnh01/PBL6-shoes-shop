@@ -22,8 +22,6 @@ data class BodyOrder(
 data class ResponseOrder(
     @SerializedName("id")
     var id: Int,
-    @SerializedName("cartItems")
-    var cartItems: List<Cart> = emptyList(),
     @SerializedName("totalDiscountedPrice")
     var totalDiscountedPrice: Int = 0
 )

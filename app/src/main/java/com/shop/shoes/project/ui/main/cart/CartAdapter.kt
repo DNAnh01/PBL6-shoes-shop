@@ -15,6 +15,7 @@ import com.shop.shoes.project.databinding.ItemProductsBinding
 import com.shop.shoes.project.utils.Pref
 
 class CartAdapter(
+    private val isCart: Boolean,
     private var records: List<Cart>,
     private val listener: (Int) -> Unit,
     private val listenerEdit: (Int) -> Unit,
@@ -31,6 +32,9 @@ class CartAdapter(
                 tvPrice.text = item.discountedPrice.toString()
                 tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 tvQuality.text = item.quantity.toString()
+                if (!isCart) {
+                    tvEdit.visibility = View.GONE
+                }
                 tvEdit.setOnClickListener {
                     listenerEdit(adapterPosition)
                 }

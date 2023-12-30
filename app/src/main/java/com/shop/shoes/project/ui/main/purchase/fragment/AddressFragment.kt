@@ -2,6 +2,7 @@ package com.shop.shoes.project.ui.main.purchase.fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.databinding.FragmentAddressBinding
@@ -11,6 +12,7 @@ import com.shop.shoes.project.ui.main.purchase.PurchaseActivity
 class AddressFragment : BaseFragment<FragmentAddressBinding>() {
 
     private val purchaseViewModel by lazy { (context as PurchaseActivity).purchaseViewModel }
+
     override fun initView() {
     }
 
@@ -45,11 +47,16 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
                 state = tvState.text.toString().trim()
             )
             purchaseViewModel.createOrder((context as PurchaseActivity).address, {
-                toast("hehe")
+                goToConfirm()
             }, {
                 toast(getString(R.string.something_wrong))
             })
         }
+    }
+
+    private fun goToConfirm() {
+        Navigation.findNavController(binding.root)
+            .navigate(R.id.action_addressFragment_to_confirmFragment)
     }
 
     private fun isCanBuy(): Boolean = binding.run {
