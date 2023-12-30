@@ -103,7 +103,7 @@ public class OrderServiceImplementation implements OrderService {
 		createdOrder.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
 		createdOrder.setDiscount(cart.getDiscount());
 		createdOrder.setOrderDate(LocalDateTime.now());
-		createdOrder.setOrderStatus("PENDING");
+		createdOrder.setOrderStatus("");
 		createdOrder.setTotalDiscountedPrice(cart.getTotalDiscountedPrice());
 		createdOrder.setTotalItem(cart.getTotalItem());
 		createdOrder.setTotalPrice(cart.getTotalPrice());
