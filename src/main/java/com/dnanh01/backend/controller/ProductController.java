@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dnanh01.backend.dto.TopProductsDto;
 import com.dnanh01.backend.exception.ProductException;
 import com.dnanh01.backend.model.Product;
 import com.dnanh01.backend.service.ProductService;
@@ -55,4 +56,23 @@ public class ProductController {
         Product product = productService.findProductById(productId);
         return new ResponseEntity<Product>(product, HttpStatus.ACCEPTED);
     }
+    
+    @GetMapping("/get-top-new-products")
+    public ResponseEntity<List<TopProductsDto>> getTopNewProduct() {
+        List<TopProductsDto> topNewProducts = productService.getTopNewProducts();
+        return ResponseEntity.status(HttpStatus.OK).body(topNewProducts);
+    }
+
+    @GetMapping("/get-top-selling-products")
+    public ResponseEntity<List<TopProductsDto>> getTopSellingProducts() {
+        List<TopProductsDto> topSellingProducts = productService.getTopSellingProducts();
+        return ResponseEntity.status(HttpStatus.OK).body(topSellingProducts);
+    }
+
+    @GetMapping("/get-top-rating-products")
+    public ResponseEntity<List<TopProductsDto>> getTopRatingProducts() {
+        List<TopProductsDto> topRatingProducts = productService.getTopRatingProducts();
+        return ResponseEntity.status(HttpStatus.OK).body(topRatingProducts);
+    }
+
 }
