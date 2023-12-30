@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.BodyCart
-import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.source.Repository

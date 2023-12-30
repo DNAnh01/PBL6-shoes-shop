@@ -70,4 +70,15 @@
     <string name="new_password">New password</string>
     <string name="old_password">Old password</string>
     <string name="please_enter_different_values">Please enter different values</string>
+    <string name="enter_your_first_name">Enter your first name</string>
+    <string name="enter_your_last_name">Enter your last name</string>
+    <string name="enter_your_address">Enter your address</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="city">City</string>
+    <string name="enter_your_city">Enter your city</string>
+    <string name="state">State</string>
+    <string name="enter_your_state">Enter your state</string>
+    <string name="zipcode">ZipCode</string>
+    <string name="enter_your_zipcode">Enter your ZipCode</string>
+    <string name="buy">Buy</string>
 </resources>

@@ -25,11 +25,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val products = mutableListOf<Product>()
     private val bestProducts = mutableListOf<Product>()
     private val brands = BrandUtils.brands
-    private val poster = arrayListOf(
-        R.drawable.img_banner,
-        R.drawable.img_banner_1,
-        R.drawable.img_banner_2
-    )
+
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
         ProductAdapter(products) { pos ->
             goToDetail(products[pos])
@@ -50,7 +46,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             goToDetail(products[pos])
         }
     }
-    private val viewPagerAdapter by lazy { PosterViewPagerAdapter(poster) }
 
     override fun initView() = binding.run {
         rvProducts.layoutManager = GridLayoutManager(context, 2)
@@ -59,8 +54,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             adapter = brandAdapter
         }
         rvBestSeller.layoutManager = GridLayoutManager(context, 2)
-        viewPager.adapter = viewPagerAdapter
-        dotIndicator.setViewPager(viewPager)
     }
 
     override fun initData() {

@@ -12,6 +12,7 @@ import com.shop.shoes.project.databinding.FragmentCartBinding
 import com.shop.shoes.project.ui.main.MainActivity
 import com.shop.shoes.project.ui.base.BaseFragment
 import com.shop.shoes.project.ui.main.detail.DetailProductActivity
+import com.shop.shoes.project.ui.main.purchase.PurchaseActivity
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Pref
 import com.shop.shoes.project.utils.Utils
@@ -53,6 +54,9 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
     }
 
     override fun initListener() {
+        binding.tvPurchase.setOnClickListener {
+            startActivity(Intent(context, PurchaseActivity::class.java))
+        }
     }
 
     override fun getViewBinding(

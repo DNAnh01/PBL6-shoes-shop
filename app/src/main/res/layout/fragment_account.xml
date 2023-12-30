@@ -27,7 +27,7 @@
             android:layout_margin="@dimen/_16sdp"
             android:elevation="@dimen/_16sdp"
             android:text="@string/welcome"
-            android:textColor="@color/color_start_btn"
+            android:textColor="@color/color_text_pink"
             android:textSize="@dimen/_30sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn" />
+            android:background="@drawable/bg_box_grey" />
 
         <TextView
             android:id="@+id/tvSupport"
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn" />
+            android:background="@drawable/bg_box_grey" />
 
         <TextView
             android:id="@+id/tvLogout"

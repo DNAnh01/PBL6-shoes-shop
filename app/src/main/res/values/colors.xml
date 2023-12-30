@@ -13,4 +13,8 @@
     <color name="color_end_btn">#8D4DD7</color>
     <color name="color_grey">#8D8A91</color>
     <color name="color_red">#D30747</color>
+    <color name="color_text_pink">#FF8F9C</color>
+    <color name="color_pink_btn">#C25C68</color>
+    <color name="color_text_black">#454545</color>
+    <color name="color_bg_search">#F8C8CE</color>
 </resources>

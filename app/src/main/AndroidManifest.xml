@@ -25,6 +25,11 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="34">
         <activity
+            android:name=".ui.main.purchase.PurchaseActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ShopShoes" />
+        <activity
             android:name=".ui.main.detail.DetailProductActivity"
             android:exported="false"
             android:screenOrientation="portrait"

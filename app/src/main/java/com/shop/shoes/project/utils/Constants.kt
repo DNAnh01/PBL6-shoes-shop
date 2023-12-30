@@ -21,4 +21,5 @@ object Constants {
     const val SIGN_UP = "/auth/signup"
     const val CHANGE_PASS = "/api/users/change-password"
     const val EXTRA_PRODUCT = "productExtra"
+    const val CREATE_ORDER = "/api/orders/"
 }

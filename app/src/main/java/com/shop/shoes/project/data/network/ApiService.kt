@@ -4,9 +4,11 @@ import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.data.model.AuthResponse
 import com.shop.shoes.project.data.model.BodyCart
 import com.shop.shoes.project.data.model.BodyChangePass
+import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.model.ResponseCartAdd
+import com.shop.shoes.project.data.model.ResponseOrder
 import com.shop.shoes.project.data.model.ResponseProduct
 import com.shop.shoes.project.data.model.User
 import com.shop.shoes.project.utils.Constants
@@ -44,4 +46,7 @@ interface ApiService {
 
     @POST(Constants.CHANGE_PASS)
     suspend fun changePass(@Body body: BodyChangePass): String
+
+    @POST(Constants.CREATE_ORDER)
+    suspend fun createOrder(@Body body: BodyOrder): ResponseOrder
 }
