@@ -22,10 +22,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "AND (o.orderStatus = 'PENDING' OR o.orderStatus = 'CONFIRMED' OR o.orderStatus = 'SHIPPED' OR o.orderStatus = 'DELIVERED')")
 	public List<Order> getUsersOrders(@Param("userId") Long userId);
 
-	@Query("SELECT o FROM Order o"
-			+ "WHERE o.orderStatus IN ('PENDING', 'CONFIRMED', 'SHIPPED', 'DELIVERED')")
-	public List<Order> getAllOrders();
-
+	@Query("SELECT o FROM Order o WHERE o.orderStatus IN ('PENDING', 'CONFIRMED', 'SHIPPED', 'DELIVERED')")
+    	public List<Order> getAllOrders();
+	
 	public List<Order> findByUser(User user);
 
 	@Query("SELECT o FROM Order o " +
