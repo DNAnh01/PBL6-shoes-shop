@@ -83,7 +83,7 @@ public class PaymentController {
             throws OrderException {
 
         Long currentOrderId = req.getCurrentOrderId();
-        Order order = orderService.confirmedOrder(currentOrderId);
+        Order order = orderService.pendingOrder(currentOrderId);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
     
