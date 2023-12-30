@@ -1,11 +1,10 @@
 package com.dnanh01.backend.service;
 
-import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.dnanh01.backend.exception.CartItemException;
-import com.dnanh01.backend.exception.ProductException;
 import com.dnanh01.backend.exception.UserException;
 import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.CartItem;
@@ -13,96 +12,88 @@ import com.dnanh01.backend.model.Product;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.CartItemRepository;
 import com.dnanh01.backend.repository.CartRepository;
-import com.dnanh01.backend.request.AddItemRequest;
 
 @Service
-public class CartServiceImplementation implements CartService {
+public class CartItemServiceImplementation implements CartItemService {
 
+    private CartItemRepository cartItemRepository;
+    private UserService userService;
     private CartRepository cartRepository;
-    private CartItemService cartItemService;
-    private ProductService productService;
 
-    public CartServiceImplementation(
-            CartRepository cartRepository,
-            CartItemService cartItemService,
-            ProductService productService) {
+    public CartItemServiceImplementation(
+            CartItemRepository cartItemRepository,
+            UserService userService,
+            CartRepository cartRepository) {
+        this.cartItemRepository = cartItemRepository;
+        this.userService = userService;
         this.cartRepository = cartRepository;
-        this.cartItemService = cartItemService;
-        this.productService = productService;
-
     }
 
     @Override
-    public Cart createCart(User user) {
-        Cart cart = new Cart();
-        cart.setUser(user);
-        return cartRepository.save(cart);
+    public CartItem createCartItem(CartItem cartItem) {
+
+        CartItem saveCartItem = new CartItem();
+        saveCartItem.setDiscountedPrice(cartItem.getProduct().getDiscountedPrice() * cartItem.getQuantity());
+        saveCartItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
+
+        saveCartItem.setQuantity(cartItem.getQuantity());
+        saveCartItem.setSize(cartItem.getSize());
+        saveCartItem.setUserId(cartItem.getUserId());
+        saveCartItem.setCart(cartItem.getCart());
+        saveCartItem.setProduct(cartItem.getProduct());
+        // cartItem.setQuantity(1);
+
+        // cartItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
+
+        // cartItem.setDiscountedPrice(cartItem.getProduct().getDiscountedPrice() *
+        // cartItem.getQuantity());
+
+        CartItem createCartItem = cartItemRepository.save(saveCartItem);
+        return createCartItem;
     }
 
     @Override
-    public String addCartItem(Long userId, AddItemRequest req)
-            throws ProductException, CartItemException, UserException {
-        Cart cart = cartRepository.findByUserId(userId);
-        Product product = productService.findProductById(req.getProductId());
-        CartItem isPresent = cartItemService.isCartItemExist(cart, product, req.getSize(), userId);
+    public CartItem updateCartItem(Long userId, Long id, CartItem cartItem) throws CartItemException, UserException {
+        CartItem item = findCartItemById(id);
+        User user = userService.findUserById(item.getUserId());
 
-        if (isPresent == null) {
-            CartItem cartItem = new CartItem();
+        if (user.getId().equals(userId)) {
+            item.setQuantity(cartItem.getQuantity());
+            item.setSize(cartItem.getSize());
+            item.setPrice(item.getQuantity() * item.getProduct().getPrice());
+            item.setDiscountedPrice(item.getProduct().getDiscountedPrice() * item.getQuantity());
+        }
 
-            int price = req.getQuantity() * product.getDiscountedPrice();
-            cartItem.setPrice(price);
-            cartItem.setQuantity(req.getQuantity());
-            cartItem.setSize(req.getSize());
-            cartItem.setUserId(userId);
-            cartItem.setCart(cart);
-            cartItem.setProduct(product);
-            cartItem.setCreateCartItem(LocalDateTime.now());
-            CartItem createdCartItem = cartItemService.createCartItem(cartItem);
+        return cartItemRepository.save(item);
+    }
 
-            cart.getCartItems().add(createdCartItem);
+    @Override
+    public CartItem isCartItemExist(Cart cart, Product product, String size, Long userId) {
+        CartItem cartItem = cartItemRepository.isCartItemExist(cart, product, size, userId);
+        return cartItem;
+    }
 
-            cartRepository.save(cart);
+    @Override
+    public void removeCartItem(Long userId, Long cartItemId) throws CartItemException, UserException {
+        CartItem cartItem = findCartItemById(cartItemId);
+        User user = userService.findUserById(cartItem.getUserId());
+        User reqUser = userService.findUserById(userId);
+
+        if (user.getId().equals(reqUser.getId())) {
+            cartItemRepository.deleteById(cartItemId);
         } else {
-            CartItem cartItem = new CartItem();
-            int price = req.getQuantity() * product.getDiscountedPrice();
-            cartItem.setPrice(price);
-            cartItem.setQuantity(req.getQuantity());
-            cartItem.setSize(req.getSize());
-            cartItem.setUserId(userId);
-            cartItem.setCart(cart);
-            cartItem.setProduct(product);
-            cartItem.setCreateCartItem(LocalDateTime.now());
-            cartItemService.updateCartItem(userId, isPresent.getId(), cartItem);
-
+            throw new UserException("You can't remove another users item.");
         }
-
-        return "Item add to cart";
     }
 
     @Override
-    public Cart findUserCart(Long userId) {
-        Cart cart = cartRepository.findByUserId(userId);
-
-        int totalPrice = 0;
-        int totalDiscountedPrice = 0;
-        int totalItem = 0;
-
-        for (CartItem cartItem : cart.getCartItems()) {
-            totalPrice = totalPrice + cartItem.getPrice();
-            totalDiscountedPrice = totalDiscountedPrice + cartItem.getDiscountedPrice();
-            totalItem = totalItem + cartItem.getQuantity();
+    public CartItem findCartItemById(Long cartItemId) throws CartItemException {
+        Optional<CartItem> opt = cartItemRepository.findById(cartItemId);
+        if (opt.isPresent()) {
+            return opt.get();
+        } else {
+            throw new CartItemException("Cart item not found with id - " + cartItemId);
         }
-
-        cart.setTotalPrice(totalPrice);
-        cart.setTotalDiscountedPrice(totalDiscountedPrice);
-        cart.setTotalItem(totalItem);
-        cart.setDiscount(totalPrice - totalDiscountedPrice);
-        return cartRepository.save(cart);
     }
 
-    
-	@Override
-	public void saveOrUpdateCart(Cart cart) {
-	        cartRepository.save(cart);
-	 }
 }
