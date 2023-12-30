@@ -41,6 +41,7 @@
 
 .mt-30 {
     margin-top: 30px;
+    margin-bottom: 50px;
 }
 .button-payment {
     background: linear-gradient(90deg, #008eff, #fa5c5c);
@@ -51,6 +52,9 @@
     font-size: 16px;
     outline: none;
     padding: 10px 20px;
+}
+.button-payment:hover {
+    background: linear-gradient(to right, #4caeff, #03f2ff);
 }
 .div-payment {
     display: flex;
@@ -74,6 +78,11 @@
     animation: marquee 8s linear infinite; /* Tốc độ chạy và lặp vô hạn */
     transition: background-color 0.3s ease;
     background: linear-gradient(to left, #008eff, #f60000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.complete-title:hover {
+    background: linear-gradient(to right, #4caeff, #03f2ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

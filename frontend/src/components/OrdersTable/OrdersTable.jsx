@@ -195,7 +195,13 @@ export default function OrdersTable() {
                                                 className="custom-header-order-user"
                                                 style={{ textAlign: 'center' }}
                                             >
-                                                Quantity
+                                                Quantity purchased
+                                            </TableCell>
+                                            <TableCell
+                                                className="custom-header-order-user"
+                                                style={{ textAlign: 'center' }}
+                                            >
+                                                Quantity remaining
                                             </TableCell>
                                             <TableCell
                                                 className="custom-header-order-user"
@@ -238,6 +244,12 @@ export default function OrdersTable() {
                                                     </TableCell>
                                                     <TableCell align="left" className="custom-cell-order-user">
                                                         <span className="custom-cell-order-title">{item.quantity}</span>
+                                                    </TableCell>
+                                                    <TableCell align="left" className="custom-cell-order-user">
+                                                        <span className="custom-cell-order-title">
+                                                            {item.product.sizes.find((size) => size.name === item.size)
+                                                                ?.quantity || 0}
+                                                        </span>
                                                     </TableCell>
                                                     <TableCell align="left" className="custom-cell-order-user">
                                                         <span className="custom-cell-order-title">

@@ -157,3 +157,35 @@
 .color-main-text {
     color: var(--main-text) !important;
 }
+/* Thêm CSS này vào file style.scss hoặc tương tự */
+.size-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    z-index: 999; /* Đảm bảo form hiển thị trên cùng */
+    border: 1px solid #ccc;
+}
+
+.size-form ul {
+    list-style: none;
+    padding: 0;
+}
+
+.size-form li {
+    margin-bottom: 10px;
+}
+
+.size-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.size-form button:hover {
+    background-color: #2980b9;
+}

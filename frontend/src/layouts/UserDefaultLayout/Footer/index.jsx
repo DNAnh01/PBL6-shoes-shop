@@ -42,6 +42,9 @@ export default function Footer() {
                     <div className="footer-nav">
                         <div className="container">
                             <ul className="footer-nav-list">
+                                <li className="footer-nav-item">
+                                    <h2 className="nav-title">Popular Categories</h2>
+                                </li>
                                 {brands.map((brand) => (
                                     <li key={brand?.brand?.id} className="footer-nav-item">
                                         <Link to={`/product?brand=${brand?.brand?.name}`} className="footer-nav-link">
@@ -93,20 +96,20 @@ export default function Footer() {
                                         to="https://www.facebook.com/groups/891809415594105"
                                         className="footer-nav-link"
                                     >
-                                        facebook.ShoeShop.vn
+                                        facebook.ShoesShop.vn
                                     </Link>
                                 </li>
                                 <li className="footer-nav-item flex">
                                     <div className="icon-box">
                                         <InstagramOutlined />
                                     </div>
-                                    <Link className="footer-nav-link">Intargram.vn</Link>
+                                    <Link className="footer-nav-link">instagram.vn</Link>
                                 </li>
                                 <li className="footer-nav-item flex">
                                     <div className="icon-box">
                                         <i class="fa fa-telegram" aria-hidden="true"></i>
                                     </div>
-                                    <Link className="footer-nav-link">Telegram.com.vn</Link>
+                                    <Link className="footer-nav-link">telegram.com.vn</Link>
                                 </li>
                             </ul>
                             <ul className="footer-nav-list">

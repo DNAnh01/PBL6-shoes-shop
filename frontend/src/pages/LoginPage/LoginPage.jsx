@@ -36,13 +36,13 @@ export default function LoginPage() {
                     setTimeout(() => {
                         navigate('/admin/dashboard');
                         window.location.reload();
-                    }, 500);
+                    }, 1000);
                 } else if (response?.data?.role === 'user') {
                     toast.success('Đang vào trang chủ');
                     setTimeout(() => {
                         navigate('/');
                         window.location.reload();
-                    }, 500);
+                    }, 1000);
                 }
             }
         } catch (error) {

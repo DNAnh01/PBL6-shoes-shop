@@ -29,6 +29,7 @@ export default function Payment({ paymentTime, transactionId }) {
                 sessionStorage.removeItem('currentOrderId');
                 setTimeout(() => {
                     navigate('/pay?step=4');
+                    window.location.reload();
                 }, 500);
             }
         } catch (error) {
@@ -102,9 +103,11 @@ export default function Payment({ paymentTime, transactionId }) {
                         </div>
                     )}
                     {isSuccess && (
-                        <button className="button-payment" onClick={confirmOrder}>
-                            Confirm
-                        </button>
+                        <div className="div-payment">
+                            <button className="button-payment" onClick={confirmOrder}>
+                                Confirm
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>

@@ -53,6 +53,13 @@
         cursor: pointer;
         font-weight: 600;
     }
+    &-detail .profile-btn .profile-btn-personal:hover,
+    &-detail .profile-btn .profile-btn-changepassword:hover,
+    &-detail .profile-btn .profile-btn-logout:hover {
+        background: linear-gradient(to left, #008eff, #f60000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
     &-detail .profile-btn .profile-btn-changepassword {
         color: black;
         border: none;

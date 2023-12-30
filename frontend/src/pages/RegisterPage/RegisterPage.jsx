@@ -61,14 +61,15 @@ const RegisterPage = () => {
                 role: 'user',
             };
             const response = await apiRegister.postRegister(formData);
+            console.log(response);
             if (response.status === 201) {
                 toast.success('Đăng ký thành công');
                 setTimeout(() => {
                     navigate('/login');
-                }, 500);
+                }, 1000);
             }
         } catch (error) {
-            toast.error(error?.message);
+            toast.error('Account already exists!');
         }
     };
 

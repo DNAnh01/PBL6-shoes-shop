@@ -103,6 +103,12 @@
     cursor: pointer;
     padding: 0 10px;
 }
+.payment .payment-detail .payment-detail-btndelete:hover,
+.payment .payment-detail .payment-detail-btnall:hover {
+    background: linear-gradient(to left, #008eff, #f60000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 /* Style for payment content section */
 .payment .payment-detail .payment-content {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import images from '~/assets/images';
 
@@ -11,30 +12,38 @@ export default function ServiceCard() {
                 <div className="service-category">
                     <h2 className="service-category-title">Danh Mục</h2>
                     <div className="service-category-item">
-                        <div className="service-category-item-abc">
-                            <div className="service-category-icon-item">
-                                <img src={images.icon1} alt="" />
+                        <Link to="/">
+                            <div className="service-category-item-abc">
+                                <div className="service-category-icon-item">
+                                    <img src={images.icon1} alt="" />
+                                </div>
+                                <div className="service-category-text">Mua sắm cùng Shoes</div>
                             </div>
-                            <div className="service-category-text">Mua sắm cùng Shoes</div>
-                        </div>
-                        <div className="service-category-item-abc">
-                            <div className="service-category-icon-item">
-                                <img src={images.icon2} alt="" />
+                        </Link>
+                        <Link to="/profile">
+                            <div className="service-category-item-abc">
+                                <div className="service-category-icon-item">
+                                    <img src={images.icon2} alt="" />
+                                </div>
+                                <div className="service-category-text">Thông tin cá nhân</div>
                             </div>
-                            <div className="service-category-text">Khuyến mãi &amp; ưu đãi</div>
-                        </div>
-                        <div className="service-category-item-abc">
-                            <div className="service-category-icon-item">
-                                <img src={images.icon3} alt="" />
+                        </Link>
+                        <Link to="/cart">
+                            <div className="service-category-item-abc">
+                                <div className="service-category-icon-item">
+                                    <img src={images.icon3} alt="" />
+                                </div>
+                                <div className="service-category-text">Thanh toán</div>
                             </div>
-                            <div className="service-category-text">Thanh toán</div>
-                        </div>
-                        <div className="service-category-item-abc">
-                            <div className="service-category-icon-item">
-                                <img src={images.icon4} alt="" />
+                        </Link>
+                        <Link to="/order">
+                            <div className="service-category-item-abc">
+                                <div className="service-category-icon-item">
+                                    <img src={images.icon4} alt="" />
+                                </div>
+                                <div className="service-category-text">Đơn hàng và vận chuyển</div>
                             </div>
-                            <div className="service-category-text">Đơn hàng &amp; vận chuyển</div>
-                        </div>
+                        </Link>
                         <div className="service-category-item-abc">
                             <div className="service-category-icon-item">
                                 <img src={images.icon5} alt="" />

@@ -4,6 +4,7 @@ import { useCart } from '~/api/user/CartContext';
 import { useEffect, useState } from 'react';
 import apiProductGrid from '~/api/user/apiProductGrid';
 import ProductGridList from '~/components/ProductGridList';
+import Footer from '~/layouts/UserDefaultLayout/Footer';
 
 export default function ProductPage() {
     const { cartItems } = useCart();
@@ -52,6 +53,7 @@ export default function ProductPage() {
             </div>
             <BrandList />
             <ProductGridList productSearch={productSearch} />
+            <Footer />
         </>
     );
 }

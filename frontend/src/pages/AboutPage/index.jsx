@@ -2,7 +2,7 @@ import Header from '../../layouts/UserDefaultLayout/Header';
 import './style.scss';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCart } from '~/api/user/CartContext';
 import Button from '../Button';
 import apiAddItem from '~/api/user/apiAddItem';
@@ -121,11 +121,9 @@ export default function AboutPage({ quantity = 1 }) {
                             <div className="about-information">
                                 <h1 className="about-title">{productDetail.title}</h1>
                                 <div className="about-rating">
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                                    <Link to={`/product?brand=${productDetail?.brand?.name}`} className="about-brand">
+                                        {productDetail?.brand?.name}
+                                    </Link>
                                 </div>
                                 <div className="about-description">
                                     <p>{productDetail.description}</p>

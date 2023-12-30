@@ -8,8 +8,9 @@
 .about {
     &-div {
         width: 700px;
-        max-height: 700px;
+        height: 500px;
         position: relative;
+        text-align: center;
     }
     &-image {
         height: 70%;
@@ -57,6 +58,11 @@
         background: linear-gradient(to right, #c72092e8, #6c14d0e4);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+    &-brand {
+        color: var(--salmon-pink);
+        font-weight: var(--weight-500);
+        text-decoration: none;
     }
     &-rating {
         display: flex;

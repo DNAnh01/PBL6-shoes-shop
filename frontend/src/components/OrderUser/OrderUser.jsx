@@ -2,6 +2,7 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import apiOrderUser from '~/api/user/apiOrderUser';
 import './style.scss';
 
@@ -144,15 +145,21 @@ export default function OrderUser() {
                                                 scope="row"
                                                 className="custom-cell-order-user-title"
                                             >
-                                                <img
-                                                    src={order.product.imageUrl}
-                                                    alt=""
-                                                    style={{ width: '70px', height: '70px' }}
-                                                />
+                                                <Link to={`/product/${order.product.id}`}>
+                                                    <img
+                                                        src={order.product.imageUrl}
+                                                        alt=""
+                                                        style={{ width: '70px', height: '70px' }}
+                                                    />
+                                                </Link>
                                             </TableCell>
 
                                             <TableCell align="left" className="custom-cell-order-user">
-                                                <span className="custom-cell-order-title">{order.product.title}</span>
+                                                <Link to={`/product/${order.product.id}`}>
+                                                    <span className="custom-cell-order-title">
+                                                        {order.product.title}
+                                                    </span>
+                                                </Link>
                                             </TableCell>
                                             <TableCell align="left" className="custom-cell-order-user">
                                                 <span className="custom-cell-order-title">

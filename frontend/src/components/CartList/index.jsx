@@ -3,14 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import CartCard from '../CartCard';
 import './style.scss';
 import { toast, ToastContainer } from 'react-toastify';
-import { useDispatch } from 'react-redux';
 import Button from '~/pages/Button';
 import apiCart from '~/api/user/apiCart';
 import apiUpdateCartItems from '~/api/user/apiUPdateCartItems';
 import apiRemoveCartItems from '~/api/user/apiRemoveCartItems';
 
 export default function CartList() {
-    const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const checksessionStorage = () => {
@@ -32,12 +30,6 @@ export default function CartList() {
             console.log(error);
         }
     };
-
-    // API cart
-    useEffect(() => {
-        // Gọi hàm fetchCarts
-        fetchCarts();
-    }, []);
 
     const handleQuantityChange = async (productId, newQuantity) => {
         const formData = {
@@ -103,6 +95,11 @@ export default function CartList() {
             navigate('/pay?step=1');
         }
     };
+    // API cart
+    useEffect(() => {
+        // Gọi hàm fetchCarts
+        fetchCarts();
+    }, []);
 
     return (
         <>
