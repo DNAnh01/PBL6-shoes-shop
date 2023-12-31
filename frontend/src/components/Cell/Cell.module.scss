@@ -1,0 +1,24 @@
+.container {
+    font-family: var(--font-family);
+    height: 1.4rem;
+    border-bottom: 1px solid #9d9d9d;
+    border-right: 1px solid #9d9d9d;
+
+    font-size: 1rem;
+    transition: background-color 0.1s ease;
+    cursor: pointer;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background-color: #e4e4e4;
+    }
+}
+
+.active {
+    background: var(--primary);
+    color: var(--white);
+}

@@ -6,7 +6,7 @@ import Icon from '../Icons/Icon';
 const cx = classNames.bind(styles);
 const Stats = ({ stats, title, color, icon }) => {
     return (
-        <div className={`${cx('container')} align-items-center d-flex h-75 justify-content-between w-100`}>
+        <div className={`${cx('container')} align-items-center d-flex  justify-content-between`}>
             <div className={cx('icon')} style={{ background: color }}>
                 <Icon icon={icon} color="#fff" />
             </div>

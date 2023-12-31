@@ -2,7 +2,9 @@
     display: flex;
     gap: 0 30px;
 }
-
+.product-box-content {
+    width: 400px;
+}
 .product {
     &-minimal {
         font: inherit;

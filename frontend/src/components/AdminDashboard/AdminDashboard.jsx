@@ -1,17 +1,23 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './AdminDashboard.module.scss';
 import Icon from '../Icons/Icon';
 import Card from '~/components/Card';
-import Achievement from '../Achievement/Achievement';
-import MonthlyOverview from '../MonthlyOverview';
 import LineChart from '../LineChart';
-import { WeekData } from '~/components/LineChart/WeekData';
-import { MonthData } from '../BarChart/MonthData';
-import BarChart from '../BarChart';
+import SummaryStatistics from '../SummaryStatistics';
+import { LineChartData } from '~/components/LineChart/LineChartData';
+import BestSellingProduct from '../BestSellingProduct';
 
 const cx = classNames.bind(styles);
 const AdminDashboard = () => {
+    const [selectedTimeForSummaryStatistics, setSelectedTimeForSummaryStatistics] = useState('');
+    const [selectedTimeForLineChart, setSelectedTimeForLineChart] = useState('');
+    const [selectedTimeForBestSellingProductToday, setSelectedTimeForBestSellingProductToday] = useState('');
+
+    const [isLoadingForSummaryStatistics, setIsLoadingForSummaryStatistics] = useState(false);
+    const [isLoadingForLineChart, setIsLoadingForLineChart] = useState(false);
+    const [isLoadingForBestSellingProductToday, setIsLoadingForBestSellingProductToday] = useState(false);
+
     return (
         <Fragment>
             <header className={`align-items-center d-flex p-2`}>
@@ -20,23 +26,43 @@ const AdminDashboard = () => {
             </header>
             <div className={`${cx('grid')} pb-3`}>
                 <div className={cx('section1')}>
-                    <Card headline={'Shoes Shop'}>
-                        <Achievement />
+                    <Card
+                        headline={'Summary Statistics'}
+                        setSelectedTime={setSelectedTimeForSummaryStatistics}
+                        isLoading={isLoadingForSummaryStatistics}
+                        setIsLoading={setIsLoadingForSummaryStatistics}
+                    >
+                        <SummaryStatistics
+                            selectedTime={selectedTimeForSummaryStatistics}
+                            setIsLoading={setIsLoadingForSummaryStatistics}
+                        />
                     </Card>
                 </div>
                 <div className={cx('section2')}>
-                    <Card headline={'Monthly Overview'}>
-                        <MonthlyOverview />
+                    <Card
+                        headline={'Statistical Chart'}
+                        setSelectedTime={setSelectedTimeForLineChart}
+                        isLoading={isLoadingForLineChart}
+                        setIsLoading={setIsLoadingForLineChart}
+                    >
+                        <LineChart
+                            selectedTime={selectedTimeForLineChart}
+                            setIsLoading={setIsLoadingForLineChart}
+                            reqData={LineChartData}
+                        />
                     </Card>
                 </div>
                 <div className={cx('section3')}>
-                    <Card headline={'Weekly Overview'}>
-                        <LineChart reqData={WeekData} />
-                    </Card>
-                </div>
-                <div className={cx('section4')}>
-                    <Card headline={'Monthly Overview'}>
-                        <BarChart reqData={MonthData} />
+                    <Card
+                        headline={'Best Selling Product'}
+                        setSelectedTime={setSelectedTimeForBestSellingProductToday}
+                        isLoading={isLoadingForBestSellingProductToday}
+                        setIsLoading={setIsLoadingForBestSellingProductToday}
+                    >
+                        <BestSellingProduct
+                            selectedTime={selectedTimeForBestSellingProductToday}
+                            setIsLoading={setIsLoadingForBestSellingProductToday}
+                        />
                     </Card>
                 </div>
             </div>

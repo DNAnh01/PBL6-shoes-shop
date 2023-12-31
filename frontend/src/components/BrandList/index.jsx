@@ -70,7 +70,7 @@ export default function BrandList() {
     );
     return (
         <div className="container-layout">
-            <h1 className="brandList-title">Danh mục</h1>
+            <h1 className="brandList-title">category</h1>
             <div className="brandList">
                 <Swiper
                     spaceBetween={20}
@@ -82,7 +82,6 @@ export default function BrandList() {
                     mousewheel={true}
                     keyboard={true}
                     modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-                    
                 >
                     {isLoading ? (
                         <SwiperSlide>

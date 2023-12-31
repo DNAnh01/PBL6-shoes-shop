@@ -7,6 +7,7 @@ import { Modal } from 'antd';
 
 export default function OrdersTable() {
     const [orders, setOrders] = useState([]);
+    console.log(orders);
     const [selectedOrderIds, setSelectedOrderIds] = useState([]);
     const [localStatus, setLocalStatus] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false); // Step 1
@@ -80,6 +81,7 @@ export default function OrdersTable() {
                             <TableCell className="custom-header-order">Email</TableCell>
                             <TableCell className="custom-header-order">Address</TableCell>
                             <TableCell className="custom-header-order">Order Date</TableCell>
+                            <TableCell className="custom-header-order">Order Deadline </TableCell>
                             <TableCell className="custom-header-order">ToTal Price</TableCell>
                             <TableCell className="custom-header-order">Status</TableCell>
                             <TableCell className="custom-header-order">Update</TableCell>
@@ -110,6 +112,9 @@ export default function OrdersTable() {
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
                                     {`${order?.shippingAddress?.streetAddress}, ${order?.shippingAddress?.city}`}
+                                </TableCell>
+                                <TableCell align="left" className="custom-cell-order">
+                                    {new Date(order.orderDate).toLocaleString()}
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
                                     {new Date(order.deliveryDate).toLocaleString()}

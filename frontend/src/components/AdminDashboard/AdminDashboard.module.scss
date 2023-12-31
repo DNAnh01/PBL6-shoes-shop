@@ -8,9 +8,16 @@
     height: 100%;
     display: grid;
     grid-template-areas:
-        'section1 section1 section2 section2 section2 section2'
-        'section3 section3 section3 section4 section4 section4'
-        'section3 section3 section3 section4 section4 section4';
+        'section1 section1 section1 section1 section2 section2 section2 section2 section2 section2 section2 section2'
+        'section1 section1 section1 section1 section2 section2 section2 section2 section2 section2 section2 section2'
+        'section1 section1 section1 section1 section2 section2 section2 section2 section2 section2 section2 section2'
+        'section1 section1 section1 section1 section2 section2 section2 section2 section2 section2 section2 section2'
+        'section3 section3 section3 section3 section2 section2 section2 section2 section2 section2 section2 section2'
+        'section3 section3 section3 section3 section2 section2 section2 section2 section2 section2 section2 section2'
+        'section3 section3 section3 section3 section2 section2 section2 section2 section2 section2 section2 section2'
+        'section3 section3 section3 section3 section2 section2 section2 section2 section2 section2 section2 section2'
+        'section3 section3 section3 section3 section2 section2 section2 section2 section2 section2 section2 section2'
+        'section3 section3 section3 section3 section2 section2 section2 section2 section2 section2 section2 section2';
     grid-gap: 0.4rem;
 
     @for $i from 1 through 4 {
@@ -26,9 +33,10 @@
     .grid {
         height: 100%;
         grid-template-areas:
-            'section1 section1 section2 section2 section2 section2'
-            'section3 section3 section3 section4 section4 section4'
-            'section3 section3 section3 section4 section4 section4';
+            'section1 section1 section1 section3 section3 section3'
+            'section1 section1 section1 section3 section3 section3'
+            'section2 section2 section2 section2 section2 section2'
+            'section2 section2 section2 section2 section2 section2';
 
         grid-gap: 0.2rem;
     }
@@ -39,9 +47,10 @@
     .grid {
         height: 100%;
         grid-template-areas:
-            'section1 section1 section2 section2'
+            'section1 section1 section1 section1'
             'section3 section3 section3 section3'
-            'section4 section4 section4 section4';
+            'section2 section2 section2 section2'
+            'section2 section2 section2 section2';
 
         grid-gap: 0.2rem;
 

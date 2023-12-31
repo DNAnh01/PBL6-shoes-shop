@@ -1,0 +1,28 @@
+.container {
+    width: 20rem;
+
+    border-top: 1px solid #9d9d9d;
+    border-left: 1px solid #9d9d9d;
+
+    background: var(--white);
+    z-index: 1000000;
+
+    .content {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        .title {
+            grid-column: span 3;
+            font-size: 1rem;
+        }
+
+        .days-of-week {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    }
+}
