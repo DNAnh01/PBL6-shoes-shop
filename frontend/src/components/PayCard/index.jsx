@@ -30,7 +30,7 @@ export default function PayCard() {
         navigate(`/pay?step=${prevStep}`);
     };
     const handleFinish = () => {
-        toast.success('Giao dịch đã hoàn thành!');
+        toast.success('Transaction completed!');
         setTimeout(() => {
             navigate('/');
         }, 500); // 1000 milliseconds = 1 second

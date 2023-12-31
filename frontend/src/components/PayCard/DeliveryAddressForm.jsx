@@ -25,9 +25,7 @@ export default function DeliveryAddressForm() {
             try {
                 const response = await apiProfile();
                 setProfiles(response.data);
-            } catch (error) {
-                // toast.error(error?.message);
-            }
+            } catch (error) {}
         };
         // Call the fetchProductGrid function
         fetchProfile();
@@ -70,12 +68,12 @@ export default function DeliveryAddressForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (phone.length !== 10) {
-            toast.warning('Số điện thoại không hợp lệ');
+            toast.warning('iInvalid phone number');
             return;
         }
         const nameRegex = /^[a-zA-ZÀ-Ỹà-ỹ ]+$/;
         if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
-            toast.warning('Họ và Tên chỉ được chứa chữ cái và không có số hoặc ký tự đặc biệt');
+            toast.warning('First and last names must contain only letters and no numbers or special characters');
             return;
         }
 
@@ -92,14 +90,14 @@ export default function DeliveryAddressForm() {
             const response = await apiCreateOrder.postCreateOrder(address);
             if (response.status === 201) {
                 sessionStorage.setItem('currentOrderId', response.data.id);
-                toast.success('Thêm thông tin thành công ');
+                toast.success('Added information successfully');
                 sessionStorage.setItem('maxAddress', JSON.stringify(address));
                 setTimeout(() => {
                     navigate('/pay?step=2');
                     window.location.reload();
                 }, 500);
             } else {
-                toast.error('Có lỗi khi thêm thông tin');
+                toast.error('There was an error adding information');
             }
         } catch (error) {}
     };

@@ -28,7 +28,7 @@ export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuanti
             setNewQuantity(newQuantity);
             onIncreaseQuantity();
         } else {
-            toast.warning('Đã đạt số lượng tối đa');
+            toast.warning('Maximum quantity reached');
         }
     };
     const handleDelete = () => {

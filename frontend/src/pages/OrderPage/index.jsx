@@ -13,8 +13,7 @@ export default function OrderPage() {
             const jwt = sessionStorage.getItem('jwt');
 
             if (!token || !user || !jwt) {
-                // Hiển thị toast.error và chuyển hướng đến trang đăng nhập
-                toast.error('Bạn cần đăng nhập để truy cập trang này');
+                toast.error('You need to log in to access this page');
             }
         };
         checkAuthentication();

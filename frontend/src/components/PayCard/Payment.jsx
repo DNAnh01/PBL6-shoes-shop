@@ -25,7 +25,7 @@ export default function Payment({ paymentTime, transactionId }) {
             const res = await apiConfirmedOrder.postConfirmedOrder(form);
             console.log(res);
             if (res.status === 200) {
-                toast.success('Xác nhận đơn hàng thành công');
+                toast.success('Order confirmation successful');
                 sessionStorage.removeItem('currentOrderId');
                 setTimeout(() => {
                     navigate('/pay?step=4');

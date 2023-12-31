@@ -30,7 +30,7 @@ export default function AboutPage({ quantity = 1 }) {
 
     const handleAddToCart = async (productId) => {
         if (!selectedSize || !selectedColor) {
-            toast.warning('Vui lòng chọn size và màu sắc trước khi thêm vào giỏ hàng');
+            toast.warning('Please select size and color before adding to cart');
             return;
         }
         const formData = {
@@ -43,12 +43,12 @@ export default function AboutPage({ quantity = 1 }) {
             setIsLoading(true); // Bắt đầu loading
 
             const response = await apiAddItem.putAddItem(formData);
-            toast.success('Thêm sản phẩm vào giỏ thành công');
+            toast.success('Added product to cart successfully');
             updateCartItems();
             console.log(response);
         } catch (error) {
             console.error('Add to Cart Error:', error);
-            toast.error('Bạn cần đăng nhập mới được sử dụng chức năng này');
+            toast.error('You need to log in to use this function');
         } finally {
             setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại
         }
@@ -62,7 +62,7 @@ export default function AboutPage({ quantity = 1 }) {
                 const response = await apiProductDetail.getProductDetail(id);
                 setProductDetail(response.data);
             } catch (error) {
-                toast.error('Sản phẩm không tồn tại', error);
+                toast.error('Product does not exist', error);
             } finally {
                 setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại
             }
@@ -72,7 +72,7 @@ export default function AboutPage({ quantity = 1 }) {
     }, [id]);
 
     const handleBuyNow = () => {
-        toast.success('Thêm sản phẩm vào giỏ thành công');
+        toast.success('Added product to cart successfully');
         setTimeout(() => {
             navigate(`/pay?step=1`);
         }, 500);
@@ -93,7 +93,7 @@ export default function AboutPage({ quantity = 1 }) {
         if (quantityDefault < maxQuantity) {
             setQuantityDefault(quantityDefault + 1);
         } else {
-            toast.warning(`Bạn không thể thêm nhiều hơn  ${maxQuantity} mục cho kích thước đã chọn.`);
+            toast.warning(`You cannot add more than ${maxQuantity} entries for the selected dimension.`);
         }
     };
     useEffect(() => {

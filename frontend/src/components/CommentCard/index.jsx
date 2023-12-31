@@ -41,9 +41,8 @@ export default function CommentCard({ productId }) {
 
     const postCreateRaiting = async () => {
         if (!reviewText.trim()) {
-            // If reviewText is empty or only contains whitespace
-            toast.warning('Vui lòng nhập đánh giá của bạn trước khi gửi.');
-            return; // Stop the function execution
+            toast.warning('Please enter your rating before submitting.');
+            return;
         }
         const formData = {
             productId: productId,
@@ -56,13 +55,13 @@ export default function CommentCard({ productId }) {
             console.log('response:', response);
 
             if (response) {
-                toast.success('Thêm đánh giá thành công');
+                toast.success('Added review successfully');
                 fetchReviewDetail();
             } else {
-                toast.error('Có lỗi khi thêm đánh giá');
+                toast.error('There was an error adding a review');
             }
         } catch (error) {
-            toast.error('Bạn cần đăng nhập', error);
+            toast.error('You need to log in', error);
         }
     };
 

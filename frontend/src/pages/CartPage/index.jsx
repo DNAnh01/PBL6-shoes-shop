@@ -13,8 +13,7 @@ export default function CartPage() {
             const jwt = sessionStorage.getItem('jwt');
 
             if (!jwt) {
-                // Hiển thị toast.error và chuyển hướng đến trang đăng nhập
-                toast.error('Bạn cần đăng nhập để xem giỏ hàng');
+                toast.error('You need to log in to view your shopping cart');
             }
         };
 

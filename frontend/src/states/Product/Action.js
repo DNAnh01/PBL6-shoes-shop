@@ -67,7 +67,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
             },
         });
         console.log('delete product: ', data);
-        toast.success('Xóa sản phẩm thành công');
+        toast.success('Product deletion successful');
         dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: productId });
     } catch (error) {
         dispatch({ type: DELETE_PRODUCT_FAILURE, payload: error.message });

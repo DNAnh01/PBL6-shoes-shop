@@ -29,26 +29,28 @@ const RegisterPage = () => {
     };
     const handleSubmit = async () => {
         if (!password || !lastName || !firstName || !phone || !email) {
-            toast.warning('Vui lòng nhập đủ thông tin yêu cầu');
+            toast.warning('Please enter all required information');
             return;
         }
         // Kiểm tra định dạng email
         if (!validateEmail(email)) {
-            toast.warning('Vui lòng nhập đúng định dạng email');
+            toast.warning(' Please enter the correct email format');
             return;
         }
         // Kiểm tra mật khẩu
         if (!validatePassword(password)) {
-            toast.warning('Mật khẩu phải có 8 ký tự bao gồm 1 số, 1 chữ hoa, 1 ký tự đặc biệt');
+            toast.warning(
+                'Password must have 8 characters including 1 number, 1 uppercase letter, 1 special character',
+            );
             return;
         }
         if (phone.length !== 10) {
-            toast.warning('Số điện thoại không hợp lệ');
+            toast.warning('invalid phone number');
             return;
         }
         const nameRegex = /^[a-zA-ZÀ-Ỹà-ỹ ]+$/;
         if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
-            toast.warning('Họ và Tên chỉ được chứa chữ cái và không có số hoặc ký tự đặc biệt');
+            toast.warning('First and last names must contain only letters and no numbers or special characters');
             return;
         }
         try {
@@ -63,7 +65,7 @@ const RegisterPage = () => {
             const response = await apiRegister.postRegister(formData);
             console.log(response);
             if (response.status === 201) {
-                toast.success('Đăng ký thành công');
+                toast.success('Sign Up Success');
                 setTimeout(() => {
                     navigate('/login');
                 }, 1000);

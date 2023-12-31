@@ -31,7 +31,7 @@ export default function ProfileCard() {
                 setDefaultAddress(response.data.addresses[0]);
             }
         } catch (error) {
-            toast.error('Có lỗi xảy ra khi lấy thông tin cá nhân');
+            toast.error(' An error occurred while retrieving personal information');
         }
     };
     useEffect(() => {
@@ -63,7 +63,7 @@ export default function ProfileCard() {
         setShowChangePassword(true);
     };
     const handleLogout = () => {
-        toast.success('Đăng xuất thành công');
+        toast.success('Signed out successfully');
         sessionStorage.clear();
         setTimeout(() => {
             navigate('/login');
@@ -85,14 +85,14 @@ export default function ProfileCard() {
                 };
                 const response = await apiChangePass.postChangepass(formdata);
                 if (response.status === 200) {
-                    toast.success('Thay đổi mật khẩu thành công');
+                    toast.success('Password changed successfully');
                     handleCancel();
                 }
             } catch (error) {
-                toast.error('Đã có lỗi xảy ra khi thay đổi mật khẩu', error);
+                toast.error('An error occurred while changing the password', error);
             }
         } else {
-            toast.warning('Mật khẩu không khớp');
+            toast.warning('password incorrect');
         }
     };
     const handleUpdateProfile = async () => {
@@ -106,13 +106,13 @@ export default function ProfileCard() {
             const response = await apiUpdateProfile.putUpdateprofile(formdata);
             if (response.status === 200) {
                 fetchProfile();
-                toast.success('Cập nhật thông tin cá nhân thành công');
+                toast.success('Successfully updated personal information');
                 setIsEditing(false);
             } else {
-                toast.error('Đã có lỗi xảy ra khi cập nhật thông tin cá nhân');
+                toast.error('An error occurred while updating personal information');
             }
         } catch (error) {
-            toast.error('Đã có lỗi xảy ra khi cập nhật thông tin cá nhân');
+            toast.error('An error occurred while updating personal information');
         }
     };
     const handleCancel = () => {

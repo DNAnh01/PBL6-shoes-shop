@@ -41,7 +41,7 @@ export default function AddProductPage() {
         const value = event.target.value;
         if (!/^\d+$/.test(value) || parseInt(value, 10) < 0) {
             // Display a warning or handle the invalid input case
-            toast.warning('Vui lòng nhập lại giá trị số lượng của size');
+            toast.warning('Please re-enter the quantity value of the size');
             return;
         }
         setArrSize((prevArrSize) =>
@@ -81,7 +81,7 @@ export default function AddProductPage() {
             discountPersentProduct.trim() === '' ||
             imageProduct.trim() === ''
         ) {
-            toast.warning('Vui lòng nhập đầy đủ các thông tin');
+            toast.warning('Please enter complete information');
             return;
         }
 
@@ -110,20 +110,20 @@ export default function AddProductPage() {
                     const response = await apiAddProduct.postAddProduct(formData);
                     console.log('response:', response);
                     if (response) {
-                        toast.success('Thêm sản phẩm mới thành công');
+                        toast.success('Added new products successfully');
                         setTimeout(() => {
                             navigate('/admin/products');
                         }, 500);
                     } else {
-                        toast.error('Có lỗi khi thêm sản phẩm');
+                        toast.error('There was an error adding a product');
                     }
                 } catch (error) {}
             } else {
-                toast.error('Giá của sản phẩm bạn đã nhập sai');
+                toast.error('The price of the product you entered is incorrect');
             }
         } else {
             // Display a message or handle the case where totalQuantity is not greater than 0
-            toast.error('Số lượng sản phẩm cần lớn hơn 0 để thêm vào kho');
+            toast.error('Product quantity needs to be greater than 0 to add to inventory');
         }
     };
 

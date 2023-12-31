@@ -32,13 +32,13 @@ export default function LoginPage() {
             if (response.status === 201) {
                 sessionStorage.setItem('jwt', response?.data?.jwt);
                 if (response?.data?.role === 'admin') {
-                    toast.success('Đang vào trang admin');
+                    toast.success('Entering the admin page');
                     setTimeout(() => {
                         navigate('/admin/dashboard');
                         window.location.reload();
                     }, 1000);
                 } else if (response?.data?.role === 'user') {
-                    toast.success('Đang vào trang chủ');
+                    toast.success('Going to the home page');
                     setTimeout(() => {
                         navigate('/');
                         window.location.reload();
@@ -46,7 +46,7 @@ export default function LoginPage() {
                 }
             }
         } catch (error) {
-            toast.error('Bạn nhập sai mật khẩu hoặc tài khoản', error?.message);
+            toast.error('You entered the wrong password or account', error?.message);
         }
     };
     return (

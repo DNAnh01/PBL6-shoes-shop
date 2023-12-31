@@ -18,7 +18,7 @@ const SideNav = () => {
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('jwt');
         setTimeout(() => {
-            toast.success('Đăng xuất thành công');
+            toast.success('Signed out successfully');
             navigate('/login');
         }, 500);
     };

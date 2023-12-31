@@ -27,81 +27,93 @@ export default function OrderUser() {
     }, []);
     return (
         <div>
-            <TableContainer component={Paper} variant="outlined" className="custom-table-container container-layout">
-                <Table aria-label="demo table" className="custom-table">
-                    <TableHead>
-                        <TableRow className="custom-header">
-                            <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
-                                Email
-                            </TableCell>
-                            <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
-                                Address
-                            </TableCell>
-                            <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
-                                Phone
-                            </TableCell>
-                            <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
-                                Date
-                            </TableCell>
-                            <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
-                                ToTal Price
-                            </TableCell>
-                            <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
-                                Status
-                            </TableCell>
-                            <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
-                                Detail
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {userOrders.length > 0 &&
-                            userOrders.map((order, index) => (
-                                <TableRow key={index} className="custom-cell">
-                                    <TableCell align="left" scope="row" className="custom-cell-order-user-title">
-                                        <span className="custom-cell-order-title">{order.user.email}</span>
-                                    </TableCell>
+            {userOrders.length > 0 ? (
+                <TableContainer
+                    component={Paper}
+                    variant="outlined"
+                    className="custom-table-container container-layout"
+                >
+                    <Table aria-label="demo table" className="custom-table">
+                        <TableHead>
+                            <TableRow className="custom-header">
+                                <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
+                                    Email
+                                </TableCell>
+                                <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
+                                    Address
+                                </TableCell>
+                                <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
+                                    Phone
+                                </TableCell>
+                                <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
+                                    Date
+                                </TableCell>
+                                <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
+                                    ToTal Price
+                                </TableCell>
+                                <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
+                                    Status
+                                </TableCell>
+                                <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
+                                    Detail
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {userOrders.length > 0 &&
+                                userOrders.map((order, index) => (
+                                    <TableRow key={index} className="custom-cell">
+                                        <TableCell align="left" scope="row" className="custom-cell-order-user-title">
+                                            <span className="custom-cell-order-title">{order.user.email}</span>
+                                        </TableCell>
 
-                                    <TableCell align="left" className="custom-cell-order-user">
-                                        <span className="custom-cell-order-title">{`${order.shippingAddress.streetAddress}, ${order.shippingAddress.city}`}</span>
-                                    </TableCell>
-                                    <TableCell align="left" className="custom-cell-order-user">
-                                        <span className="custom-cell-order-title">{order.user.mobile}</span>
-                                    </TableCell>
+                                        <TableCell align="left" className="custom-cell-order-user">
+                                            <span className="custom-cell-order-title">{`${order.shippingAddress.streetAddress}, ${order.shippingAddress.city}`}</span>
+                                        </TableCell>
+                                        <TableCell align="left" className="custom-cell-order-user">
+                                            <span className="custom-cell-order-title">{order.user.mobile}</span>
+                                        </TableCell>
 
-                                    <TableCell align="left" className="custom-cell-order-user">
-                                        <span className="custom-cell-order-title">
-                                            {format(new Date(order.orderDate), 'dd/MM/yyyy hh:mm:ss')}
-                                        </span>
-                                    </TableCell>
-                                    <TableCell align="left" className="custom-cell-order-user">
-                                        <span className="custom-cell-order-title">
-                                            {order.totalDiscountedPrice.toLocaleString('it-IT', {
-                                                style: 'currency',
-                                                currency: 'VND',
-                                            })}
-                                        </span>
-                                    </TableCell>
-                                    <TableCell align="left" className="custom-cell-order-user">
-                                        <span className="custom-status">{order?.orderStatus}</span>
-                                    </TableCell>
-                                    <TableCell
-                                        onClick={() => {
-                                            setToggleDetail((prev) => !prev);
-                                            setOrderDetail(order?.orderItems);
-                                        }}
-                                        align="left"
-                                        className="custom-cell-order-user"
-                                    >
-                                        <button type="button" style={{ background: 'transparent' }}>
-                                            <i className="fa fa-eye" aria-hidden="true"></i>
-                                        </button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                                        <TableCell align="left" className="custom-cell-order-user">
+                                            <span className="custom-cell-order-title">
+                                                {format(new Date(order.orderDate), 'dd/MM/yyyy hh:mm:ss')}
+                                            </span>
+                                        </TableCell>
+                                        <TableCell align="left" className="custom-cell-order-user">
+                                            <span className="custom-cell-order-title">
+                                                {order.totalDiscountedPrice.toLocaleString('it-IT', {
+                                                    style: 'currency',
+                                                    currency: 'VND',
+                                                })}
+                                            </span>
+                                        </TableCell>
+                                        <TableCell align="left" className="custom-cell-order-user">
+                                            <span className="custom-status">{order?.orderStatus}</span>
+                                        </TableCell>
+                                        <TableCell
+                                            onClick={() => {
+                                                setToggleDetail((prev) => !prev);
+                                                setOrderDetail(order?.orderItems);
+                                            }}
+                                            align="left"
+                                            className="custom-cell-order-user"
+                                        >
+                                            <button type="button" style={{ background: 'transparent' }}>
+                                                <i className="fa fa-eye" aria-hidden="true"></i>
+                                            </button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            ) : (
+                <img
+                    src="https://dl.dropboxusercontent.com/scl/fi/kna31jdkojgdfo81lxhmt/e8d986243b69af8a5323e3a4c41402b3.png?rlkey=7klaetgqboc4yt62dwtp9a9jt&dl=0"
+                    alt="No products"
+                    style={{ display: 'block', margin: 'auto', width: '40%', height: 'auto' }}
+                />
+            )}
             {toggleDetail ? (
                 <div>
                     <h1 className="orderDetail container-layout">Chi tiết đơn hàng</h1>

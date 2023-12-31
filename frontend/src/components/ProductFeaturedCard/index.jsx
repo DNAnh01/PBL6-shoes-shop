@@ -10,7 +10,7 @@ export default function ProductFeaturedCard(product) {
     console.log(product);
     const navigate = useNavigate();
     const handleAddtocart = async () => {
-        toast.success('Thêm sản phẩm vào giỏ thành công');
+        toast.success('Added product to cart successfully');
         setTimeout(() => {
             navigate(`/cart`);
         }, 500);

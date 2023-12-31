@@ -11,12 +11,12 @@ export default function ForgetPassPage() {
 
     const handleReset = async () => {
         if (username === 'user@gmail.com' && password === 'demoA@1234' && passwordconfim === 'demoA@1234') {
-            toast.success('Thay đổi mật khẩu thành công');
+            toast.success('Password changed successfully');
             setTimeout(() => {
                 navigate('/login');
             }, 500);
         } else {
-            toast.error('Sai tài khoản hoặc mật khẩu chưa giống nhau');
+            toast.error('Wrong account or different password');
         }
     };
 
