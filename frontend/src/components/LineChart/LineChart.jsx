@@ -4,7 +4,7 @@ import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement
 
 import classNames from 'classnames/bind';
 import styles from './LineChart.module.scss';
-import apiAdminDashboard from '~/api/admin/apiAdminDashbor';
+import apiAdminDashboard from '~/api/admin/apiAdminDashboard';
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
 const cx = classNames.bind(styles);

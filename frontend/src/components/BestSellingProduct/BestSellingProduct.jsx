@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './BestSellingProduct.module.scss';
 import images from '~/assets/images';
-import apiAdminDashboard from '~/api/admin/apiAdminDashbor';
+import apiAdminDashboard from '~/api/admin/apiAdminDashboard';
 
 const cx = classNames.bind(styles);
 
