@@ -3,11 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import './style.scss';
 import Button from '../../components/Button';
-import images from '~/assets/images';
 import { toast } from 'react-toastify';
 
 export default function ProductFeaturedCard(product) {
-    console.log(product);
     const navigate = useNavigate();
     const handleAddtocart = async () => {
         toast.success('Added product to cart successfully');

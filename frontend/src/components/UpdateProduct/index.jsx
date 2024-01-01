@@ -15,7 +15,6 @@ const UpdateProduct = ({ onClose, product }) => {
             price: productPrice,
             discountedPrice: productDiscountedPrice,
             discountPersent: productDiscountPercent,
-            // Add other fields if needed
         };
         try {
             const response = await apiUpdateProduct.putUpdateProduct(product?.id, formData);

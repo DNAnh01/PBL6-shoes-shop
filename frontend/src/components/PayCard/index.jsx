@@ -40,8 +40,8 @@ export default function PayCard() {
         <div className="pay container-layout">
             <h1 className="pay-title">Check Out</h1>
             <Box sx={{ width: '100%' }}>
-                <Stepper activeStep={step - 1} style={{ fontSize: '18px' }}>
-                    {steps.map((label, index) => {
+                <Stepper activeStep={step - 1} style={{ fontSize: '18px', color: 'red' }}>
+                    {steps.map((label) => {
                         const stepProps = {};
                         const labelProps = {};
 

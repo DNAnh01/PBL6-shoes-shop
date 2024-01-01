@@ -17,6 +17,7 @@ const ProductsTable = ({ handleProductUpdate }) => {
 
     const pageSize = 5;
     const [currentPage, setCurrentPage] = useState(0);
+    console.log(products);
 
     const handleProductDelete = (productId) => {
         dispatch(deleteProduct(productId));

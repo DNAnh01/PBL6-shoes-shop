@@ -5,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.scss';
 import apiLogin from '~/api/user/apiLogin';
+import { parseJSON } from 'date-fns';
 
 const cx = classNames.bind(styles);
 const getTokenFromsessionStorage = () => {
@@ -28,7 +29,6 @@ export default function LoginPage() {
                 password,
             };
             const response = await apiLogin.postLogin(formData);
-            console.log(response);
             if (response.status === 201) {
                 sessionStorage.setItem('jwt', response?.data?.jwt);
                 if (response?.data?.role === 'admin') {

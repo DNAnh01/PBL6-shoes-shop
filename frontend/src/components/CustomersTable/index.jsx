@@ -13,18 +13,7 @@ export default function CustomersTable() {
             console.log(error);
         }
     }, []);
-    const handleDeleteUser = (id) => {
-        const updatedUsers = users.map((user) => {
-            if (user.id === id) {
-                const maxAddressId = Math.max(...user.addresses.map((address) => address.id), 0);
 
-                console.log(`Max ID for user ${id}: ${maxAddressId}`);
-            }
-            return user;
-        });
-
-        setUsers(updatedUsers);
-    };
     useEffect(() => {
         getAllUser();
     }, [getAllUser]);
@@ -40,6 +29,7 @@ export default function CustomersTable() {
                             <TableCell className="custom-header-order">Email</TableCell>
                             <TableCell className="custom-header-order">Address</TableCell>
                             <TableCell className="custom-header-order">Phone</TableCell>
+                            <TableCell className="custom-header-order">Create At</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -67,6 +57,9 @@ export default function CustomersTable() {
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
                                     {user.mobile}
+                                </TableCell>
+                                <TableCell align="left" className="custom-cell-order">
+                                    {new Date(user.createAt).toLocaleString()}
                                 </TableCell>
                             </TableRow>
                         ))}

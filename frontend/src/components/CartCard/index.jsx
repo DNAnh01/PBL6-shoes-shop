@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style.scss';
 import { toast } from 'react-toastify';
-export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuantity, onDelete }) {
+export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuantity, onDelete, onEditProduct }) {
     const [quantityDefault, setQuantityDefault] = useState(product?.quantity);
     const [newQuantity, setNewQuantity] = useState(product.quantity);
     const hexColorCode = product?.product.color;
@@ -33,6 +33,10 @@ export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuanti
     };
     const handleDelete = () => {
         onDelete();
+    };
+    const handleEditProduct = () => {
+        // Truyền thông tin sản phẩm cần chỉnh sửa lên component cha
+        onEditProduct(product);
     };
     return (
         <>
@@ -106,6 +110,9 @@ export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuanti
                     </span>
                 </div>
                 <div className="cartList-operation">
+                    <button style={{ backgroundColor: 'transparent', fontSize: '18px' }} onClick={handleEditProduct}>
+                        Edit
+                    </button>
                     <button style={{ backgroundColor: 'transparent', fontSize: '18px' }} onClick={handleDelete}>
                         Delete
                     </button>

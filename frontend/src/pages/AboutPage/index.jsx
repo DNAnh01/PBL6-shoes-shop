@@ -17,7 +17,7 @@ export default function AboutPage({ quantity = 1 }) {
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedColor, setSelectedColor] = useState('');
     const [quantityDefault, setQuantityDefault] = useState(quantity);
-    const [isLoading, setIsLoading] = useState(true); // Thêm isLoading vào đây
+    const [isLoading, setIsLoading] = useState(true);
     const { id } = useParams();
     const [selectedSizeQuantity, setSelectedSizeQuantity] = useState(null);
     const [maxQuantity, setMaxQuantity] = useState(1);
@@ -40,7 +40,7 @@ export default function AboutPage({ quantity = 1 }) {
             color: selectedColor,
         };
         try {
-            setIsLoading(true); // Bắt đầu loading
+            setIsLoading(true);
 
             const response = await apiAddItem.putAddItem(formData);
             toast.success('Added product to cart successfully');
@@ -50,14 +50,14 @@ export default function AboutPage({ quantity = 1 }) {
             console.error('Add to Cart Error:', error);
             toast.error('You need to log in to use this function');
         } finally {
-            setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại
+            setIsLoading(false);
         }
     };
 
     useEffect(() => {
         const fetchProductDetail = async () => {
             try {
-                setIsLoading(true); // Bắt đầu loading
+                setIsLoading(true);
 
                 const response = await apiProductDetail.getProductDetail(id);
                 setProductDetail(response.data);

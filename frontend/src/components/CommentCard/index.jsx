@@ -12,6 +12,7 @@ import apiProductDetail from '~/api/admin/apiProductDetail';
 import apiCreateReview from '~/api/user/apiReview';
 import apiReviewDetail from '~/api/user/apiReviewDetail';
 import Raiting from '~/api/user/Raiting';
+import { VscAccount } from 'react-icons/vsc';
 
 export default function CommentCard({ productId }) {
     const image =
@@ -250,7 +251,14 @@ export default function CommentCard({ productId }) {
                                     <div className="card-top">
                                         <div className="comment-profile">
                                             <div className="comment-profile-image">
-                                                <img src={image} alt="123" width={100} height={100} />
+                                                <VscAccount
+                                                    style={{
+                                                        sizeMode: 'contain',
+                                                        width: '100%',
+                                                        height: '100%',
+                                                        fontWeight: '300',
+                                                    }}
+                                                />
                                             </div>
                                             <div className="comment-profile-name">
                                                 <strong>

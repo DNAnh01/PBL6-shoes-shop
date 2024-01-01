@@ -7,6 +7,7 @@ import './style.scss';
 import apiUpdateProfile from '~/api/user/apiUpdateProfile';
 import apiChangePass from '~/api/user/apiChangePass';
 import img from '../../assets/images/index.js';
+import { VscAccount } from 'react-icons/vsc';
 export default function ProfileCard() {
     const [profiles, setProfiles] = useState([]);
     const [defaultAddress, setDefaultAddress] = useState(null);
@@ -127,7 +128,7 @@ export default function ProfileCard() {
                 <h1 className="profile-title">Profile information</h1>
                 <div className="profile-content">
                     <div className="profile-info">
-                        <img src={img.complete} alt="" className="profile-img"></img>
+                        <VscAccount style={{ width: 250, height: 250, fontWeight: '300' }} />
                         <div className="profile-accout">
                             <span>{`${profiles.lastName} ${profiles.firstName}`}</span>
                         </div>

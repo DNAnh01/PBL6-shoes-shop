@@ -181,15 +181,6 @@ export default function AddProductPage() {
                             onChange={(event) => setDiscountedPriceProduct(event.target.value)}
                         />
                     </div>
-                    <div className="add-discountPersent">
-                        <label className="add-label">Discount Persent:</label>
-                        <input
-                            type="number"
-                            className="add-discountPersent-input"
-                            value={discountPersentProduct}
-                            onChange={(event) => setDiscountPersentProduct(event.target.value)}
-                        />
-                    </div>
 
                     <div className="add-type">
                         <div className="add-brand">
