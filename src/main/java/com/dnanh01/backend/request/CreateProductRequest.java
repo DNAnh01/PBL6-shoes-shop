@@ -9,7 +9,7 @@ public class CreateProductRequest {
     private String title;
     private String description;
     private int price;
-
+    private int warehousePrice;
     private int discountedPrice;
     private int discountPersent;
     private int quantity;
@@ -19,6 +19,21 @@ public class CreateProductRequest {
     private Set<Size> size = new HashSet<>();
 
     private String imageUrl;
+
+    public CreateProductRequest(String title, String description, int price, int warehousePrice, int discountedPrice,
+            int discountPersent, int quantity, BrandRequest brand, String color, Set<Size> size, String imageUrl) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.warehousePrice = warehousePrice;
+        this.discountedPrice = discountedPrice;
+        this.discountPersent = discountPersent;
+        this.quantity = quantity;
+        this.brand = brand;
+        this.color = color;
+        this.size = size;
+        this.imageUrl = imageUrl;
+    }
 
     public String getTitle() {
         return title;
@@ -42,6 +57,14 @@ public class CreateProductRequest {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getWarehousePrice() {
+        return warehousePrice;
+    }
+
+    public void setWarehousePrice(int warehousePrice) {
+        this.warehousePrice = warehousePrice;
     }
 
     public int getDiscountedPrice() {
