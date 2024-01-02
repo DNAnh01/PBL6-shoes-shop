@@ -1,9 +1,9 @@
 package com.dnanh01.backend.service;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +26,7 @@ import com.dnanh01.backend.request.CreateProductRequest;
 public class ProductServiceImplementation implements ProductService {
 
     private ProductRepository productRepository;
+    // private UserService userService;
     private BrandRepository brandRepository;
 
     public ProductServiceImplementation(
@@ -33,6 +34,7 @@ public class ProductServiceImplementation implements ProductService {
             UserService userService,
             BrandRepository brandRepository) {
         this.productRepository = productRepository;
+        // this.userService = userService;
         this.brandRepository = brandRepository;
 
     }
@@ -59,7 +61,7 @@ public class ProductServiceImplementation implements ProductService {
         product.setDiscountedPrice(req.getDiscountedPrice());
         product.setImageUrl(req.getImageUrl());
         product.setTitle(req.getTitle());
-
+        product.setWarehousePrice(req.getWarehousePrice());
         product.setPrice(req.getPrice());
         product.setSizes(req.getSize());
         product.setQuantity(req.getQuantity());
@@ -81,6 +83,7 @@ public class ProductServiceImplementation implements ProductService {
     public Product updateProduct(Long productId, Product req) throws ProductException {
         Product product = findProductById(productId);
         if (req.getQuantity() != 0) {
+            // update so luong san pham
             product.setQuantity(req.getQuantity());
         }
         return productRepository.save(product);
@@ -94,10 +97,10 @@ public class ProductServiceImplementation implements ProductService {
         }
         throw new ProductException("Product not found with id - " + id);
     }
-  
 
     @Override
-    public List<Product> findProductByCategory(String category) {
+    public List<Product> findProductByBrand(String brand) {
+
         return null;
     }
 
@@ -107,11 +110,11 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public Page<Product> getAllProduct(String category, List<String> colors, List<String> sizes, Integer minPrice,
+    public Page<Product> getAllProduct(String brand, List<String> colors, List<String> sizes, Integer minPrice,
             Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-        List<Product> products = productRepository.filterProducts(category, minPrice, maxPrice, minDiscount, sort);
+        List<Product> products = productRepository.filterProducts(brand, minPrice, maxPrice, minDiscount, sort);
         if (!colors.isEmpty()) {
             /**
              * Lọc các sản phẩm mà màu sắc của chúng khớp với bất kỳ màu sắc nào trong
@@ -139,6 +142,7 @@ public class ProductServiceImplementation implements ProductService {
         Page<Product> filteredProducts = new PageImpl<>(pageContent, pageable, products.size());
         return filteredProducts;
     }
+
     @Override
     public List<TopProductsDto> getTopNewProducts() {
 
@@ -225,5 +229,4 @@ public class ProductServiceImplementation implements ProductService {
         }
         return results;
     }
-
 }
