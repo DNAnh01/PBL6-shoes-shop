@@ -71,12 +71,13 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String title, String description, int price, int discountedPrice, int discountPersent,
-            int quantity, String color, Set<Size> sizes, String imageUrl, List<Review> reviews,
-            int numRatings, Brand brand, LocalDateTime createAt) {
+    public Product(Long id, String title, String description, int warehousePrice, int price, int discountedPrice,
+            int discountPersent, int quantity, String color, Set<Size> sizes, String imageUrl, List<Review> reviews,
+            Brand brand, LocalDateTime createAt) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.warehousePrice = warehousePrice;
         this.price = price;
         this.discountedPrice = discountedPrice;
         this.discountPersent = discountPersent;
@@ -111,6 +112,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getWarehousePrice() {
+        return warehousePrice;
+    }
+
+    public void setWarehousePrice(int warehousePrice) {
+        this.warehousePrice = warehousePrice;
     }
 
     public int getPrice() {
