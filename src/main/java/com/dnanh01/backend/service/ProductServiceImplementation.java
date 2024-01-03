@@ -82,8 +82,14 @@ public class ProductServiceImplementation implements ProductService {
     @Override
     public Product updateProduct(Long productId, Product req) throws ProductException {
         Product product = findProductById(productId);
-        if (req.getQuantity() != 0) {
+
+        if (product.getId().equals(productId)) {
             // update so luong san pham
+            product.setDescription(req.getDescription());
+            product.setPrice(req.getPrice());
+            product.setDiscountedPrice(req.getDiscountedPrice());
+            product.setDiscountPersent(req.getDiscountPersent());
+            product.setWarehousePrice(req.getWarehousePrice());
             product.setQuantity(req.getQuantity());
         }
         return productRepository.save(product);
