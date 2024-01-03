@@ -87,4 +87,33 @@ public class PaymentController {
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
     
+    @PostMapping("/mobileVnpay")
+    @ResponseBody
+    public ResponseEntity<PaymentSubmitResponse> MobileVnpay(
+            HttpServletRequest request,
+            @RequestHeader("Authorization") String jwt,
+            @RequestBody PaymentRequest req)
+            throws UserException, OrderException {
+
+        Long currentOrderId = req.getCurrentOrderId();
+        
+        Order order = orderService.pendingOrder(currentOrderId);
+        
+        Optional<Order> opt = orderRepository.findById(currentOrderId);
+
+        Integer totalDiscountedPrice = 0;
+
+        if (opt.isPresent()) {
+            totalDiscountedPrice = opt.get().getTotalDiscountedPrice();
+        }
+
+        BigDecimal total = new BigDecimal(totalDiscountedPrice);
+        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        String vnpayUrl = vnPayService.createOrder(total, baseUrl);
+
+        PaymentSubmitResponse paymentSubmitResponse = new PaymentSubmitResponse(vnpayUrl, jwt, currentOrderId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(paymentSubmitResponse);
+    }
+    
 }
