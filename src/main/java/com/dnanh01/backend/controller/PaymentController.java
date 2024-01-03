@@ -62,7 +62,7 @@ public class PaymentController {
 
         BigDecimal total = new BigDecimal(totalDiscountedPrice);
         String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-        String vnpayUrl = vnPayService.createOrder(total, baseUrl + "/vnpay-payment?orderId=" + currentOrderId);
+        String vnpayUrl = vnPayService.createOrder(total, baseUrl);
 
         PaymentSubmitResponse paymentSubmitResponse = new PaymentSubmitResponse(vnpayUrl, jwt, currentOrderId);
 
@@ -70,13 +70,13 @@ public class PaymentController {
     }
 
     
-    @GetMapping("/vnpay-payment")
+   @GetMapping("/vnpay-payment")
     public RedirectView getMapping(HttpServletRequest request) {
         int paymentStatus = vnPayService.orderReturn(request);
         String redirectUrl = (paymentStatus == 1) ? "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success" : "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
         return new RedirectView(redirectUrl);
     }
-
+    
     @PostMapping("/confirmOrder")
     @ResponseBody
     public ResponseEntity<?> confirmOrder(
