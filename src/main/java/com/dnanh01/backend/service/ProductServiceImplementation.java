@@ -18,6 +18,7 @@ import com.dnanh01.backend.dto.TopProductsDto;
 import com.dnanh01.backend.exception.ProductException;
 import com.dnanh01.backend.model.Brand;
 import com.dnanh01.backend.model.Product;
+import com.dnanh01.backend.model.Size;
 import com.dnanh01.backend.repository.BrandRepository;
 import com.dnanh01.backend.repository.ProductRepository;
 import com.dnanh01.backend.request.CreateProductRequest;
@@ -90,7 +91,11 @@ public class ProductServiceImplementation implements ProductService {
             product.setDiscountedPrice(req.getDiscountedPrice());
             product.setDiscountPersent(req.getDiscountPersent());
             product.setWarehousePrice(req.getWarehousePrice());
+
             product.setQuantity(req.getQuantity());
+
+            product.setSizes(req.getSizes());
+
         }
         return productRepository.save(product);
     }
