@@ -153,7 +153,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                     "    FROM `orders` o " +
                     "    WHERE " +
                     "    DATE_FORMAT(o.`order_date`, '%d/%m/%Y') = :selectedDay " +
-                    "    AND o.`order_status` = 'DELIVERED' " +
+                    "    AND o.`order_status` = 'CONFIRMED' "  +
                     "    GROUP BY " +
                     "    selected_day " +
                     "    ORDER BY " +
