@@ -63,7 +63,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                         "       FROM `orders` o " +
                         "       JOIN `order_item` oi " +
                         "       ON o.`id` = oi.`order_id` " +
-                        "       WHERE o.`order_status` = 'DELIVERED' " +
+                        "       WHERE o.`order_status` = 'CONFIRMED' " +
                         "       GROUP BY oi.`id` " +
                         "), " +
                         "`top_3_best_selling_products` AS ( " +
