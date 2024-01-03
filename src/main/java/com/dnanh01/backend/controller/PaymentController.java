@@ -68,9 +68,7 @@ public class PaymentController {
 
         return ResponseEntity.status(HttpStatus.OK).body(paymentSubmitResponse);
     }
-
-    
-   @GetMapping("/vnpay-payment")
+    @GetMapping("/vnpay-payment")
     public RedirectView getMapping(HttpServletRequest request) {
         int paymentStatus = vnPayService.orderReturn(request);
         String redirectUrl = (paymentStatus == 1) ? "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success" : "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
@@ -88,7 +86,5 @@ public class PaymentController {
         Order order = orderService.pendingOrder(currentOrderId);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
-    
-    
     
 }
