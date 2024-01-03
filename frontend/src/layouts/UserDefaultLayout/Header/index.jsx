@@ -1,9 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style-prefix.scss';
 import images from '~/assets/images';
+import { CheckRoleContext } from '~/context/CheckRoleProvider';
+import Icon from '~/components/Icons/Icon';
 
 export default function Header({ cartItems = [] }) {
+    const { role } = useContext(CheckRoleContext);
+    useEffect(() => {
+        if (role !== 'admin') {
+        }
+    }, [role]);
     const cartItemCount = cartItems?.length || 0;
     const dropdownRef = useRef(null);
     const [active, setActive] = useState(false);
@@ -59,19 +66,26 @@ export default function Header({ cartItems = [] }) {
                                         Service
                                     </Link>
                                 </li>
+                                {role === 'admin' && (
+                                    <li className="menu-category">
+                                        <Link to="/admin/dashboard" className="menu-title">
+                                            Admin Dashboard
+                                        </Link>
+                                    </li>
+                                )}
                             </ul>
                         </div>
                     </nav>
                     <div className="header-user-actions">
                         <Link to="/profile" className="action-btn">
-                            <i className="fa fa-id-card" aria-hidden="true"></i>
+                            <i class="fa fa-user" aria-hidden="true"></i>
                         </Link>
                         <Link to="/cart" className="action-btn">
                             <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                             <span className="count">{cartItemCount}</span>
                         </Link>
                         <Link to="/order" className="action-btn">
-                            <i className="fa fa-history" aria-hidden="true"></i>
+                            <Icon classes={'action-btn-history-order'} icon="history_order" color="#000" />
                         </Link>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './style-prefix.scss';
-export default function ProductBoxCard({ id, image, title, brand, price, discountedPrice }) {
+export default function ProductBoxCard({ id, image, title, brandId, brandName, price, discountedPrice }) {
     return (
         <div>
             <div className="product-minimal">
@@ -15,8 +15,8 @@ export default function ProductBoxCard({ id, image, title, brand, price, discoun
                                 {title}
                             </Link>
                         </h2>
-                        <Link to={`/product?brand=${brand}`} className="product-minimal-category">
-                            {brand}
+                        <Link to={`/product?brand=${brandId}`} className="product-minimal-category">
+                            {brandName}
                         </Link>
                         <div className="product-minimal-price">
                             <p className="product-minimal-price-real">

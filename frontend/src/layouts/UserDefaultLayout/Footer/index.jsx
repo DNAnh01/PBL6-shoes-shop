@@ -111,6 +111,14 @@ export default function Footer() {
                                     </div>
                                     <Link className="footer-nav-link">telegram.com.vn</Link>
                                 </li>
+                                <li className="footer-nav-item flex">
+                                    <div className="icon-box">
+                                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                                    </div>
+                                    <Link to="/admin/dashboard" className="footer-nav-link">
+                                        Admin Dashboard
+                                    </Link>
+                                </li>
                             </ul>
                             <ul className="footer-nav-list">
                                 <li className="footer-nav-item">

@@ -51,7 +51,8 @@ export default function ProductBoxList() {
                                     id={product?.productId}
                                     image={product?.productImageUrl}
                                     title={product?.productName}
-                                    brand={product?.brandName}
+                                    brandId={product?.brandId}
+                                    brandName={product?.brandName}
                                     price={product?.productDiscountedPrice}
                                     discountedPrice={product?.productPrice}
                                 />

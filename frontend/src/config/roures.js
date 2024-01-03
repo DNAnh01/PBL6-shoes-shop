@@ -18,6 +18,8 @@ const roures = {
     pay: '/pay',
     order: '/order',
     profile: '/profile',
+    successMobile: '/mobile/success',
+    failureMobile: '/mobile/failure',
 };
 
 export default roures;

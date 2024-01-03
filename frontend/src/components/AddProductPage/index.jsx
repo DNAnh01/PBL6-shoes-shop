@@ -5,15 +5,12 @@ import apiAddProduct from '~/api/admin/apiAddProduct';
 import { toast, ToastContainer } from 'react-toastify';
 
 export default function AddProductPage() {
-    const [nameProduct, setNameProduct] = useState('GIÀY THỂ THAO REEBOK RIDER V');
-    const [descriptionProduct, setDescriptionProduct] = useState(
-        'ĐÔI GIÀY LẤY CẢM HỨNG TỪ GIÀY CHẠY BỘ CỔ ĐIỂN VỚI PHONG CÁCH HIỆN ĐẠI Vẻ ngoài của bạn sẽ luôn trong khỏe khoắn năng động suốt ngày dài khi diện đôi Giày Reebok Rider V này',
-    );
-    const [priceProduct, setPriceProduct] = useState('200000');
-    const [warehousePriceProduct, setWarehousePriceProduct] = useState('200000');
-
-    const [discountedPriceProduct, setDiscountedPriceProduct] = useState('180000');
-    const [discountPersentProduct, setDiscountPersentProduct] = useState('10');
+    const [nameProduct, setNameProduct] = useState('');
+    const [descriptionProduct, setDescriptionProduct] = useState('');
+    const [priceProduct, setPriceProduct] = useState('');
+    const [warehousePriceProduct, setWarehousePriceProduct] = useState('');
+    const [discountPersentProduct, setDiscountPersentProduct] = useState('');
+    const discountedPriceProduct = priceProduct - (discountPersentProduct / 100) * priceProduct;
     const [imageProduct, setImageProduct] = useState('');
     const [selectedBrand, setSelectedBrand] = useState('Nike');
     const brandDefaultImages = {
@@ -77,7 +74,6 @@ export default function AddProductPage() {
             descriptionProduct.trim() === '' ||
             priceProduct.trim() === '' ||
             warehousePriceProduct.trim() === '' ||
-            discountedPriceProduct.trim() === '' ||
             discountPersentProduct.trim() === '' ||
             imageProduct.trim() === ''
         ) {
@@ -89,7 +85,7 @@ export default function AddProductPage() {
 
         // Check if totalQuantity is greater than 0 before submitting
         if (totalQuantity > 0) {
-            if (parseInt(priceProduct) > parseInt(discountedPriceProduct) > 0) {
+            if (parseInt(priceProduct) > 0) {
                 const formData = {
                     title: nameProduct,
                     description: descriptionProduct,
@@ -106,14 +102,15 @@ export default function AddProductPage() {
                     size: arrSize,
                     color: selectedColor,
                 };
+
                 try {
                     const response = await apiAddProduct.postAddProduct(formData);
-                    console.log('response:', response);
+                    console.log(response.data);
                     if (response) {
                         toast.success('Added new products successfully');
                         setTimeout(() => {
                             navigate('/admin/products');
-                        }, 500);
+                        }, 1000);
                     } else {
                         toast.error('There was an error adding a product');
                     }
@@ -173,12 +170,12 @@ export default function AddProductPage() {
                         />
                     </div>
                     <div className="add-discountedPrice">
-                        <label className="add-label">Discounted Price:</label>
+                        <label className="add-label">Percent Discount:</label>
                         <input
                             type="number"
                             className="add-discountedPrice-input"
-                            value={discountedPriceProduct}
-                            onChange={(event) => setDiscountedPriceProduct(event.target.value)}
+                            value={discountPersentProduct}
+                            onChange={(event) => setDiscountPersentProduct(event.target.value)}
                         />
                     </div>
 
@@ -255,6 +252,9 @@ export default function AddProductPage() {
                                 <option value="#FFFFFF">White</option>
                                 <option value="#000000">Black</option>
                                 <option value="#808080">Grey</option>
+                                <option value="#00FF00">Lime</option>
+                                <option value="#00FFFF">Aqua</option>
+                                <option value="#FF00FF">Magenta </option>
                             </select>
                         </div>
                     </div>

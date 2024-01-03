@@ -1,53 +1,51 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import classNames from 'classnames/bind';
 import styles from './ProductsTable.module.scss';
-
-import { deleteProduct, findProducts } from '~/states/Product/Action';
 import Button from '../Button';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import apiProductGrid from '~/api/user/apiProductGrid';
+import ReactPaginate from 'react-paginate';
+import apiDelProduct from '~/api/admin/apiDelProduct';
 
+const pageSize = 5;
 const cx = classNames.bind(styles);
 const ProductsTable = ({ handleProductUpdate }) => {
-    const dispatch = useDispatch();
-    const { products } = useSelector((store) => store);
-    const jwt = sessionStorage.getItem('jwt');
-
-    const pageSize = 5;
-    const [currentPage, setCurrentPage] = useState(0);
+    const [products, setProducts] = useState([]);
     console.log(products);
-
-    const handleProductDelete = (productId) => {
-        dispatch(deleteProduct(productId));
+    const [pageCount, setPageCount] = useState(null);
+    const handleGetAllProduct = async (pageNumber) => {
+        try {
+            const res = await apiProductGrid.getAllProduct(pageNumber, pageSize);
+            setProducts(res.data.content);
+            setPageCount(res.data.totalPages);
+        } catch (error) {
+            console.log('No Product');
+        }
+    };
+    const handleProductDelete = async (productId) => {
+        try {
+            const response = await apiDelProduct.deleteProduct(productId);
+            if (response) {
+                handleGetAllProduct();
+            } else {
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
     };
     const handleProductUpdateClick = (product) => {
         handleProductUpdate(product);
     };
-
-    useEffect(() => {
-        const data = {
-            color: [],
-            size: [],
-            minPrice: 0,
-            maxPrice: 10000000,
-            minDiscount: 0,
-            brand: [],
-            stock: null,
-            sort: 'price_low',
-            pageNumber: 0,
-            pageSize: 100,
-        };
-
-        dispatch(findProducts(data));
-    }, [jwt, dispatch, currentPage, products?.deletedProduct]);
-
-    const totalPages = Math.ceil((products?.products?.totalElements || 0) / pageSize);
-
-    const handlePageChange = (newPage) => {
-        setCurrentPage(newPage);
+    const handlePageClick = (data) => {
+        const selectedPage = data.selected;
+        handleGetAllProduct(Number(selectedPage));
     };
+    useEffect(() => {
+        handleGetAllProduct();
+    }, []);
+
     return (
         <div>
             <ToastContainer />
@@ -58,7 +56,8 @@ const ProductsTable = ({ handleProductUpdate }) => {
                             <TableCell className={cx('image')}>Image</TableCell>
                             <TableCell className={cx('brand')}>Brand</TableCell>
                             <TableCell className={cx('title')}>Title</TableCell>
-                            <TableCell className={cx('description')}>Description</TableCell>
+                            <TableCell className={cx('price')}>WarehousePrice</TableCell>
+                            <TableCell className={cx('price')}>WarehousePrice</TableCell>
                             <TableCell className={cx('price')}>Price</TableCell>
                             <TableCell className={cx('quantity')}>Quantity</TableCell>
                             <TableCell className={cx('action')}>Action</TableCell>
@@ -66,69 +65,76 @@ const ProductsTable = ({ handleProductUpdate }) => {
                     </TableHead>
 
                     <TableBody className={cx('table-body')}>
-                        {products?.products?.content
-                            ?.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
-                            .map((item) => (
-                                <TableRow key={item?.id} className={cx('body-row')}>
-                                    <TableCell className={cx('image')}>
-                                        {<img className={cx('product-img')} src={item?.imageUrl} alt="" />}
-                                    </TableCell>
-                                    <TableCell className={cx('brand')}>
-                                        {<img className={cx('brand-img')} src={item?.brand?.imageUrl} alt="" />}
-                                    </TableCell>
-                                    <TableCell className={cx('title')}>
-                                        {item?.title?.length > 20 ? `${item?.title?.substring(0, 20)}...` : item?.title}
-                                    </TableCell>
-                                    <TableCell className={cx('description')}>
-                                        {item?.description?.length > 50
-                                            ? `${item?.description?.substring(0, 50)}...`
-                                            : item?.description}
-                                    </TableCell>
-                                    <TableCell className={cx('price')}>
-                                        {item?.price.toLocaleString('it-IT', {
-                                            style: 'currency',
-                                            currency: 'VND',
-                                        })}
-                                    </TableCell>
-                                    <TableCell className={cx('quantity')}>{item?.quantity}</TableCell>
-                                    <TableCell className={cx('action')}>
-                                        <Button
-                                            small
-                                            primary
-                                            rounded
-                                            className={`${cx('btn')} ml-0`}
-                                            onClick={() => handleProductUpdateClick(item)}
-                                        >
-                                            Update
-                                        </Button>
-                                        <Button
-                                            small
-                                            primary
-                                            rounded
-                                            className={`${cx('btn')} ml-0`}
-                                            onClick={() => handleProductDelete(item?.id)}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
+                        {products.map((item) => (
+                            <TableRow key={item?.id} className={cx('body-row')}>
+                                <TableCell className={cx('image')}>
+                                    {<img className={cx('product-img')} src={item?.imageUrl} alt="" />}
+                                </TableCell>
+                                <TableCell className={cx('brand')}>
+                                    {<img className={cx('brand-img')} src={item?.brand?.imageUrl} alt="" />}
+                                </TableCell>
+                                <TableCell className={cx('title')}>
+                                    {item?.title?.length > 20 ? `${item?.title?.substring(0, 20)}...` : item?.title}
+                                </TableCell>
+                                <TableCell className={cx('price')}>
+                                    {item.warehousePrice.toLocaleString('it-IT', {
+                                        style: 'currency',
+                                        currency: 'VND',
+                                    })}
+                                </TableCell>
+                                <TableCell className={cx('price')}>
+                                    {item?.price.toLocaleString('it-IT', {
+                                        style: 'currency',
+                                        currency: 'VND',
+                                    })}
+                                </TableCell>
+                                <TableCell className={cx('quantity')}>
+                                    {item?.sizes.map((size) => (
+                                        <div>
+                                            <span>
+                                                Size {size.name} : {size.quantity}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </TableCell>
+                                <TableCell className={cx('action')}>
+                                    <Button
+                                        small
+                                        primary
+                                        rounded
+                                        className={`${cx('btn')} ml-0`}
+                                        onClick={() => handleProductUpdateClick(item)}
+                                    >
+                                        Update
+                                    </Button>
+                                    <Button
+                                        small
+                                        primary
+                                        rounded
+                                        className={`${cx('btn')} ml-0`}
+                                        onClick={() => handleProductDelete(item?.id)}
+                                    >
+                                        Delete
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <div className={`${cx('pagination')} align-content-center d-flex justify-content-between pagination w-100`}>
-                <Button small text onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 0}>
-                    Previous
-                </Button>
-                <span>{`Page ${currentPage + 1} of ${totalPages}`}</span>
-                <Button
-                    small
-                    text
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages - 1}
-                >
-                    Next
-                </Button>
+            <div style={{ margin: '30px 0' }}>
+                <ReactPaginate
+                    previousLabel={'Previous'}
+                    nextLabel={'Next'}
+                    breakLabel={'...'}
+                    breakClassName={'break-me'}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageClick}
+                    pageCount={pageCount}
+                    containerClassName={'pagination'}
+                    activeClassName={'active'}
+                />
             </div>
         </div>
     );

@@ -8,17 +8,14 @@ import Icon from '../Icons/Icon';
 import SideNavLinks from '../SideNavLinks';
 import images from '~/assets/images';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 const SideNav = () => {
     const navigate = useNavigate();
     const handleLogout = () => {
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('user');
-        sessionStorage.removeItem('jwt');
+        sessionStorage.clear();
         setTimeout(() => {
-            toast.success('Signed out successfully');
             navigate('/login');
         }, 500);
     };

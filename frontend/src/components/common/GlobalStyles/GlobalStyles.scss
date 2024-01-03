@@ -232,20 +232,20 @@ body {
     color: var(--main-text);
     overflow-y: overlay;
 }
-
-scrollbar CSS html *::-webkit-scrollbar {
+// Scrollbar CSS
+html *::-webkit-scrollbar {
     border-radius: 0;
-    width: 15px;
+    width: 8px;
 }
 
 html *::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background: linear-gradient(to top, #c72092ac, #6c14d0b1);
+    border-radius: 4px;
+    background-color: rgba(22, 24, 35, 0.2);
 }
 
 html *::-webkit-scrollbar-track {
-    border-radius: 5px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 main {

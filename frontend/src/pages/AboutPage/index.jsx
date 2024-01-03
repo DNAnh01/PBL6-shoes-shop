@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCart } from '~/api/user/CartContext';
-import Button from '../Button';
 import apiAddItem from '~/api/user/apiAddItem';
 import apiProductDetail from '~/api/admin/apiProductDetail';
 import CommentCard from '~/components/CommentCard';
+import Button from '~/components/Button';
 
 export default function AboutPage({ quantity = 1 }) {
     const navigate = useNavigate();
@@ -15,7 +15,6 @@ export default function AboutPage({ quantity = 1 }) {
     const { cartItems } = useCart();
     const { updateCartItems } = useCart();
     const [selectedSize, setSelectedSize] = useState('');
-    const [selectedColor, setSelectedColor] = useState('');
     const [quantityDefault, setQuantityDefault] = useState(quantity);
     const [isLoading, setIsLoading] = useState(true);
     const { id } = useParams();
@@ -29,7 +28,7 @@ export default function AboutPage({ quantity = 1 }) {
     };
 
     const handleAddToCart = async (productId) => {
-        if (!selectedSize || !selectedColor) {
+        if (!selectedSize || selectedSize <= 0) {
             toast.warning('Please select size and color before adding to cart');
             return;
         }
@@ -37,7 +36,7 @@ export default function AboutPage({ quantity = 1 }) {
             productId,
             quantity: quantityDefault,
             size: selectedSize,
-            color: selectedColor,
+            color: productDetail.color,
         };
         try {
             setIsLoading(true);
@@ -47,7 +46,6 @@ export default function AboutPage({ quantity = 1 }) {
             updateCartItems();
             console.log(response);
         } catch (error) {
-            console.error('Add to Cart Error:', error);
             toast.error('You need to log in to use this function');
         } finally {
             setIsLoading(false);
@@ -64,7 +62,7 @@ export default function AboutPage({ quantity = 1 }) {
             } catch (error) {
                 toast.error('Product does not exist', error);
             } finally {
-                setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại
+                setIsLoading(false);
             }
         };
 
@@ -126,19 +124,30 @@ export default function AboutPage({ quantity = 1 }) {
                                     </Link>
                                 </div>
                                 <div className="about-description">
-                                    <p>{productDetail.description}</p>
+                                    <p style={{ width: 600 }}>{productDetail.description}</p>
                                 </div>
                             </div>
                             <div className="about-table">
                                 <div className="about-table-price">
-                                    <span className="about-table-price-old">${productDetail.price}</span>
-                                    <span className="about-table-price-current">${productDetail.discountedPrice}</span>
+                                    <span className="about-table-price-old">
+                                        {productDetail.price.toLocaleString('it-IT', {
+                                            style: 'currency',
+                                            currency: 'VND',
+                                        })}
+                                    </span>
+                                    <span className="about-table-price-current">
+                                        {productDetail.discountedPrice.toLocaleString('it-IT', {
+                                            style: 'currency',
+                                            currency: 'VND',
+                                        })}
+                                    </span>
                                 </div>
                                 <div className="about-table-size">
                                     <span className="about-size-name">Size:</span>
                                     <div className="about-size-buttons">
                                         {productDetail.sizes.map((size) => (
-                                            <button
+                                            <Button
+                                                small
                                                 key={size.name}
                                                 className={`size-button ${
                                                     selectedSize === size.name ? 'selected' : ''
@@ -146,7 +155,7 @@ export default function AboutPage({ quantity = 1 }) {
                                                 onClick={() => handleSizeClick(size)}
                                             >
                                                 {size.name}
-                                            </button>
+                                            </Button>
                                         ))}
                                     </div>
                                     {selectedSizeQuantity !== null && (
@@ -156,29 +165,16 @@ export default function AboutPage({ quantity = 1 }) {
                                     )}
                                 </div>
 
-                                <div className="about-table-color">
-                                    <span className="about-color-name">Color:</span>
-                                    <select
-                                        className="about-color-font"
-                                        value={selectedColor} // Giữ giá trị đã chọn
-                                        onChange={(e) => setSelectedColor(e.target.value)}
-                                    >
-                                        <option value="1" defaultCheckedy>
-                                            Choose an option
-                                        </option>
-                                        <option value="#FF0000">Đỏ</option>
-                                        <option value="#00FF00">Xanh lá</option>
-                                        <option value="#FFFF00">Vàng</option>
-                                        <option value="#C0C0C0">Bạc</option>
-                                        <option value="#00FFFF">Xanh Dương</option>
-                                        <option value="#FFFFFF">Trắng</option>
-                                        <option value="#000000">Đen</option>
-                                        <option value="#808080">Xám</option>
-                                    </select>
+                                <div className="about-table-size" style={{ display: 'flex', gap: '0 50px' }}>
+                                    <span className="about-size-name">Color:</span>
+                                    <div
+                                        className="color-display"
+                                        style={{ backgroundColor: productDetail.color, width: '30px', height: '30px' }}
+                                    ></div>
                                 </div>
                                 <div className="about-quantity">
                                     <div className="about-quantity-detail">
-                                        <Button text="-" onClick={handleDecreaseQuantity}>
+                                        <Button primary small text="-" onClick={handleDecreaseQuantity}>
                                             -
                                         </Button>
                                         <input
@@ -187,23 +183,88 @@ export default function AboutPage({ quantity = 1 }) {
                                             value={quantityDefault}
                                             onChange={(e) => setQuantityDefault(e.target.value)}
                                         />
-                                        <Button text="+" onClick={handleIncreaseQuantity}>
+                                        <Button primary small text="+" onClick={handleIncreaseQuantity}>
                                             +
                                         </Button>
                                     </div>
                                     <div className="about-payment">
-                                        <Button text="Add To Cart" onClick={() => handleAddToCart(productDetail.id)}>
-                                            Add To Cart
-                                        </Button>
-                                        <button className="about-pay" onClick={handleBuyNow}>
-                                            Buy Now
-                                        </button>
+                                        {selectedSizeQuantity <= 0 ? (
+                                            <Button
+                                                primary
+                                                small
+                                                disabled
+                                                text="Add To Cart"
+                                                onClick={() => handleAddToCart(productDetail.id)}
+                                            >
+                                                Add To Cart
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                primary
+                                                small
+                                                text="Add To Cart"
+                                                onClick={() => handleAddToCart(productDetail.id)}
+                                            >
+                                                Add To Cart
+                                            </Button>
+                                        )}
+                                        {sessionStorage.getItem('jwt') === null || selectedSizeQuantity <= 0 ? (
+                                            <Button
+                                                primary
+                                                small
+                                                disabled
+                                                onClick={() => handleBuyNow(productDetail.id)}
+                                            >
+                                                Buy Now
+                                            </Button>
+                                        ) : (
+                                            <Button primary small onClick={() => handleBuyNow(productDetail.id)}>
+                                                Buy Now
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 )}
+            </div>
+            <hr className="horizontal-line" />
+            <div className="container-layout">
+                <ToastContainer />
+                <div className="information">
+                    <h2 className="information-title">Shoe model information: {productDetail.title}</h2>
+                    <div className="information-item">
+                        <span className="information-text">Product's name:</span>
+                        <div className="information-show">{productDetail.title}</div>
+                    </div>
+                    <div className="information-item">
+                        <span className="information-text">Catogery: </span>
+                        <div className="information-show">{productDetail.brand?.name}</div>
+                    </div>
+                    <div className="information-item">
+                        <span className="information-text">Product launched at</span>
+                        <div className="information-show">{new Date(productDetail.createAt).toLocaleDateString()}</div>
+                    </div>
+                    <div className="information-item">
+                        <span className="information-text">Discount</span>
+                        <div className="information-show">{productDetail.discountPersent}%</div>
+                    </div>
+                    <div className="information-item">
+                        <span className="information-text">Price after reduction is:</span>
+                        <div className="information-show">{productDetail.discountedPrice} VND</div>
+                    </div>
+                    <div className="information-item">
+                        <span className="information-text">Status</span>
+                        <div className="information-show">
+                            {productDetail.quantity === 0 ? 'Out of stock' : 'In stock'}
+                        </div>
+                    </div>
+                    <div className="information-item">
+                        <span className="information-text">Condition of products</span>
+                        <div className="information-show">New products 100%</div>
+                    </div>
+                </div>
             </div>
             <CommentCard productId={id} />
         </>

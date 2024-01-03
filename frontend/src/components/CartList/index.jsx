@@ -162,10 +162,7 @@ export default function CartList() {
                 </div>
             )}
             <div className="payment">
-                <div className="payment-voucher">
-                    <i className="fa fa-ticket" aria-hidden="true" />
-                    <span>Your voucher</span>
-                </div>
+                <div className="payment-voucher"></div>
                 <div className="payment-detail">
                     <button className="payment-detail-btnall">Select all</button>
                     <button className="payment-detail-btndelete" onClick={handleDeleteAllProducts}>

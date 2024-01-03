@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.scss';
 import apiLogin from '~/api/user/apiLogin';
-import { parseJSON } from 'date-fns';
+import { CheckRoleContext } from '~/context/CheckRoleProvider';
 
 const cx = classNames.bind(styles);
 const getTokenFromsessionStorage = () => {
     return sessionStorage.getItem('jwt');
 };
 export default function LoginPage() {
+    const { setRole } = useContext(CheckRoleContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+
     useEffect(() => {
         const storedToken = getTokenFromsessionStorage();
         if (storedToken) {
@@ -24,26 +26,17 @@ export default function LoginPage() {
 
     const handleSignin = async () => {
         try {
-            const formData = {
+            const response = await apiLogin.postLogin({
                 email: username,
                 password,
-            };
-            const response = await apiLogin.postLogin(formData);
-            if (response.status === 201) {
+            });
+            if (response) {
                 sessionStorage.setItem('jwt', response?.data?.jwt);
-                if (response?.data?.role === 'admin') {
-                    toast.success('Entering the admin page');
-                    setTimeout(() => {
-                        navigate('/admin/dashboard');
-                        window.location.reload();
-                    }, 1000);
-                } else if (response?.data?.role === 'user') {
-                    toast.success('Going to the home page');
-                    setTimeout(() => {
-                        navigate('/');
-                        window.location.reload();
-                    }, 1000);
-                }
+                setRole(response?.data?.role);
+                toast.success('Login successfully !');
+                setTimeout(() => {
+                    navigate('/');
+                }, 1000);
             }
         } catch (error) {
             toast.error('You entered the wrong password or account', error?.message);
@@ -80,7 +73,7 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                style={{ background: 'transparent' }}
+                                style={{ background: 'transparent', marginRight: 10 }}
                                 className={cx('toggle-password-button')}
                             >
                                 <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`} aria-hidden="true"></i>

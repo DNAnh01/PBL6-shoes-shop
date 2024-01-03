@@ -7,38 +7,41 @@ import { Fragment } from 'react';
 import { CartProvider } from './api/user/CartContext';
 
 import 'react-toastify/dist/ReactToastify.css';
+import CheckRoleProvider from './context/CheckRoleProvider';
 
 function App() {
     return (
-        <Router>
-            <Provider store={store}>
-                <CartProvider>
-                    <div className="App">
-                        <Routes>
-                            {publicRoutes.map((route, index) => {
-                                const Page = route.component;
-                                let Layout = Fragment;
-                                if (route.layout) {
-                                    Layout = route.layout;
-                                }
+        <CheckRoleProvider>
+            <Router>
+                <Provider store={store}>
+                    <CartProvider>
+                        <div className="App">
+                            <Routes>
+                                {publicRoutes.map((route, index) => {
+                                    const Page = route.component;
+                                    let Layout = Fragment;
+                                    if (route.layout) {
+                                        Layout = route.layout;
+                                    }
 
-                                return (
-                                    <Route
-                                        key={index}
-                                        path={route.path}
-                                        element={
-                                            <Layout>
-                                                <Page />
-                                            </Layout>
-                                        }
-                                    />
-                                );
-                            })}
-                        </Routes>
-                    </div>
-                </CartProvider>
-            </Provider>
-        </Router>
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            element={
+                                                <Layout>
+                                                    <Page />
+                                                </Layout>
+                                            }
+                                        />
+                                    );
+                                })}
+                            </Routes>
+                        </div>
+                    </CartProvider>
+                </Provider>
+            </Router>
+        </CheckRoleProvider>
     );
 }
 

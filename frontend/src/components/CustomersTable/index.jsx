@@ -1,4 +1,5 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { format } from 'date-fns';
 import React, { useCallback, useEffect, useState } from 'react';
 import apiGetAllUser from '~/api/admin/apiGetAllUser';
 
@@ -59,7 +60,7 @@ export default function CustomersTable() {
                                     {user.mobile}
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
-                                    {new Date(user.createAt).toLocaleString()}
+                                    {format(new Date(user.createAt), 'dd/MM/yyyy')}
                                 </TableCell>
                             </TableRow>
                         ))}

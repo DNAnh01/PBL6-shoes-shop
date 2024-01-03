@@ -4,10 +4,10 @@ import apiGetAllOrder from '~/api/admin/apiGetAllOrder';
 import './style.scss';
 import apiOrder from '~/api/admin/apiOrder';
 import { Modal } from 'antd';
+import { format } from 'date-fns';
 
 export default function OrdersTable() {
     const [orders, setOrders] = useState([]);
-    console.log(orders);
     const [selectedOrderIds, setSelectedOrderIds] = useState([]);
     const [localStatus, setLocalStatus] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false); // Step 1
@@ -114,10 +114,10 @@ export default function OrdersTable() {
                                     {`${order?.shippingAddress?.streetAddress}, ${order?.shippingAddress?.city}`}
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
-                                    {new Date(order.orderDate).toLocaleString()}
+                                    {format(new Date(order.orderDate), 'dd/MM/yyyy')}
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
-                                    {new Date(order.deliveryDate).toLocaleString()}
+                                    {format(new Date(order.deliveryDate), 'dd/MM/yyyy')}
                                 </TableCell>
                                 <TableCell align="left" className="custom-cell-order">
                                     {order.totalDiscountedPrice.toLocaleString('it-IT', {
@@ -139,8 +139,6 @@ export default function OrdersTable() {
                                     >
                                         <option value="">Update</option>
                                         <option value="confirmed">Confirmed</option>
-                                        <option value="delivered">Delivered</option>
-                                        <option value="shipped">Shipped</option>
                                         <option value="canceled">Canceled</option>
                                     </select>
                                 </TableCell>

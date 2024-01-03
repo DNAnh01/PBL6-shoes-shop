@@ -108,7 +108,7 @@ const RegisterPage = () => {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                style={{ background: 'transparent' }}
+                                style={{ background: 'transparent', marginRight: 10 }}
                                 className={cx('toggle-password-button')}
                             >
                                 <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`} aria-hidden="true"></i>

@@ -145,7 +145,7 @@
     &-payment {
         display: flex;
         gap: 0 30px;
-        margin-top: 10px;
+        margin-top: 15px;
     }
     &-quantity-detail {
         display: flex;
@@ -177,6 +177,36 @@
 .size-button.selected {
     background-color: #ffffff;
     border-color: #ff0000cc;
+}
+.horizontal-line {
+    border-top: 3px solid #675a5a;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.information {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.information-title {
+    background: linear-gradient(to right, rgba(199, 32, 146, 0.9098039216), rgba(108, 20, 208, 0.8941176471));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.information-item {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    padding: 10px 50px;
+
+    .information-text {
+        font-weight: bold;
+    }
 }
 
 @media (max-width: 570px) {

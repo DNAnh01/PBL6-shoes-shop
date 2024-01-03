@@ -6,6 +6,7 @@ import Button from '../../components/Button';
 import { toast } from 'react-toastify';
 
 export default function ProductFeaturedCard(product) {
+    console.log(product);
     const navigate = useNavigate();
     const handleAddtocart = async () => {
         toast.success('Added product to cart successfully');
@@ -35,6 +36,7 @@ export default function ProductFeaturedCard(product) {
                     <Link to={`/product?brand=${product?.product.brandName}`} className="product-featured-category">
                         {product?.product.brandName}
                     </Link>
+                    <div className="product-featured-description">{product.product.productDescription}</div>
                     <div className="product-featured-price">
                         <p className="product-featured-price-real">
                             {product?.product.productDiscountedPrice.toLocaleString('it-IT', {
@@ -52,34 +54,12 @@ export default function ProductFeaturedCard(product) {
                     <Button text="ADD TO CART" onClick={handleAddtocart}></Button>
                     <div className="product-featured-status">
                         <p>
-                            already sold: <b>15</b>
+                            already sold: <b>10</b>
                         </p>
 
                         <p>
-                            {' '}
                             available: <b>{product?.product?.productQuantity}</b>{' '}
                         </p>
-                    </div>
-                    <div className="product-featured-countdown-box">
-                        <p className="product-featured-countdown-desc">Hurry Up! Offer ends in:</p>
-                        <div className="product-featured-countdown">
-                            <div className="product-featured-countdown-content">
-                                <p className="product-featured-display-number">360</p>
-                                <p className="product-featured-display-text">Days</p>
-                            </div>
-                            <div className="product-featured-countdown-content">
-                                <p className="product-featured-display-number">24</p>
-                                <p className="product-featured-display-text">Hours</p>
-                            </div>
-                            <div className="product-featured-countdown-content">
-                                <p className="product-featured-display-number">59</p>
-                                <p className="product-featured-display-text">Min</p>
-                            </div>
-                            <div className="product-featured-countdown-content">
-                                <p className="product-featured-display-number">00</p>
-                                <p className="product-featured-display-text">Sec</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

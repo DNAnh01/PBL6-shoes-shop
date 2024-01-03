@@ -13,11 +13,9 @@ import apiCreateReview from '~/api/user/apiReview';
 import apiReviewDetail from '~/api/user/apiReviewDetail';
 import Raiting from '~/api/user/Raiting';
 import { VscAccount } from 'react-icons/vsc';
+import { format } from 'date-fns';
 
 export default function CommentCard({ productId }) {
-    const image =
-        'https://png.pngtree.com/element_our/20200611/ourlarge/pngtree-doggie-cute-cheap-expression-pack-avatar-image_2251655.jpg';
-
     const [product, setProduct] = useState();
     const [value, setValue] = useState(0);
     const [reviewText, setReviewText] = useState('');
@@ -274,7 +272,7 @@ export default function CommentCard({ productId }) {
                                                 </div>
                                             </div>
                                             <div className="comment-date">
-                                                <span>{new Date(review.createAt).toLocaleString()}</span>
+                                                <span>{format(new Date(review.createAt), 'dd/MM/yyyy')}</span>
                                             </div>
                                         </div>
                                     </div>

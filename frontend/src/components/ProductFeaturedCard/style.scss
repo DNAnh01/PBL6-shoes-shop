@@ -21,6 +21,9 @@
         display: flex;
         gap: 0 50px;
         border-radius: var(--border-radius-md);
+        background: url(../../assets/images/contain/background.png);
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     &-featured-link {
         display: block;
@@ -56,6 +59,11 @@
         text-decoration: none;
         color: var(--eerie-black);
         text-wrap: balance;
+    }
+    &-featured-description {
+        padding: 10px 0;
+        width: 700px;
+        font-size: 18px;
     }
     &-featured-category {
         text-decoration: none;

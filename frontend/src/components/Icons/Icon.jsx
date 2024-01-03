@@ -12,6 +12,7 @@ import {
     DowntrendIcon,
     EyeIcon,
     GridIcon,
+    HistoryOrder,
     ListIcon,
     Loading,
     OptionsIcon,
@@ -28,6 +29,7 @@ import {
 
 const Icon = (props) => {
     const components = {
+        history_order: HistoryOrder,
         loading: Loading,
         calendar: Calendar,
         cell_phone_link: SellPhoneLink,

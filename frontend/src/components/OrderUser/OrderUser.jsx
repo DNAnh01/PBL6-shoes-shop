@@ -76,7 +76,7 @@ export default function OrderUser() {
 
                                         <TableCell align="left" className="custom-cell-order-user">
                                             <span className="custom-cell-order-title">
-                                                {format(new Date(order.orderDate), 'dd/MM/yyyy hh:mm:ss')}
+                                                {format(new Date(order.orderDate), 'dd/MM/yyyy')}
                                             </span>
                                         </TableCell>
                                         <TableCell align="left" className="custom-cell-order-user">

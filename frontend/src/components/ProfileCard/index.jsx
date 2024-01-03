@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import Button from '~/pages/Button';
@@ -8,7 +8,9 @@ import apiUpdateProfile from '~/api/user/apiUpdateProfile';
 import apiChangePass from '~/api/user/apiChangePass';
 import img from '../../assets/images/index.js';
 import { VscAccount } from 'react-icons/vsc';
+import { CheckRoleContext } from '~/context/CheckRoleProvider';
 export default function ProfileCard() {
+    const { setRole } = useContext(CheckRoleContext);
     const [profiles, setProfiles] = useState([]);
     const [defaultAddress, setDefaultAddress] = useState(null);
 
@@ -66,6 +68,7 @@ export default function ProfileCard() {
     const handleLogout = () => {
         toast.success('Signed out successfully');
         sessionStorage.clear();
+        setRole(null);
         setTimeout(() => {
             navigate('/login');
         }, 500);

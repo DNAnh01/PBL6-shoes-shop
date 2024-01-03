@@ -744,6 +744,12 @@
     .header-user-actions .action-btn:hover {
         color: var(--salmon-pink);
     }
+    .header-user-actions .action-btn-history-order {
+        color: var(--onyx);
+    }
+    .header-user-actions .action-btn-history-order:hover {
+        color: var(--salmon-pink);
+    }
 
     .header-user-actions .count {
         position: absolute;

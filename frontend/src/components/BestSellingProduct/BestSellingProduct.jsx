@@ -9,7 +9,6 @@ const cx = classNames.bind(styles);
 const BestSellingProduct = ({ selectedTime, setIsLoading }) => {
     const [productData, setProductData] = useState({});
     useEffect(() => {
-        console.log('selected time for best selling product: ', selectedTime);
         // call api
         setIsLoading(true);
         const fetchData = async () => {

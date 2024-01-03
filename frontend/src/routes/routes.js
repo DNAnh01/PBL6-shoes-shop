@@ -18,6 +18,8 @@ import ProductPage from '~/pages/ProductPage';
 import ProfilePage from '~/pages/ProfilePage';
 import RegisterPage from '~/pages/RegisterPage';
 import ServicePage from '~/pages/ServicePage';
+import SuccessPage from '~/pages/SuccessPage';
+import FailurePage from '~/pages/FailurePage';
 
 // public routers
 const publicRoutes = [
@@ -40,6 +42,8 @@ const publicRoutes = [
     { path: config.roures.pay, component: PayPage },
     { path: config.roures.order, component: OrderPage },
     { path: config.roures.profile, component: ProfilePage },
+    { path: config.roures.successMobile, component: SuccessPage },
+    { path: config.roures.failureMobile, component: FailurePage },
 ];
 //  private routers
 
