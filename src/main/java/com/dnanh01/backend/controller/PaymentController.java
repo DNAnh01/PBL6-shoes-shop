@@ -68,26 +68,15 @@ public class PaymentController {
 
         return ResponseEntity.status(HttpStatus.OK).body(paymentSubmitResponse);
     }
-    @GetMapping("/vnpay-payment")
-    public RedirectView getMapping(
-            HttpServletRequest request,
-            @RequestParam(name = "orderId") Long orderId) throws OrderException {
-        int paymentStatus = vnPayService.orderReturn(request);
-        if(paymentStatus == 1) {
-        	Order order = orderService.pendingOrder(orderId);
-        	return new RedirectView("https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success");
-        }
-        return new RedirectView("https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure");
-    }
 
     
-   /* @GetMapping("/vnpay-payment")
+    @GetMapping("/vnpay-payment")
     public RedirectView getMapping(HttpServletRequest request) {
         int paymentStatus = vnPayService.orderReturn(request);
         String redirectUrl = (paymentStatus == 1) ? "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=success" : "https://shoes-shop-mvaa.vercel.app/pay?step=3&result=failure";
         return new RedirectView(redirectUrl);
     }
-    */
+
     @PostMapping("/confirmOrder")
     @ResponseBody
     public ResponseEntity<?> confirmOrder(
