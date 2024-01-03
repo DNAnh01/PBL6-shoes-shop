@@ -11,7 +11,7 @@ class PurchaseActivity : BaseActivity<ActivityPurchaseBinding>() {
 
     val shareViewModel by lazy { (application as ShopShoesApp).shareViewModel }
 
-    lateinit var address: BodyOrder
+    var address: BodyOrder? = null
 
     val purchaseViewModel by inject<PurchaseViewModel>()
 
@@ -26,5 +26,4 @@ class PurchaseActivity : BaseActivity<ActivityPurchaseBinding>() {
 
     override fun initListener() {
     }
-
 }

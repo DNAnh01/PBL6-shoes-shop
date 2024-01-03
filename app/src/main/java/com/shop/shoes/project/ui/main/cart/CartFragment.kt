@@ -1,6 +1,7 @@
 package com.shop.shoes.project.ui.main.cart
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +56,10 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
 
     override fun initListener() {
         binding.tvPurchase.setOnClickListener {
-            startActivity(Intent(context, PurchaseActivity::class.java))
+            startActivityForResult(
+                Intent(context, PurchaseActivity::class.java),
+                Constants.REQUEST_CODE_PURCHASE
+            )
         }
     }
 
@@ -89,5 +93,13 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         val intent = Intent(activity, DetailProductActivity::class.java)
         intent.putExtra(Constants.EXTRA_PRODUCT, json)
         startActivity(intent)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Constants.REQUEST_CODE_PURCHASE) {
+            cartViewModel.getAllCart()
+        }
     }
 }

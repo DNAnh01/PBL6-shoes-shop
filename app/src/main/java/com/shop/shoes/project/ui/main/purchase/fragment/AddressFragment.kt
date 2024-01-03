@@ -13,7 +13,16 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
 
     private val purchaseViewModel by lazy { (context as PurchaseActivity).purchaseViewModel }
 
-    override fun initView() {
+    override fun initView() = binding.run {
+        if ((context as PurchaseActivity).address != null) {
+            val address = (context as PurchaseActivity).address
+            tvFirst.setText(address!!.firstName)
+            tvLast.setText(address.lastName)
+            tvPhone.setText(address.mobile)
+            tvAddress.setText(address.streetAddress)
+            tvCity.setText(address.city)
+            tvState.setText(address.state)
+        }
     }
 
     override fun initData() {
@@ -46,7 +55,7 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
                 city = tvCity.text.toString().trim(),
                 state = tvState.text.toString().trim()
             )
-            purchaseViewModel.createOrder((context as PurchaseActivity).address, {
+            purchaseViewModel.createOrder((context as PurchaseActivity).address!!, {
                 goToConfirm()
             }, {
                 toast(getString(R.string.something_wrong))

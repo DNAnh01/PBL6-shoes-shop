@@ -25,6 +25,9 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="34">
         <activity
+            android:name=".ui.main.payment.PaymentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.purchase.PurchaseActivity"
             android:exported="false"
             android:screenOrientation="portrait"

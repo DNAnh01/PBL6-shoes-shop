@@ -1,6 +1,7 @@
 package com.shop.shoes.project.ui.main.purchase.fragment
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.shop.shoes.project.databinding.FragmentConfirmBinding
 import com.shop.shoes.project.ui.base.BaseFragment
 import com.shop.shoes.project.ui.main.cart.CartAdapter
 import com.shop.shoes.project.ui.main.detail.DetailProductActivity
+import com.shop.shoes.project.ui.main.payment.PaymentActivity
 import com.shop.shoes.project.ui.main.purchase.PurchaseActivity
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Utils
@@ -41,10 +43,10 @@ class ConfirmFragment : BaseFragment<FragmentConfirmBinding>() {
 
     override fun initView() = binding.run {
         rvCart.layoutManager = LinearLayoutManager(context)
-        val name = address.firstName + " " + address.lastName
+        val name = address!!.firstName + " " + address!!.lastName
         tvName.text = name
-        tvPhone.text = address.mobile
-        val locate = address.streetAddress + " " + address.city + " " + address.state
+        tvPhone.text = address!!.mobile
+        val locate = address!!.streetAddress + " " + address!!.city + " " + address!!.state
         tvAddress.text = locate
     }
 
@@ -55,6 +57,14 @@ class ConfirmFragment : BaseFragment<FragmentConfirmBinding>() {
 
     override fun initListener() = binding.run {
         tvCancel.setOnClickListener { goToBack() }
+        tvBuy.setOnClickListener {
+            purchaseViewModel.goToPay(id) { url ->
+                startActivityForResult(
+                    PaymentActivity.newIntent(context as PurchaseActivity, url),
+                    Constants.REQUEST_CODE_PAY
+                )
+            }
+        }
     }
 
     override fun getViewBinding(
@@ -97,5 +107,14 @@ class ConfirmFragment : BaseFragment<FragmentConfirmBinding>() {
     private fun goToBack() {
         Navigation.findNavController(binding.root)
             .navigate(R.id.action_confirmFragment_to_addressFragment)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Constants.REQUEST_CODE_PAY && resultCode == Activity.RESULT_OK) {
+            toast("BUY SUCCESS")
+            (context as PurchaseActivity).finish()
+        }
     }
 }
