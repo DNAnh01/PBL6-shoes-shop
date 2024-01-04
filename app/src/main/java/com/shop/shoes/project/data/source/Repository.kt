@@ -8,6 +8,7 @@ import com.shop.shoes.project.data.model.BodyInfo
 import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.data.model.BodyPayment
 import com.shop.shoes.project.data.model.Cart
+import com.shop.shoes.project.data.model.History
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.model.ResponseCartAdd
 import com.shop.shoes.project.data.model.ResponseOrder
@@ -69,6 +70,10 @@ class Repository(
 
     override suspend fun changeInfo(body: BodyInfo): User {
         return remoteDataSource.changeInfo(body)
+    }
+
+    override suspend fun getHistory(): List<History> {
+        return remoteDataSource.getHistory()
     }
 
 }

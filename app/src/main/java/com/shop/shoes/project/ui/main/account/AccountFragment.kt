@@ -13,6 +13,7 @@ import com.shop.shoes.project.databinding.FragmentAccountBinding
 import com.shop.shoes.project.ui.auth.LoginActivity
 import com.shop.shoes.project.ui.main.MainActivity
 import com.shop.shoes.project.ui.base.BaseFragment
+import com.shop.shoes.project.ui.main.history.HistoryActivity
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Pref
 
@@ -43,7 +44,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
             )
         }
         tvHistory.setOnClickListener {
-            //TODO
+            startActivity(Intent(context, HistoryActivity::class.java))
         }
     }
 

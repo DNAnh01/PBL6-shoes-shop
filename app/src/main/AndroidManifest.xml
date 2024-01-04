@@ -25,8 +25,14 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="34">
         <activity
+            android:name=".ui.main.history.HistoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Pink" />
+        <activity
             android:name=".ui.main.payment.PaymentActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Pink" />
         <activity
             android:name=".ui.main.purchase.PurchaseActivity"

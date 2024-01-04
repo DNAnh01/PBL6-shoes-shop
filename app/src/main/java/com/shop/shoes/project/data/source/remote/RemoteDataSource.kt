@@ -8,6 +8,7 @@ import com.shop.shoes.project.data.model.BodyInfo
 import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.data.model.BodyPayment
 import com.shop.shoes.project.data.model.Cart
+import com.shop.shoes.project.data.model.History
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.model.ResponseCartAdd
 import com.shop.shoes.project.data.model.ResponseOrder
@@ -30,4 +31,5 @@ interface RemoteDataSource {
     suspend fun createOrder(@Body body: BodyOrder): ResponseOrder
     suspend fun payment(@Body body: BodyPayment): ResponsePayment
     suspend fun changeInfo(@Body body: BodyInfo): User
+    suspend fun getHistory(): List<History>
 }

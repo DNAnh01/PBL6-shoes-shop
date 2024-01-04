@@ -8,6 +8,7 @@ import com.shop.shoes.project.data.model.BodyInfo
 import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.data.model.BodyPayment
 import com.shop.shoes.project.data.model.Cart
+import com.shop.shoes.project.data.model.History
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.model.ResponseCartAdd
 import com.shop.shoes.project.data.model.ResponseOrder
@@ -58,4 +59,7 @@ interface ApiService {
 
     @PUT(Constants.CHANGE_INFO)
     suspend fun changeInfo(@Body body: BodyInfo): User
+
+    @GET(Constants.HISTORY)
+    suspend fun getHistory(): List<History>
 }

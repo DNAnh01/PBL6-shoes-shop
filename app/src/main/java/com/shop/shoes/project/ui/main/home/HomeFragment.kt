@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.FragmentHomeBinding
 import com.shop.shoes.project.ui.main.MainActivity
