@@ -183,6 +183,7 @@
                     android:id="@+id/rvRating"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
                     app:layout_constraintTop_toBottomOf="@id/view" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

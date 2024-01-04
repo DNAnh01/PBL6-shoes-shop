@@ -89,8 +89,8 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
         } else if (!Utils.isValidPhoneNumber(tvPhone.text.toString())) {
             toast("please enter right your phone number")
             return false
-        } else if (!Utils.isEmailValid(tvAddress.text.toString().trim())) {
-            toast("please enter right your address")
+        } else if (tvAddress.text.toString().trim() == "") {
+            toast("please enter your address")
             return false
         } else if (tvCity.text.toString().trim() == "") {
             toast("please enter your city")

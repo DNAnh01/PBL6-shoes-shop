@@ -27,4 +27,5 @@ object Constants {
     const val PAYMENT = "/api/payment/mobileVnpay"
     const val CHANGE_INFO = "/api/users/update"
     const val KEY_PAY = "pay_act"
+    const val PRICE = "VND"
 }

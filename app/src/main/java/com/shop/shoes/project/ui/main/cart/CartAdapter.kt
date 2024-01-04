@@ -12,6 +12,7 @@ import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.ItemCartBinding
 import com.shop.shoes.project.databinding.ItemProductsBinding
+import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Pref
 
 class CartAdapter(
@@ -24,12 +25,14 @@ class CartAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: Cart) {
             binding.run {
+                val price = "${item.price} ${Constants.PRICE}"
+                val discount = "${item.discountedPrice} ${Constants.PRICE}"
                 Glide.with(Pref.context).load(item.product?.imageUrl).into(imgPic)
                 tvName.text = item.product?.title
                 view.setBackgroundColor(Color.parseColor(item.product?.color))
                 tvSize.text = item.size
-                tvDiscount.text = item.price.toString()
-                tvPrice.text = item.discountedPrice.toString()
+                tvDiscount.text = price
+                tvPrice.text = discount
                 tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 tvQuality.text = item.quantity.toString()
                 if (!isCart) {

@@ -79,7 +79,8 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
                 tvLogin.visibility = View.GONE
                 adapter.notifyDataSetChanged()
                 rvCart.adapter = adapter
-                tvTotal.text = it.totalDiscountedPrice.toString()
+                val total = "${it.totalDiscountedPrice} ${Constants.PRICE}"
+                tvTotal.text = total
             } else {
                 if (Pref.accessToken == "") {
                     tvLogin.visibility = View.VISIBLE

@@ -26,7 +26,8 @@
         tools:targetApi="34">
         <activity
             android:name=".ui.main.payment.PaymentActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Pink" />
         <activity
             android:name=".ui.main.purchase.PurchaseActivity"
             android:exported="false"
@@ -48,11 +49,13 @@
         <activity
             android:name=".ui.auth.RegisterActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Pink" />
         <activity
             android:name=".ui.auth.LoginActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Pink" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false"

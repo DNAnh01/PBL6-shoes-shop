@@ -100,14 +100,16 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
     }
 
     private fun showPrice() = binding.run {
+        val price = "${entity!!.price} ${Constants.PRICE}"
         if (entity!!.discountedPrice == 0) {
             tvDiscount.visibility = View.GONE
-            tvPrice.text = entity!!.price.toString()
+            tvPrice.text = price
             tvSale.visibility = View.GONE
         } else {
-            tvDiscount.text = entity!!.price.toString()
-            tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG;
-            tvPrice.text = entity!!.discountedPrice.toString()
+            tvDiscount.text = price
+            tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            val discount = "${entity!!.discountedPrice} ${Constants.PRICE}"
+            tvPrice.text = discount
             val text = "-${entity!!.discountPersent}%"
             tvSale.text = text
         }
