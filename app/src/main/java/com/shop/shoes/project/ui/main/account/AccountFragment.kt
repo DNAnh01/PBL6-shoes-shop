@@ -21,10 +21,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
     private val shareViewModel by lazy { (context as MainActivity).shareViewModel }
     override fun initView() = binding.run {
         playAnimation()
-        if (Pref.accessToken == "") {
-            tvLogout.visibility = View.GONE
-            view.visibility = View.GONE
-        }
+        changeLogin()
     }
 
     override fun initData() {
@@ -32,16 +29,21 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
 
     override fun initListener() = binding.run {
         tvInfo.setOnClickListener {
-            mustBeLogin {
-                startActivity(Intent(context, InfoActivity::class.java))
-            }
+            startActivity(Intent(context, InfoActivity::class.java))
         }
         tvSupport.setOnClickListener { sendFeedBack() }
         tvLogout.setOnClickListener {
             Pref.accessToken = ""
-            tvLogout.visibility = View.GONE
-            view.visibility = View.GONE
+            changeLogin()
             shareViewModel.clearCart()
+        }
+        tvLogin.setOnClickListener {
+            startActivityForResult(
+                Intent(context, LoginActivity::class.java), Constants.REQUEST_CODE_LOGIN
+            )
+        }
+        tvHistory.setOnClickListener {
+            //TODO
         }
     }
 
@@ -55,6 +57,17 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
             playAnimation()
             repeatCount = LottieDrawable.INFINITE
         }
+    }
+
+    private fun changeLogin() = binding.run {
+        tvLogin.visibility = if (Pref.accessToken == "") View.VISIBLE else View.GONE
+        viewLogin.visibility = if (Pref.accessToken == "") View.VISIBLE else View.GONE
+        tvInfo.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        viewInfo.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        tvHistory.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        viewHistory.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        tvLogout.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        view.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
     }
 
     private fun mustBeLogin(listener: () -> Unit) {
@@ -93,20 +106,17 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            binding.run {
-                tvLogout.visibility = View.VISIBLE
-                view.visibility = View.VISIBLE
-            }
+            changeLogin()
             shareViewModel.getAllCart()
             shareViewModel.getAllProducts()
         }
     }
 
-    override fun onResume() = binding.run {
-        super.onResume()
-        if (Pref.accessToken != "") {
-            tvLogout.visibility = View.VISIBLE
-            view.visibility = View.VISIBLE
-        }
-    }
+//    override fun onResume() = binding.run {
+//        super.onResume()
+//        if (Pref.accessToken != "") {
+//            tvLogout.visibility = View.VISIBLE
+//            view.visibility = View.VISIBLE
+//        }
+//    }
 }
