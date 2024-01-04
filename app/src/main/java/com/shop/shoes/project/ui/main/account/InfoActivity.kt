@@ -1,6 +1,7 @@
 package com.shop.shoes.project.ui.main.account
 
 import android.view.LayoutInflater
+import com.shop.shoes.project.data.model.BodyInfo
 import com.shop.shoes.project.data.model.User
 import com.shop.shoes.project.databinding.ActivityInfoBinding
 import com.shop.shoes.project.ui.base.BaseActivity
@@ -22,7 +23,10 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>() {
 
     override fun initListener() = binding.run {
         btnBack.setOnClickListener { finish() }
-        btnChangePass.setOnClickListener { handleChangePass() }
+        btnChangePass.setOnClickListener {
+            Utils.showBottomChangePass(this@InfoActivity, infoViewModel)
+        }
+        btnChangeInfo.setOnClickListener { handleChangeInfo() }
     }
 
     private fun listenVM() {
@@ -40,7 +44,17 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>() {
         edtPhone.setText(user.mobile)
     }
 
-    private fun handleChangePass() {
-        Utils.showBottomChangePass(this, infoViewModel)
+    private fun handleChangeInfo() = binding.run {
+        if (!Utils.isValidPhoneNumber(edtPhone.text.toString())) {
+            toast("Please enter right phone number")
+        } else {
+            infoViewModel.changeInfo(
+                BodyInfo(
+                    firstName = edtFirstName.text.toString(),
+                    lastName = edtLastname.text.toString(),
+                    mobile = edtPhone.text.toString(),
+                )
+            )
+        }
     }
 }

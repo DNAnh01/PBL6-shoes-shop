@@ -25,5 +25,6 @@ object Constants {
     const val EXTRA_PRODUCT = "productExtra"
     const val CREATE_ORDER = "/api/orders/"
     const val PAYMENT = "/api/payment/mobileVnpay"
+    const val CHANGE_INFO = "/api/users/update"
     const val KEY_PAY = "pay_act"
 }

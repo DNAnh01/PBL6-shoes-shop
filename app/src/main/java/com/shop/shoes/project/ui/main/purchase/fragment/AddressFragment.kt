@@ -8,6 +8,7 @@ import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.databinding.FragmentAddressBinding
 import com.shop.shoes.project.ui.base.BaseFragment
 import com.shop.shoes.project.ui.main.purchase.PurchaseActivity
+import com.shop.shoes.project.utils.Utils
 
 class AddressFragment : BaseFragment<FragmentAddressBinding>() {
 
@@ -39,11 +40,6 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentAddressBinding = FragmentAddressBinding.inflate(inflater)
-
-    private fun isValidPhoneNumber(phoneNumber: String): Boolean {
-        val phoneRegex = Regex("^0\\d{9}$")
-        return phoneRegex.matches(phoneNumber)
-    }
 
     private fun handleBuy() = binding.run {
         if (isCanBuy()) {
@@ -78,7 +74,7 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
         } else if (tvPhone.text.toString().trim() == "") {
             toast("please enter your phone number")
             return false
-        } else if (!isValidPhoneNumber(tvPhone.text.toString())) {
+        } else if (!Utils.isValidPhoneNumber(tvPhone.text.toString())) {
             toast("please enter right your phone number")
             return false
         } else if (tvAddress.text.toString().trim() == "") {

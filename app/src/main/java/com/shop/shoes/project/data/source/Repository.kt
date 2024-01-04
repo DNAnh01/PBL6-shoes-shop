@@ -4,6 +4,7 @@ import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.data.model.AuthResponse
 import com.shop.shoes.project.data.model.BodyCart
 import com.shop.shoes.project.data.model.BodyChangePass
+import com.shop.shoes.project.data.model.BodyInfo
 import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.data.model.BodyPayment
 import com.shop.shoes.project.data.model.Cart
@@ -64,6 +65,10 @@ class Repository(
 
     override suspend fun payment(body: BodyPayment): ResponsePayment {
         return remoteDataSource.payment(body)
+    }
+
+    override suspend fun changeInfo(body: BodyInfo): User {
+        return remoteDataSource.changeInfo(body)
     }
 
 }

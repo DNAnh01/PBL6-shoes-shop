@@ -20,3 +20,12 @@ data class BodyChangePass(
     @SerializedName("newPassword")
     var newPassword: String,
 )
+
+data class BodyInfo(
+    @SerializedName("firstName")
+    var firstName: String,
+    @SerializedName("lastName")
+    var lastName: String,
+    @SerializedName("mobile")
+    var mobile: String,
+)

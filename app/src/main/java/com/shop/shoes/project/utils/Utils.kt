@@ -59,4 +59,9 @@ object Utils {
     fun showBottomChangePass(context: Context, viewModel: InfoViewModel) {
         BottomSheetUtils.showBottomChangePass(context, viewModel)
     }
+
+    fun isValidPhoneNumber(phoneNumber: String): Boolean {
+        val phoneRegex = Regex("^0\\d{9}$")
+        return phoneRegex.matches(phoneNumber)
+    }
 }

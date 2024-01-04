@@ -4,6 +4,7 @@ import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.data.model.AuthResponse
 import com.shop.shoes.project.data.model.BodyCart
 import com.shop.shoes.project.data.model.BodyChangePass
+import com.shop.shoes.project.data.model.BodyInfo
 import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.data.model.BodyPayment
 import com.shop.shoes.project.data.model.Cart
@@ -28,4 +29,5 @@ interface RemoteDataSource {
     suspend fun changePass(@Body body: BodyChangePass): String
     suspend fun createOrder(@Body body: BodyOrder): ResponseOrder
     suspend fun payment(@Body body: BodyPayment): ResponsePayment
+    suspend fun changeInfo(@Body body: BodyInfo): User
 }
