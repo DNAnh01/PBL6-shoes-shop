@@ -173,7 +173,7 @@ export default function ProfileCard() {
                                 ></input>
                             </div>
                             <div className="profile-address">
-                                <label className="profile-show-label">Địa chỉ</label>
+                                <label className="profile-show-label">Address</label>
                                 {defaultAddress ? (
                                     <input
                                         type="text"
@@ -197,7 +197,7 @@ export default function ProfileCard() {
                                 />
                             </div>
                             <div className="profile-phone">
-                                <label className="profile-show-label">Số điện thoại</label>
+                                <label className="profile-show-label">Phone Number</label>
                                 {}
                                 <input
                                     type="text"
