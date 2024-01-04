@@ -27,6 +27,8 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
     }
 
     override fun initData() {
+        purchaseViewModel.getInfo()
+        listenInfo()
     }
 
     override fun initListener() = binding.run {
@@ -59,6 +61,16 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
         }
     }
 
+    private fun listenInfo() = binding.run {
+        purchaseViewModel.user.observe(this@AddressFragment) {
+            if (it != null) {
+                if (it.lastName != "") tvLast.setText(it.lastName)
+                if (it.firstName != "") tvFirst.setText(it.firstName)
+                if (it.mobile != "") tvPhone.setText(it.mobile)
+            }
+        }
+    }
+
     private fun goToConfirm() {
         Navigation.findNavController(binding.root)
             .navigate(R.id.action_addressFragment_to_confirmFragment)
@@ -77,8 +89,8 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
         } else if (!Utils.isValidPhoneNumber(tvPhone.text.toString())) {
             toast("please enter right your phone number")
             return false
-        } else if (tvAddress.text.toString().trim() == "") {
-            toast("please enter your address")
+        } else if (!Utils.isEmailValid(tvAddress.text.toString().trim())) {
+            toast("please enter right your address")
             return false
         } else if (tvCity.text.toString().trim() == "") {
             toast("please enter your city")

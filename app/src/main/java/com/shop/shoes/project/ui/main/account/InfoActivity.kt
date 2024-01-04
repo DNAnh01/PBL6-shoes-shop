@@ -47,6 +47,8 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>() {
     private fun handleChangeInfo() = binding.run {
         if (!Utils.isValidPhoneNumber(edtPhone.text.toString())) {
             toast("Please enter right phone number")
+        } else if (!Utils.isEmailValid(edtEmail.text.toString())) {
+            toast("Please enter right email")
         } else {
             infoViewModel.changeInfo(
                 BodyInfo(

@@ -64,4 +64,9 @@ object Utils {
         val phoneRegex = Regex("^0\\d{9}$")
         return phoneRegex.matches(phoneNumber)
     }
+
+    fun isEmailValid(email: String): Boolean {
+        val emailRegex = Regex("^\\S+@\\S+\\.\\S+\$")
+        return emailRegex.matches(email)
+    }
 }
