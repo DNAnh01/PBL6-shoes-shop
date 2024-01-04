@@ -116,7 +116,7 @@ export default function Footer() {
                                         <i class="fa fa-user-o" aria-hidden="true"></i>
                                     </div>
                                     <Link to="/admin/dashboard" className="footer-nav-link">
-                                        Admin Dashboard
+                                        Website Admin
                                     </Link>
                                 </li>
                             </ul>

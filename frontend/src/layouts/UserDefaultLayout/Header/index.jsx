@@ -8,7 +8,7 @@ import Icon from '~/components/Icons/Icon';
 export default function Header({ cartItems = [] }) {
     const { role } = useContext(CheckRoleContext);
     useEffect(() => {
-        if (role !== 'admin') {
+        if (role !== 'user') {
         }
     }, [role]);
     const cartItemCount = cartItems?.length || 0;
@@ -66,10 +66,10 @@ export default function Header({ cartItems = [] }) {
                                         Service
                                     </Link>
                                 </li>
-                                {role === 'admin' && (
+                                {role !== 'user' && (
                                     <li className="menu-category">
                                         <Link to="/admin/dashboard" className="menu-title">
-                                            Admin Dashboard
+                                            Website Admin
                                         </Link>
                                     </li>
                                 )}
@@ -85,7 +85,12 @@ export default function Header({ cartItems = [] }) {
                             <span className="count">{cartItemCount}</span>
                         </Link>
                         <Link to="/order" className="action-btn">
-                            <Icon classes={'action-btn-history-order'} icon="history_order" color="#000" />
+                            <Icon
+                                classes={'action-btn-history-order'}
+                                icon="history_order"
+                                color="var(--onyx)"
+                                style={{ color: 'var(--onyx)' }}
+                            />
                         </Link>
                     </div>
                 </div>

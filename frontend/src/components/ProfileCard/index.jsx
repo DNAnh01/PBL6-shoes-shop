@@ -6,7 +6,6 @@ import apiProfile from '~/api/user/apiProfile';
 import './style.scss';
 import apiUpdateProfile from '~/api/user/apiUpdateProfile';
 import apiChangePass from '~/api/user/apiChangePass';
-import img from '../../assets/images/index.js';
 import { VscAccount } from 'react-icons/vsc';
 import { CheckRoleContext } from '~/context/CheckRoleProvider';
 export default function ProfileCard() {
@@ -138,10 +137,16 @@ export default function ProfileCard() {
                     </div>
                     <div className="profile-detail">
                         <div className="profile-btn">
-                            <button className="profile-btn-personal" onClick={handleShowPersonal}>
+                            <button
+                                className={`profile-btn-personal ${showPersonal ? 'active' : ''}`}
+                                onClick={handleShowPersonal}
+                            >
                                 Personal Information
                             </button>
-                            <button className="profile-btn-changepassword" onClick={handleShowChangePassword}>
+                            <button
+                                className={`profile-btn-changepassword ${showChangePassword ? 'active' : ''}`}
+                                onClick={handleShowChangePassword}
+                            >
                                 Change Password
                             </button>
                             <button className="profile-btn-logout" onClick={handleLogout}>

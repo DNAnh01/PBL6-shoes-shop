@@ -57,7 +57,6 @@ const ProductsTable = ({ handleProductUpdate }) => {
                             <TableCell className={cx('brand')}>Brand</TableCell>
                             <TableCell className={cx('title')}>Title</TableCell>
                             <TableCell className={cx('price')}>WarehousePrice</TableCell>
-                            <TableCell className={cx('price')}>WarehousePrice</TableCell>
                             <TableCell className={cx('price')}>Price</TableCell>
                             <TableCell className={cx('quantity')}>Quantity</TableCell>
                             <TableCell className={cx('action')}>Action</TableCell>
