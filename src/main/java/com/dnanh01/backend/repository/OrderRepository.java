@@ -19,11 +19,11 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
 	@Query("SELECT o FROM Order o " +
             "WHERE o.user.id = :userId " +
-            "AND (o.orderStatus = 'PENDING' OR o.orderStatus = 'CONFIRMED' OR o.orderStatus = 'CANCELED')")//OR o.orderStatus = 'SHIPPED' OR o.orderStatus = 'DELIVERED'
+            "AND (o.orderStatus = 'PENDING' OR o.orderStatus = 'CONFIRMED' OR o.orderStatus = 'SHIPPED' OR o.orderStatus = 'DELIVERED')")
 	public List<Order> getUsersOrders(@Param("userId") Long userId);
 
 	
-	@Query("SELECT o FROM Order o WHERE o.orderStatus IN ('PENDING', 'CONFIRMED', 'CANCELED')")//'SHIPPED', 'DELIVERED'
+	@Query("SELECT o FROM Order o WHERE o.orderStatus IN ('PENDING', 'CONFIRMED', 'SHIPPED', 'DELIVERED')")
     public List<Order> getAllOrders();
 	
 	public List<Order> findByUser(User user);
@@ -33,9 +33,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "AND (o.orderStatus = 'CONFIRMED')")
 	public List<Order> getConfirmedOrdersForUser(@Param("userId") Long userId);
     
-    // --------------------DASHBOARD ADMIN--------------------
+	  // --------------------DASHBOARD ADMIN--------------------
 
-	   // thống kê doanh thu, lợi nhuận theo từng giờ của một ngày nhất định được
+    // thống kê doanh thu, lợi nhuận theo từng giờ của một ngày nhất định được
     // chọn
     @Query(value = "WITH HourReference AS ( " +
                     "     SELECT 0 AS hour_of_day " +
@@ -153,7 +153,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                     "    FROM `orders` o " +
                     "    WHERE " +
                     "    DATE_FORMAT(o.`order_date`, '%d/%m/%Y') = :selectedDay " +
-                    "    AND o.`order_status` = 'CONFIRMED' "  +
+                    "    AND o.`order_status` = 'CONFIRMED' " +
                     "    GROUP BY " +
                     "    selected_day " +
                     "    ORDER BY " +
@@ -270,47 +270,69 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     // lấy ra sản phẩm bán chạy nhất trong ngày được chọn
 
-    @Query(value = "SELECT " +
-                    "    oi.product_id, " +
-                    "    p.title, " +
-                    "    p.image_url, " +
-                    "    p.discounted_price, " +
-                    "    COUNT(*) AS appearance_count " +
-                    "FROM " +
-                    "    `orders` o " +
-                    "    JOIN `order_item` oi ON o.id = oi.order_id " +
-                    "    JOIN `product` p ON oi.product_id = p.id " +
-                    "WHERE " +
-                    "    DATE_FORMAT(o.order_date, '%d/%m/%Y') = :selectedDay " +
-                    "    AND o.order_status = 'CONFIRMED' " +
-                    "GROUP BY " +
-                    "    oi.product_id " +
-                    "ORDER BY " +
-                    "    appearance_count DESC " +
-                    "LIMIT 1;", nativeQuery = true)
+    @Query(value = "with `oi_info` as ( select " +
+                    "                       oi.id as order_item_id, " +
+                    "                       oi.quantity as number_of_products_in_each_order_item, " +
+                    "                       p.id as product_id " +
+                    " " +
+                    "                   FROM " +
+                    "                       `orders` o " +
+                    "                   JOIN `order_item` oi ON o.id = oi.order_id " +
+                    "                   JOIN `product` p ON oi.product_id = p.id " +
+                    "                   WHERE " +
+                    "                       DATE_FORMAT(o.order_date, '%d/%m/%Y') = :selectedDay " +
+                    "                   AND o.order_status = 'CONFIRMED'  " +
+                    "                   GROUP BY " +
+                    "                       oi.id " +
+                    "), `best_selling_product_info` as ( select sum(number_of_products_in_each_order_item) as `total_quantity_sold_of_each_product`, product_id  "
+                    +
+                    "                                       from `oi_info` " +
+                    "                                       group by product_id " +
+                    "                                       order by sum(number_of_products_in_each_order_item) desc "
+                    +
+                    "                                       limit 1) " +
+                    "select  p.id, " +
+                    "        p.title, " +
+                    "        p.image_url, " +
+                    "        p.discounted_price, " +
+                    "        bspi.total_quantity_sold_of_each_product as appearance_count " +
+                    "from best_selling_product_info bspi  " +
+                    "join `product` p " +
+                    "on bspi.product_id = p.id;", nativeQuery = true)
     @QueryHints(value = { @QueryHint(name = "org.hibernate.readOnly", value = "true") })
     public List<Object[]> getBestSellingProductToday(@Param("selectedDay") String selectedDay);
 
     // lấy ra sản phẩm bán chạy nhất trong tháng được chọn
 
-    @Query(value = "SELECT " +
-                    "    oi.product_id, " +
-                    "    p.title, " +
-                    "    p.image_url, " +
-                    "    p.discounted_price, " +
-                    "    COUNT(*) AS appearance_count " +
-                    "FROM " +
-                    "    `orders` o " +
-                    "    JOIN `order_item` oi ON o.id = oi.order_id " +
-                    "    JOIN `product` p ON oi.product_id = p.id " +
-                    "WHERE " +
-                    "    DATE_FORMAT(o.order_date, '%d/%m/%Y') = :selectedMonth " +
-                    "    AND o.order_status = 'CONFIRMED' " +
-                    "GROUP BY " +
-                    "    oi.product_id " +
-                    "ORDER BY " +
-                    "    appearance_count DESC " +
-                    "LIMIT 1;", nativeQuery = true)
+    @Query(value = "with `oi_info` as ( select " +
+                    "                       oi.id as order_item_id, " +
+                    "                       oi.quantity as number_of_products_in_each_order_item, " +
+                    "                       p.id as product_id " +
+                    " " +
+                    "                   FROM " +
+                    "                       `orders` o " +
+                    "                   JOIN `order_item` oi ON o.id = oi.order_id " +
+                    "                   JOIN `product` p ON oi.product_id = p.id " +
+                    "                   WHERE " +
+                    "                       DATE_FORMAT(o.order_date, '%m/%Y') = :selectedMonth " +
+                    "                   AND o.order_status = 'CONFIRMED'  " +
+                    "                   GROUP BY " +
+                    "                       oi.id " +
+                    "), `best_selling_product_info` as ( select sum(number_of_products_in_each_order_item) as `total_quantity_sold_of_each_product`, product_id  "
+                    +
+                    "                                       from `oi_info` " +
+                    "                                       group by product_id " +
+                    "                                       order by sum(number_of_products_in_each_order_item) desc "
+                    +
+                    "                                       limit 1) " +
+                    "select  p.id, " +
+                    "        p.title, " +
+                    "        p.image_url, " +
+                    "        p.discounted_price, " +
+                    "        bspi.total_quantity_sold_of_each_product as appearance_count " +
+                    "from best_selling_product_info bspi  " +
+                    "join `product` p " +
+                    "on bspi.product_id = p.id;", nativeQuery = true)
     @QueryHints(value = { @QueryHint(name = "org.hibernate.readOnly", value = "true") })
     public List<Object[]> getBestSellingProductMonth(@Param("selectedMonth") String selectedMonth);
 
