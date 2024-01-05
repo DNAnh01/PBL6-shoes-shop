@@ -428,8 +428,8 @@ public class OrderServiceImplementation implements OrderService {
 		String title = (String) row[1];
 		String imageUrl = (String) row[2];
 		Integer discountedPrice = (Integer) row[3];
-		Long appearanceCount = (Long) row[4];
-
+		BigDecimal appearanceCount = (BigDecimal) row[4];
+		
 		return new BestSellingProductResponse(productId, title, imageUrl, discountedPrice, appearanceCount);
 	}
 }
