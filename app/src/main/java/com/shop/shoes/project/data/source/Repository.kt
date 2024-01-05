@@ -9,11 +9,13 @@ import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.data.model.BodyPayment
 import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.History
+import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.model.ResponseCartAdd
 import com.shop.shoes.project.data.model.ResponseOrder
 import com.shop.shoes.project.data.model.ResponsePayment
 import com.shop.shoes.project.data.model.ResponseProduct
+import com.shop.shoes.project.data.model.TopItem
 import com.shop.shoes.project.data.model.User
 import com.shop.shoes.project.data.source.local.LocalDataSourceImpl
 import com.shop.shoes.project.data.source.local.LocalDataSource
@@ -74,6 +76,14 @@ class Repository(
 
     override suspend fun getHistory(): List<History> {
         return remoteDataSource.getHistory()
+    }
+
+    override suspend fun getTop(): List<TopItem> {
+        return remoteDataSource.getTop()
+    }
+
+    override suspend fun getProductById(cartId: Int): Product {
+        return remoteDataSource.getProductById(cartId)
     }
 
 }

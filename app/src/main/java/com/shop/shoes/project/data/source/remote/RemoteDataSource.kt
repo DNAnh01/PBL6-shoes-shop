@@ -9,11 +9,13 @@ import com.shop.shoes.project.data.model.BodyOrder
 import com.shop.shoes.project.data.model.BodyPayment
 import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.History
+import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.model.ResponseCartAdd
 import com.shop.shoes.project.data.model.ResponseOrder
 import com.shop.shoes.project.data.model.ResponsePayment
 import com.shop.shoes.project.data.model.ResponseProduct
+import com.shop.shoes.project.data.model.TopItem
 import com.shop.shoes.project.data.model.User
 import retrofit2.http.Body
 import retrofit2.http.Path
@@ -32,4 +34,6 @@ interface RemoteDataSource {
     suspend fun payment(@Body body: BodyPayment): ResponsePayment
     suspend fun changeInfo(@Body body: BodyInfo): User
     suspend fun getHistory(): List<History>
+    suspend fun getTop(): List<TopItem>
+    suspend fun getProductById(@Path("cartId") cartId: Int): Product
 }

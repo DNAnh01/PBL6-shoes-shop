@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.Product
+import com.shop.shoes.project.data.model.TopItem
 import com.shop.shoes.project.databinding.FragmentHomeBinding
 import com.shop.shoes.project.ui.main.MainActivity
 import com.shop.shoes.project.ui.base.BaseFragment
 import com.shop.shoes.project.ui.main.detail.DetailProductActivity
 import com.shop.shoes.project.ui.main.home.adapter.BrandAdapter
 import com.shop.shoes.project.ui.main.home.adapter.ProductAdapter
+import com.shop.shoes.project.ui.main.home.adapter.TopAdapter
 import com.shop.shoes.project.ui.main.search.SearchActivity
 import com.shop.shoes.project.utils.BrandUtils
 import com.shop.shoes.project.utils.Constants
@@ -22,7 +25,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val homeViewModel by lazy { (context as MainActivity).shareViewModel }
     private val products = mutableListOf<Product>()
-    private val bestProducts = mutableListOf<Product>()
+    private val tops = mutableListOf<TopItem>()
     private val brands = BrandUtils.brands
 
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -30,6 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             goToDetail(products[pos])
         }
     }
+
     private val brandAdapter by lazy(LazyThreadSafetyMode.NONE) {
         BrandAdapter(brands) { pos ->
             val list = homeViewModel.getAllProductsBaseBrand(brands[pos].name)
@@ -40,9 +44,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             adapter.updateData(products)
         }
     }
-    private val bestAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        ProductAdapter(bestProducts) { pos ->
-            goToDetail(products[pos])
+
+    private val topAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        TopAdapter(tops) { pos ->
+            homeViewModel.getProductById(tops[pos].productId) { product ->
+                if (product != null) {
+                    goToDetail(product)
+                } else {
+                    toast(getString(R.string.something_wrong))
+                }
+            }
         }
     }
 
@@ -52,12 +63,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = brandAdapter
         }
-        rvBestSeller.layoutManager = GridLayoutManager(context, 2)
+        rvBestSeller.layoutManager = GridLayoutManager(context, 3)
     }
 
     override fun initData() {
         homeViewModel.getAllProducts()
+        homeViewModel.getTop()
         listenVM()
+        listenTop()
     }
 
     override fun initListener() {
@@ -78,14 +91,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 clear()
                 addAll(it)
             }
-            bestProducts.run {
-                clear()
-                addAll(it.take(4))
-            }
             adapter.notifyDataSetChanged()
             rvProducts.adapter = adapter
-            bestAdapter.notifyDataSetChanged()
-            rvBestSeller.adapter = bestAdapter
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun listenTop() = binding.run {
+        homeViewModel.top.observe(this@HomeFragment) {
+            tops.run {
+                clear()
+                addAll(it)
+            }
+            topAdapter.notifyDataSetChanged()
+            rvBestSeller.adapter = topAdapter
         }
     }
 

@@ -9,6 +9,7 @@ import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.BodyCart
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.ResponseCart
+import com.shop.shoes.project.data.model.TopItem
 import com.shop.shoes.project.data.source.Repository
 import com.shop.shoes.project.utils.Pref
 import kotlinx.coroutines.launch
@@ -17,6 +18,9 @@ class ShareViewModel(application: Application, private val repository: Repositor
     AndroidViewModel(application) {
     private val _product = MutableLiveData<List<Product>>(emptyList())
     val product = _product
+
+    private val _top = MutableLiveData<List<TopItem>>(emptyList())
+    val top = _top
     fun getAllProducts() {
         viewModelScope.launch {
             try {
@@ -24,6 +28,28 @@ class ShareViewModel(application: Application, private val repository: Repositor
                 _product.postValue(response.content)
             } catch (e: Exception) {
                 _product.postValue(emptyList())
+            }
+        }
+    }
+
+    fun getTop() {
+        viewModelScope.launch {
+            try {
+                val response = repository.getTop()
+                _top.postValue(response)
+            } catch (e: Exception) {
+                _top.postValue(emptyList())
+            }
+        }
+    }
+
+    fun getProductById(id: Int, listener: (Product?) -> Unit) {
+        viewModelScope.launch {
+            try {
+                val response = repository.getProductById(id)
+                listener.invoke(response)
+            } catch (e: Exception) {
+                listener.invoke(null)
             }
         }
     }
