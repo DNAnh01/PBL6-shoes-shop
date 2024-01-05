@@ -21,6 +21,12 @@ class ShareViewModel(application: Application, private val repository: Repositor
 
     private val _top = MutableLiveData<List<TopItem>>(emptyList())
     val top = _top
+
+    private val _new = MutableLiveData<List<TopItem>>(emptyList())
+    val new = _new
+
+    private val _rate = MutableLiveData<List<TopItem>>(emptyList())
+    val rate = _rate
     fun getAllProducts() {
         viewModelScope.launch {
             try {
@@ -35,8 +41,9 @@ class ShareViewModel(application: Application, private val repository: Repositor
     fun getTop() {
         viewModelScope.launch {
             try {
-                val response = repository.getTop()
-                _top.postValue(response)
+                _top.postValue(repository.getTop())
+                _rate.postValue(repository.getTopRate())
+                _new.postValue(repository.getNew())
             } catch (e: Exception) {
                 _top.postValue(emptyList())
             }

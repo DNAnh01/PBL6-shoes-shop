@@ -30,5 +30,7 @@ object Constants {
     const val TOP_SALE = "/api/products/get-top-selling-products"
     const val KEY_PAY = "pay_act"
     const val GET_PRODUCT_BY_ID = "/api/products/id/"
+    const val GET_TOP_NEW = "/api/products/get-top-new-products"
+    const val GET_TOP_RATE = "/api/products/get-top-rating-products"
     const val PRICE = "VND"
 }

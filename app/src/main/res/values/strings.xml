@@ -91,4 +91,6 @@
     <string name="status">Status</string>
     <string name="detail">Detail</string>
     <string name="detail_history">Detail History</string>
+    <string name="top_rate">Top Rate</string>
+    <string name="top_new">Top New</string>
 </resources>

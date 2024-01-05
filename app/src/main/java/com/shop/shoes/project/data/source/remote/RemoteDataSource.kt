@@ -17,7 +17,9 @@ import com.shop.shoes.project.data.model.ResponsePayment
 import com.shop.shoes.project.data.model.ResponseProduct
 import com.shop.shoes.project.data.model.TopItem
 import com.shop.shoes.project.data.model.User
+import com.shop.shoes.project.utils.Constants
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RemoteDataSource {
@@ -36,4 +38,6 @@ interface RemoteDataSource {
     suspend fun getHistory(): List<History>
     suspend fun getTop(): List<TopItem>
     suspend fun getProductById(@Path("cartId") cartId: Int): Product
+    suspend fun getTopRate(): List<TopItem>
+    suspend fun getNew(): List<TopItem>
 }

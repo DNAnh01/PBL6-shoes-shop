@@ -86,4 +86,12 @@ class Repository(
         return remoteDataSource.getProductById(cartId)
     }
 
+    override suspend fun getTopRate(): List<TopItem> {
+        return remoteDataSource.getTopRate()
+    }
+
+    override suspend fun getNew(): List<TopItem> {
+        return remoteDataSource.getNew()
+    }
+
 }

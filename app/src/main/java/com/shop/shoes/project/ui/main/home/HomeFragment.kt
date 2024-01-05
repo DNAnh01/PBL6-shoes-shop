@@ -26,6 +26,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val homeViewModel by lazy { (context as MainActivity).shareViewModel }
     private val products = mutableListOf<Product>()
     private val tops = mutableListOf<TopItem>()
+    private val rates = mutableListOf<TopItem>()
+    private val news = mutableListOf<TopItem>()
     private val brands = BrandUtils.brands
 
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -57,6 +59,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    private val rateAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        TopAdapter(rates) { pos ->
+            homeViewModel.getProductById(rates[pos].productId) { product ->
+                if (product != null) {
+                    goToDetail(product)
+                } else {
+                    toast(getString(R.string.something_wrong))
+                }
+            }
+        }
+    }
+
+    private val newAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        TopAdapter(news) { pos ->
+            homeViewModel.getProductById(news[pos].productId) { product ->
+                if (product != null) {
+                    goToDetail(product)
+                } else {
+                    toast(getString(R.string.something_wrong))
+                }
+            }
+        }
+    }
+
     override fun initView() = binding.run {
         rvProducts.layoutManager = GridLayoutManager(context, 2)
         rvBrand.run {
@@ -64,6 +90,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             adapter = brandAdapter
         }
         rvBestSeller.layoutManager = GridLayoutManager(context, 3)
+        rvRate.layoutManager = GridLayoutManager(context, 3)
+        rvNew.layoutManager = GridLayoutManager(context, 3)
     }
 
     override fun initData() {
@@ -105,6 +133,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
             topAdapter.notifyDataSetChanged()
             rvBestSeller.adapter = topAdapter
+        }
+        homeViewModel.rate.observe(this@HomeFragment) {
+            rates.run {
+                clear()
+                addAll(it)
+            }
+            rateAdapter.notifyDataSetChanged()
+            rvRate.adapter = rateAdapter
+        }
+        homeViewModel.new.observe(this@HomeFragment) {
+            news.run {
+                clear()
+                addAll(it)
+            }
+            newAdapter.notifyDataSetChanged()
+            rvNew.adapter = newAdapter
         }
     }
 

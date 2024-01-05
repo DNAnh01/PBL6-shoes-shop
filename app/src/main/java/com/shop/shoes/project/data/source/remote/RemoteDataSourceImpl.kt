@@ -81,4 +81,12 @@ class RemoteDataSourceImpl(
     override suspend fun getProductById(cartId: Int): Product {
         return apiService.getProductById(cartId)
     }
+
+    override suspend fun getTopRate(): List<TopItem> {
+        return apiService.getTopRate()
+    }
+
+    override suspend fun getNew(): List<TopItem> {
+        return apiService.getNew()
+    }
 }

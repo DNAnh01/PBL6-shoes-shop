@@ -50,11 +50,48 @@
                 app:layout_constraintTop_toBottomOf="@id/tvBestSeller"
                 app:spanCount="2" />
 
+            <TextView
+                android:id="@+id/tvNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/top_new"
+                android:textSize="@dimen/_24sdp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/rvBestSeller" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvNew"
+                app:spanCount="2" />
+
+            <TextView
+                android:id="@+id/tvRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/top_rate"
+                android:textSize="@dimen/_24sdp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/rvNew" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/tvRate"
+                app:spanCount="2" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvBrand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/rvBestSeller" />
+                app:layout_constraintTop_toBottomOf="@id/rvRate" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProducts"

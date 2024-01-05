@@ -68,6 +68,12 @@ interface ApiService {
     @GET(Constants.TOP_SALE)
     suspend fun getTop(): List<TopItem>
 
+    @GET(Constants.GET_TOP_RATE)
+    suspend fun getTopRate(): List<TopItem>
+
+    @GET(Constants.GET_TOP_NEW)
+    suspend fun getNew(): List<TopItem>
+
     @GET("${Constants.GET_PRODUCT_BY_ID}{cartId}")
     suspend fun getProductById(@Path("cartId") cartId: Int): Product
 }
