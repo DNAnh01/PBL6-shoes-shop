@@ -1,5 +1,6 @@
 package com.shop.shoes.project.ui.main.account
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -9,17 +10,19 @@ import android.view.ViewGroup
 import com.airbnb.lottie.LottieDrawable
 import com.shop.shoes.project.R
 import com.shop.shoes.project.databinding.FragmentAccountBinding
+import com.shop.shoes.project.ui.auth.LoginActivity
+import com.shop.shoes.project.ui.main.MainActivity
 import com.shop.shoes.project.ui.base.BaseFragment
+import com.shop.shoes.project.ui.main.history.HistoryActivity
+import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Pref
 
 class AccountFragment : BaseFragment<FragmentAccountBinding>() {
 
+    private val shareViewModel by lazy { (context as MainActivity).shareViewModel }
     override fun initView() = binding.run {
         playAnimation()
-        if (Pref.accessToken == "") {
-            tvLogout.visibility = View.GONE
-            view.visibility = View.GONE
-        }
+        changeLogin()
     }
 
     override fun initData() {
@@ -27,15 +30,21 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
 
     override fun initListener() = binding.run {
         tvInfo.setOnClickListener {
-            mustBeLogin {
-                //TODO
-            }
+            startActivity(Intent(context, InfoActivity::class.java))
         }
         tvSupport.setOnClickListener { sendFeedBack() }
         tvLogout.setOnClickListener {
             Pref.accessToken = ""
-            tvLogout.visibility = View.GONE
-            view.visibility = View.GONE
+            changeLogin()
+            shareViewModel.clearCart()
+        }
+        tvLogin.setOnClickListener {
+            startActivityForResult(
+                Intent(context, LoginActivity::class.java), Constants.REQUEST_CODE_LOGIN
+            )
+        }
+        tvHistory.setOnClickListener {
+            startActivity(Intent(context, HistoryActivity::class.java))
         }
     }
 
@@ -51,9 +60,23 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         }
     }
 
+    private fun changeLogin() = binding.run {
+        tvLogin.visibility = if (Pref.accessToken == "") View.VISIBLE else View.GONE
+        viewLogin.visibility = if (Pref.accessToken == "") View.VISIBLE else View.GONE
+        tvInfo.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        viewInfo.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        tvHistory.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        viewHistory.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        tvLogout.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+        view.visibility = if (Pref.accessToken == "") View.GONE else View.VISIBLE
+    }
+
     private fun mustBeLogin(listener: () -> Unit) {
         if (Pref.accessToken == "") {
-            //TODO
+            startActivityForResult(
+                Intent(context, LoginActivity::class.java),
+                Constants.REQUEST_CODE_LOGIN
+            )
         } else {
             listener.invoke()
         }
@@ -79,4 +102,22 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
             toast(getString(R.string.error_can_not_send))
         }
     }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            changeLogin()
+            shareViewModel.getAllCart()
+            shareViewModel.getAllProducts()
+        }
+    }
+
+//    override fun onResume() = binding.run {
+//        super.onResume()
+//        if (Pref.accessToken != "") {
+//            tvLogout.visibility = View.VISIBLE
+//            view.visibility = View.VISIBLE
+//        }
+//    }
 }

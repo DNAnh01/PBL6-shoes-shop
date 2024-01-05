@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.ItemProductsBinding
+import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Pref.context
 
 
@@ -24,12 +25,15 @@ class ProductAdapter(
                 tvName.text = item.title
                 if (item.discountedPrice == 0) {
                     tvDiscount.visibility = View.GONE
-                    tvPrice.text = item.price.toString()
+                    val price = "${item.price} ${Constants.PRICE}"
+                    tvPrice.text = price
                     tvSale.visibility = View.GONE
                 } else {
-                    tvDiscount.text = item.price.toString()
+                    val discount = "${item.price} ${Constants.PRICE}"
+                    tvDiscount.text = discount
                     tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-                    tvPrice.text = item.discountedPrice.toString()
+                    val price = "${item.discountedPrice} ${Constants.PRICE}"
+                    tvPrice.text = price
                     val text = "-${item.discountPersent}%"
                     tvSale.text = text
                 }

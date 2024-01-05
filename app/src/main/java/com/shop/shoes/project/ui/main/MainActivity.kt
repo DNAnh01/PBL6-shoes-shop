@@ -52,4 +52,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
         }
     }
+
 }

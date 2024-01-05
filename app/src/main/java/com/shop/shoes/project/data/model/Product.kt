@@ -50,6 +50,8 @@ data class Review(
     var quantity: String = "",
     @SerializedName("rating")
     var rating: Int = 0,
+    @SerializedName("user")
+    var user: User,
     @SerializedName("createAt")
     var createAt: String = ""
 )

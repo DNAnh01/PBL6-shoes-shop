@@ -1,56 +1,110 @@
 package com.shop.shoes.project.ui.main.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.Product
+import com.shop.shoes.project.data.model.TopItem
 import com.shop.shoes.project.databinding.FragmentHomeBinding
 import com.shop.shoes.project.ui.main.MainActivity
 import com.shop.shoes.project.ui.base.BaseFragment
+import com.shop.shoes.project.ui.main.detail.DetailProductActivity
+import com.shop.shoes.project.ui.main.home.adapter.BrandAdapter
 import com.shop.shoes.project.ui.main.home.adapter.ProductAdapter
+import com.shop.shoes.project.ui.main.home.adapter.TopAdapter
+import com.shop.shoes.project.ui.main.search.SearchActivity
+import com.shop.shoes.project.utils.BrandUtils
+import com.shop.shoes.project.utils.Constants
+import com.shop.shoes.project.utils.Utils
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val homeViewModel by lazy { (context as MainActivity).shareViewModel }
     private val products = mutableListOf<Product>()
-    private val bestProducts = mutableListOf<Product>()
-    private val poster = arrayListOf(
-        R.drawable.img_banner,
-        R.drawable.img_banner_1,
-        R.drawable.img_banner_2
-    )
+    private val tops = mutableListOf<TopItem>()
+    private val rates = mutableListOf<TopItem>()
+    private val news = mutableListOf<TopItem>()
+    private val brands = BrandUtils.brands
+
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
         ProductAdapter(products) { pos ->
-            //TODO
+            goToDetail(products[pos])
         }
     }
 
-    private val bestAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        ProductAdapter(bestProducts) { pos ->
-           //TODO
+    private val brandAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        BrandAdapter(brands) { pos ->
+            val list = homeViewModel.getAllProductsBaseBrand(brands[pos].name)
+            products.run {
+                clear()
+                addAll(list)
+            }
+            adapter.updateData(products)
         }
     }
-    private val viewPagerAdapter by lazy { PosterViewPagerAdapter(poster) }
+
+    private val topAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        TopAdapter(tops) { pos ->
+            homeViewModel.getProductById(tops[pos].productId) { product ->
+                if (product != null) {
+                    goToDetail(product)
+                } else {
+                    toast(getString(R.string.something_wrong))
+                }
+            }
+        }
+    }
+
+    private val rateAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        TopAdapter(rates) { pos ->
+            homeViewModel.getProductById(rates[pos].productId) { product ->
+                if (product != null) {
+                    goToDetail(product)
+                } else {
+                    toast(getString(R.string.something_wrong))
+                }
+            }
+        }
+    }
+
+    private val newAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        TopAdapter(news) { pos ->
+            homeViewModel.getProductById(news[pos].productId) { product ->
+                if (product != null) {
+                    goToDetail(product)
+                } else {
+                    toast(getString(R.string.something_wrong))
+                }
+            }
+        }
+    }
 
     override fun initView() = binding.run {
-        rvProduct.layoutManager = GridLayoutManager(context, 2)
-        rvBrandShoes.run {
+        rvProducts.layoutManager = GridLayoutManager(context, 2)
+        rvBrand.run {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = brandAdapter
         }
-        rvBest.layoutManager = GridLayoutManager(context, 2)
-        viewPager.adapter = viewPagerAdapter
-        dot.setViewPager(viewPager)
+        rvBestSeller.layoutManager = GridLayoutManager(context, 3)
+        rvRate.layoutManager = GridLayoutManager(context, 3)
+        rvNew.layoutManager = GridLayoutManager(context, 3)
     }
 
     override fun initData() {
         homeViewModel.getAllProducts()
+        homeViewModel.getTop()
         listenVM()
+        listenTop()
     }
 
     override fun initListener() {
+        binding.tvSearch.setOnClickListener {
+            startActivity(Intent(context, SearchActivity::class.java))
+        }
     }
 
     override fun getViewBinding(
@@ -65,14 +119,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 clear()
                 addAll(it)
             }
-            bestProducts.run {
-                clear()
-                addAll(it.take(4))
-            }
             adapter.notifyDataSetChanged()
-            rvProduct.adapter = adapter
-            bestAdapter.notifyDataSetChanged()
-            rvBest.adapter = bestAdapter
+            rvProducts.adapter = adapter
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun listenTop() = binding.run {
+        homeViewModel.top.observe(this@HomeFragment) {
+            tops.run {
+                clear()
+                addAll(it)
+            }
+            topAdapter.notifyDataSetChanged()
+            rvBestSeller.adapter = topAdapter
+        }
+        homeViewModel.rate.observe(this@HomeFragment) {
+            rates.run {
+                clear()
+                addAll(it)
+            }
+            rateAdapter.notifyDataSetChanged()
+            rvRate.adapter = rateAdapter
+        }
+        homeViewModel.new.observe(this@HomeFragment) {
+            news.run {
+                clear()
+                addAll(it)
+            }
+            newAdapter.notifyDataSetChanged()
+            rvNew.adapter = newAdapter
+        }
+    }
+
+    private fun goToDetail(product: Product) {
+        val json = Utils.convertProductToJson(product)
+        val intent = Intent(activity, DetailProductActivity::class.java)
+        intent.putExtra(Constants.EXTRA_PRODUCT, json)
+        startActivity(intent)
     }
 }
