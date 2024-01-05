@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.History
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.User
@@ -14,6 +15,9 @@ class HistoryViewModel(application: Application, private val repository: Reposit
     AndroidViewModel(application) {
     private val _histories = MutableLiveData<List<History>>(emptyList())
     val histories = _histories
+
+    private val _details = MutableLiveData<List<Cart>>(emptyList())
+    var details = _details
     fun getHistory() {
         viewModelScope.launch {
             try {
@@ -23,5 +27,9 @@ class HistoryViewModel(application: Application, private val repository: Reposit
                 _histories.postValue(emptyList())
             }
         }
+    }
+
+    fun setCurrentDetail(list: List<Cart>) {
+        _details.postValue(list)
     }
 }
