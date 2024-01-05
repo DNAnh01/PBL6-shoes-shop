@@ -27,7 +27,7 @@
             android:layout_margin="@dimen/_16sdp"
             android:elevation="@dimen/_16sdp"
             android:text="@string/welcome"
-            android:textColor="@color/color_start_btn"
+            android:textColor="@color/color_text_pink"
             android:textSize="@dimen/_30sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -55,6 +55,24 @@
         app:layout_constraintTop_toBottomOf="@id/clTop">
 
         <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/login"
+            android:drawablePadding="@dimen/_8sdp"
+            android:paddingVertical="@dimen/_16sdp"
+            android:text="@string/login"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
+
+        <View
+            android:id="@+id/viewLogin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:background="@drawable/bg_box_grey" />
+
+        <TextView
             android:id="@+id/tvInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,10 +84,29 @@
             android:textSize="@dimen/_16sdp" />
 
         <View
+            android:id="@+id/viewInfo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn" />
+            android:background="@drawable/bg_box_grey" />
+
+        <TextView
+            android:id="@+id/tvHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/baseline_history_24"
+            android:drawablePadding="@dimen/_8sdp"
+            android:paddingVertical="@dimen/_16sdp"
+            android:text="@string/history"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
+
+        <View
+            android:id="@+id/viewHistory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:background="@drawable/bg_box_grey" />
 
         <TextView
             android:id="@+id/tvSupport"
@@ -87,7 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn" />
+            android:background="@drawable/bg_box_grey" />
 
         <TextView
             android:id="@+id/tvLogout"

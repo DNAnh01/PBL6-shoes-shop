@@ -33,28 +33,29 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/tvType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
+            android:lines="1"
+            android:maxLines="1"
+            android:text="aaaaaaa"
+            android:textColor="@color/color_text_pink"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/imgPic" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="2"
             android:maxLines="2"
             android:text="aaaaaaa"
             android:textColor="@color/black"
             android:textSize="@dimen/_16sdp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/imgPic" />
-
-        <TextView
-            android:id="@+id/tvType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="aaaaaaa"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16sdp"
-            app:layout_constraintTop_toBottomOf="@id/tvName" />
+            app:layout_constraintTop_toBottomOf="@id/tvType" />
 
         <TextView
             android:id="@+id/tvDiscount"
@@ -62,9 +63,9 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="ssss"
-            android:textColor="@color/color_grey"
+            android:textColor="@color/black"
             android:textSize="@dimen/_16sdp"
-            app:layout_constraintTop_toBottomOf="@id/tvType" />
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
 
         <TextView
             android:id="@+id/tvPrice"
